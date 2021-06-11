@@ -1,0 +1,5 @@
+﻿  SchoolLunchOrder.cpp
+C:\Users\keith\OneDrive\Desktop\cppFolder\SchoolLunchOrder\SchoolLunchOrder.cpp(170,10): warning C4129: 'M': unrecognized character escape sequence
+C:\Users\keith\OneDrive\Desktop\cppFolder\SchoolLunchOrder\SchoolLunchOrder.cpp(165,6): warning C4101: 'i': unreferenced local variable
+C:\Users\keith\OneDrive\Desktop\cppFolder\SchoolLunchOrder\SchoolLunchOrder.cpp(198,6): warning C4101: 'itemPrice': unreferenced local variable
+  SchoolLunchOrder.vcxproj -> C:\Users\keith\OneDrive\Desktop\cppFolder\SchoolLunchOrder\Debug\SchoolLunchOrder.exe
