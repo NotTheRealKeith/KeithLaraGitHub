@@ -39,6 +39,16 @@ struct ParentOrder {
 	bool paymentStatus;
 };
 
+struct ParentComplaint {
+	string compDate;
+	string compItem;
+	string comptDesc;
+	string compNumber;
+	ParentAcc firstName;
+	ParentAcc contactNum;
+	bool actionStatus;
+};
+
 
 struct MenuItems {
 	string itemName;
@@ -83,8 +93,12 @@ void contactDetails() {
 	cout << "\n\nOffice Hours: 1pm - 5pm, Monday - Friday";
 }
 
-string ParentReg(ParentAcc* ptr) {
-	int num;
+int ParentReg(ParentAcc* ptr) {
+	vector<array<string, 9>>  matrix;
+	vector<array<string, 9>>  idcheck;
+	int num, a;
+	unsigned int id;
+	string line, row, iD;
 
 	cout << "\n\t\t\tRegistration\t\t\t" << endl;
 	underLine(80);
@@ -113,6 +127,36 @@ loginpin:
 	cout << "\n\nCard Expiry Date (format as MM/YY): ";
 	cin >> ptr->cardExpiry;
 
+	srand(time(NULL));
+	id = rand() % 10000000 + 9999999;
+	iD = to_string(id);
+
+	ifstream fileid;
+	fileid.open("parentlogin.csv", ios::in);
+
+	while (getline(fileid, line)) {
+		stringstream ss(line);
+		int i = 0;
+		array<string, 9> f;
+		while (getline(ss, row, ',')) {
+			f[i++] = row;
+		}
+		idcheck.push_back(f);
+	}
+	idchk:
+	for (int i = 0; i < idcheck.size(); ++i) {
+		if (iD == idcheck.at(i)[0]) {
+			srand(time(NULL));
+			id = rand() % 1000000 + 999999;
+			iD = to_string(id);
+			goto idchk;
+		}
+	}
+
+	fileid.close();
+
+	ptr->parentID = to_string(id);
+
 	ofstream outfile;
 	outfile.open("parentlogin.csv", ios::out);
 
@@ -128,13 +172,34 @@ loginpin:
 
 	outfile.close();
 
-	return ptr->parentID;
+	ifstream infile;
+	infile.open("parentlogin.csv", ios::in);
+
+	while (getline(infile, line)) {
+		stringstream ss(line);
+		int i = 0;
+		array<string, 9> b;
+		while (getline(ss, row, ',')) {
+			b[i++] = row;
+		}
+		matrix.push_back(b);
+	}
+		for (int i = 0; i < matrix.size(); ++i) {
+			if (ptr->parentID == matrix.at(i)[0]) {
+				a = i;
+			}
+		}
+	
+	infile.close();
+
+	return a;
 }
 
-string parentLogin() {
+int parentLogin() {
 	vector<array<string, 9>>  matrix;
 	string firstname, line, row, pin;
-	string a = "nothing";
+	int a = -1;
+	int n = 2;
 	
 
 	cout << "\n\t\t\tLogin\t\t\t" << endl;
@@ -142,26 +207,6 @@ string parentLogin() {
 
 	ifstream infile;
 	infile.open("parentlogin.csv", ios::in);
-
-	/*for (int i = 0; i < 3; i++) {
-		cout << "\nFirst name: ";
-		cin >> firstname;
-		cout << "\nPin: ";
-		cin >> pin;
-		while (getline(infile, row)) { //Searching through each row in the file for size by column
-			istringstream linestream(row);
-			linestream >> col1 >> col2 >> col3 >> col4 >> col5 >> col6 >> col7 >> col8 >> col9;
-			if (firstname == col2 && pin == col4) {
-				a = col1;
-				break;
-			}
-		}
-		cout << "\n\nWrong login information try again!\n";
-	}
-
-	if (a == "nothing") {
-		cout << "\n\nThe number of login attempts has been exceeded, try again another time.";
-	}*/
 
 	while (getline(infile, line)) {
 		stringstream ss(line);
@@ -179,19 +224,19 @@ string parentLogin() {
 		cout << "\nPin: ";
 		cin >> pin;
 		if (firstname == "admin" && pin == "5555") {
-			a = "0";
+			a = -5;
 			break;
 		}
 		for (int i = 0; i < matrix.size(); ++i) {
 			if (firstname == matrix.at(i)[1] && pin == matrix.at(i)[3]) {
-				a = matrix.at(i)[0];
+				a = i;
 				goto exit;
 			}
 		}
-		cout << "\n\nWrong login information try again!\n";
+		cout << "\n\nWrong login information try again (you have " << n-- << " more attempts!\n";
 	}
 
-	if (a == "nothing") {
+	if (a == -1) {
 		cout << "\n\nThe number of login attempts has been exceeded, try again another time.";
 	}
 
@@ -258,7 +303,8 @@ void  menuPreview() {
 
 int main()
 {
-	int index, a = 0;
+	vector<array<string, 9>>  matrix;
+	int index, a = 0, b;
 	int flag = 0;
 	string ID;
 
@@ -330,11 +376,11 @@ MenuSelect:
 		}
 		break;
 	case 4:
-		ID = parentLogin();
-		if (ID == "nothing") {
+		b = parentLogin();
+		if (b == -1) {
 			a = 0;
 		}
-		else if (ID == "0") {
+		else if (b == -5) {
 			a = 2;
 		}
 		else {
@@ -342,7 +388,7 @@ MenuSelect:
 		}
 		break;
 	case 5:
-		ID = ParentReg(ptrParent);
+		b = ParentReg(ptrParent);
 		a = 1;
 		//Have them go to parents log in menu screen once registered as they are technically logged in
 		break;
@@ -351,11 +397,103 @@ MenuSelect:
 		goto MenuSelect;
 	}
 
-	while (a == 1) {
-		//Login Parent Screen
+	
+
+	
+
+	if (a == 0) {
+
+	}
+	else if (a == 1) {
+		string line, row;
+		int c, option;
+		ifstream infile;
+		infile.open("parentlogin.csv", ios::in);
+
+		while (getline(infile, line)) {
+			stringstream ss(line);
+			int i = 0;
+			array<string, 9> d;
+			while (getline(ss, row, ',')) {
+				d[i++] = row;
+			}
+			matrix.push_back(d);
+		}
+
+
+		infile.close();
+	MenuParentSelect:
+		cout << "\n\t\t\tParent School Lunch System " << matrix.at(b)[1] << endl;
+		underLine(80);
+
+		cout << "\n\tPlease make a selection from the options below:" << endl;
+		cout << "\n\t1.  Make an order" << endl;
+		cout << "\t2.  Bulk Discount Offers" << endl;
+		cout << "\t3.  School Contact Details & Location" << endl;
+		cout << "\t4.  Make a Complaint" << endl;
+		cout << "\n\n";
+
+		cout << "\n  Enter Option: ";
+		cin >> option;
+
+		switch (option) {
+		case 1:
+			//Add make order
+			break;
+
+		case 2:
+			bulkDiscount();
+
+			cout << "\n\n\n Enter 1 to return back to Parent Menu: ";
+			cin >> flag;
+		redoparentbulk:
+			if (flag != 1) {
+				cout << "invalid input! Try again: ";
+				cin >> flag;
+				goto redoparentbulk;
+			}
+			else {
+				goto MenuParentSelect;
+			}
+			break;
+
+		case 3:
+			contactDetails();
+
+			cout << "\n\n\n Enter 1 to return back to Main Menu: ";
+			cin >> flag;
+		redoparentcontact:
+			if (flag != 1) {
+				cout << "invalid input! Try again: ";
+				cin >> flag;
+				goto redoparentcontact;
+			}
+			else {
+				goto MenuParentSelect;
+			}
+			break;
+
+		case 4:
+			struct ParentComplaint ParentComp;
+			struct ParentComplaint* ptrParentComp;
+
+			ptrParentComp = &ParentComp;
+
+			srand(time(NULL));
+			int pc = rand() % 100000 + 99999;
+
+			ptrParentComp->compNumber = to_string(pc);
+
+			cout << "\n\t\t\tComplaint Form (" << ptrParentComp->compNumber << ")" << endl;
+			underLine(80);
+			break;
+		}
+
+
 	}
 
-	while (a == 2) {
-		//Admin Screen
+	else if (a == 2) {
+		//admin screen
 	}
+
 }

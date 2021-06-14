@@ -1,5 +1,9 @@
 ﻿  SchoolLunchOrder.cpp
-C:\Users\270096195\OneDrive - UP Education\Desktop\CS103\ActualAssignment\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(218,10): warning C4129: 'M': unrecognized character escape sequence
-C:\Users\270096195\OneDrive - UP Education\Desktop\CS103\ActualAssignment\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(213,6): warning C4101: 'i': unreferenced local variable
-C:\Users\270096195\OneDrive - UP Education\Desktop\CS103\ActualAssignment\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(246,6): warning C4101: 'itemPrice': unreferenced local variable
+C:\Users\270096195\OneDrive - UP Education\Desktop\CS103\ActualAssignment\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(130,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\270096195\OneDrive - UP Education\Desktop\CS103\ActualAssignment\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(149,14): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\270096195\OneDrive - UP Education\Desktop\CS103\ActualAssignment\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(263,10): warning C4129: 'M': unrecognized character escape sequence
+C:\Users\270096195\OneDrive - UP Education\Desktop\CS103\ActualAssignment\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(258,6): warning C4101: 'i': unreferenced local variable
+C:\Users\270096195\OneDrive - UP Education\Desktop\CS103\ActualAssignment\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(291,6): warning C4101: 'itemPrice': unreferenced local variable
+C:\Users\270096195\OneDrive - UP Education\Desktop\CS103\ActualAssignment\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(482,14): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\270096195\OneDrive - UP Education\Desktop\CS103\ActualAssignment\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(409,7): warning C4101: 'c': unreferenced local variable
   SchoolLunchOrder.vcxproj -> C:\Users\270096195\OneDrive - UP Education\Desktop\CS103\ActualAssignment\KeithLaraGitHub\SchoolLunchOrder\x64\Debug\SchoolLunchOrder.exe
