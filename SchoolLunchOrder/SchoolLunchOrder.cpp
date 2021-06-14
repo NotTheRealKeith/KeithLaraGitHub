@@ -7,6 +7,7 @@
 #include <fstream>
 #include <sstream>
 #include <vector>
+#include <array>
 #include <stdlib.h>
 #include <string>
 using namespace std;
@@ -15,11 +16,11 @@ using namespace std;
 struct ParentAcc {
 	string firstName;
 	string lastName;
-	int pinNum;
+	string pinNum;
 	string contactNum;
 
 	string childName;
-	int childRoomNum;
+	string childRoomNum;
 
 	string cardNum;
 	string cardExpiry;
@@ -27,16 +28,28 @@ struct ParentAcc {
 	string parentID;
 };
 
+struct ParentOrder {
+	string orderNumber;
+	string orderDate;
+	ParentAcc parentID;
+	ParentAcc childName;
+	string itemOrderName;
+	float itemOrderPrice;
+	int quantity;
+	bool paymentStatus;
+};
+
+
 struct MenuItems {
 	string itemName;
 	float itemPrice;
 };
 
-struct AdminAcc {
+/*struct AdminAcc {
 	string firstName;
 	string lastName;
-	int pinNum;
-};
+	string pinNum;
+};*/
 // ===== ^^ Write stuctures here ^^ =====
 
 // -- create underlines only --
@@ -83,7 +96,7 @@ loginpin:
 	cout << "\n\nLogin Pin (This will be used as your password to login, must \nbe 4 numbers): ";
 	cin >> num;
 	if (num > 999 && num < 10000) {
-		ptr->pinNum = num;
+		ptr->pinNum = to_string(num);
 	}
 	else {
 		cout << "\n\nPlease enter a valid 4 digit number";
@@ -119,9 +132,10 @@ loginpin:
 }
 
 string parentLogin() {
-	string firstname, line, row, col1, col2, col3, col5, col6, col8, col9;
+	vector<array<string, 9>>  matrix;
+	string firstname, line, row, pin;
 	string a = "nothing";
-	int pin, col4, col7;
+	
 
 	cout << "\n\t\t\tLogin\t\t\t" << endl;
 	underLine(80);
@@ -129,7 +143,7 @@ string parentLogin() {
 	ifstream infile;
 	infile.open("parentlogin.csv", ios::in);
 
-	for (int i = 0; i < 3; i++) {
+	/*for (int i = 0; i < 3; i++) {
 		cout << "\nFirst name: ";
 		cin >> firstname;
 		cout << "\nPin: ";
@@ -147,10 +161,44 @@ string parentLogin() {
 
 	if (a == "nothing") {
 		cout << "\n\nThe number of login attempts has been exceeded, try again another time.";
+	}*/
+
+	while (getline(infile, line)) {
+		stringstream ss(line);
+		int i = 0;
+		array<string, 9> b;
+		while (getline(ss, row, ',')) {
+			b[i++] = row;
+		}
+		matrix.push_back(b);
 	}
 
+	for (int k = 0; k < 3; k++) {
+		cout << "\nFirst name: ";
+		cin >> firstname;
+		cout << "\nPin: ";
+		cin >> pin;
+		if (firstname == "admin" && pin == "5555") {
+			a = "0";
+			break;
+		}
+		for (int i = 0; i < matrix.size(); ++i) {
+			if (firstname == matrix.at(i)[1] && pin == matrix.at(i)[3]) {
+				a = matrix.at(i)[0];
+				goto exit;
+			}
+		}
+		cout << "\n\nWrong login information try again!\n";
+	}
+
+	if (a == "nothing") {
+		cout << "\n\nThe number of login attempts has been exceeded, try again another time.";
+	}
+
+exit:
 	infile.close();
 	return a;
+	
 }
 
 // ===== ^^ LARA CODE SECTION ^^ =====
@@ -286,6 +334,9 @@ MenuSelect:
 		if (ID == "nothing") {
 			a = 0;
 		}
+		else if (ID == "0") {
+			a = 2;
+		}
 		else {
 			a = 1;
 		}
@@ -302,5 +353,9 @@ MenuSelect:
 
 	while (a == 1) {
 		//Login Parent Screen
+	}
+
+	while (a == 2) {
+		//Admin Screen
 	}
 }
