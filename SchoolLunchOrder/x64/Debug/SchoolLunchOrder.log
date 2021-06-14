@@ -1,0 +1,5 @@
+﻿  SchoolLunchOrder.cpp
+C:\Users\270096195\OneDrive - UP Education\Desktop\CS103\ActualAssignment\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(218,10): warning C4129: 'M': unrecognized character escape sequence
+C:\Users\270096195\OneDrive - UP Education\Desktop\CS103\ActualAssignment\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(213,6): warning C4101: 'i': unreferenced local variable
+C:\Users\270096195\OneDrive - UP Education\Desktop\CS103\ActualAssignment\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(246,6): warning C4101: 'itemPrice': unreferenced local variable
+  SchoolLunchOrder.vcxproj -> C:\Users\270096195\OneDrive - UP Education\Desktop\CS103\ActualAssignment\KeithLaraGitHub\SchoolLunchOrder\x64\Debug\SchoolLunchOrder.exe
