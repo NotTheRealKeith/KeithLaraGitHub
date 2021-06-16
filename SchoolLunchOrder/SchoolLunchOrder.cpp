@@ -246,6 +246,89 @@ exit:
 	
 }
 
+void filterPrice() {
+	vector<array<string, 2> > matrix;
+	vector<array<string, 2> > food;
+
+	ifstream infile;
+	infile.open("menuItems.csv", ios::in);
+
+	string line, row, item;
+	float matrixImp;
+
+	while (getline(infile, line)) {
+		stringstream ss(line);
+		int i = 0;
+		array<string, 2> b;
+		while (getline(ss, row, ',')) {
+			b[i++] = row;
+		}
+		matrix.push_back(b);
+	}
+
+	for (int i = 0; i < matrix.size(); ++i) {
+		float a = stof(matrix.at(i)[1]);
+		if (matrixImp < a) {
+			item = matrix.at(i)[0];
+			string stringprice = to_string(a);
+			//food.push_back(item);
+			//food.push_back(stringprice);
+		}
+	}
+	
+
+	infile.close();
+}
+
+int parentOrder(int person){
+	int option;
+	menu:
+	ifstream infile;
+	infile.open("menuItems.csv", ios::in);
+
+	string readData;
+	int itemPrice;
+
+	cout << "Menu Items: \n\n";
+	while (getline(infile, readData)) {
+		cout << readData << endl;
+	}
+
+	infile.close();
+	
+	cout << "\n\n\nMake a selection from the options below:";
+	cout << "\n\n1. Filter by price (low to high)";
+	cout << "\n2. Filter only vegetarian options";
+	cout << "\n3. Filter only GF options";
+	cout << "\n4. Order Food";
+	cout << "\n5. Go back to main menu";
+	cout << "\n\n\nEnter Option: ";
+	cin >> option;
+
+	switch (option) {
+	case 1:
+		filterPrice();
+		break;
+	case 2:
+		//Filter vege opt
+		break;
+	case 3:
+		//Filter gf opt
+		break;
+	case 4:
+		//Order
+		break;
+	case 5:
+		return 0;
+		break;
+	default:
+		cout << "\n\nPlease enter a valid option (1 - 5)";
+		goto menu;
+		break;
+	}
+	return 0;
+}
+
 // ===== ^^ LARA CODE SECTION ^^ =====
 
 // ===== vv KEITH CODE SECTION vv =====
@@ -402,7 +485,7 @@ MenuSelect:
 	
 
 	if (a == 0) {
-
+		//Too many attempts to log in
 	}
 	else if (a == 1) {
 		string line, row;
@@ -438,7 +521,25 @@ MenuSelect:
 
 		switch (option) {
 		case 1:
-			//Add make order
+			int OrderReturn;
+
+			OrderReturn = parentOrder(b); 
+
+			if (OrderReturn == 0) {
+				goto MenuParentSelect;
+			}
+
+			cout << "\n\n\n Enter 1 to return back to Parent Menu: ";
+			cin >> flag;
+		redoparentbulk:
+			if (flag != 1) {
+				cout << "invalid input! Try again: ";
+				cin >> flag;
+				goto redoparentbulk;
+			}
+			else {
+				goto MenuParentSelect;
+			}
 			break;
 
 		case 2:
