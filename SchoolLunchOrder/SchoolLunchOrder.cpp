@@ -8,6 +8,7 @@
 #include <sstream>
 #include <vector>
 #include <array>
+#include <algorithm>
 #include <stdlib.h>
 #include <string>
 using namespace std;
@@ -248,6 +249,7 @@ void filterPrice() {
 
 	/*vector<array<string, 2> > fp;
 	vector<array<string, 2> > food;
+	array<string, 2> fo;
 
 	ifstream infile;
 	infile.open("menuItems.csv", ios::in);
@@ -265,47 +267,46 @@ void filterPrice() {
 		fp.push_back(b);
 	}
 
-	for (int i = 0; i < fp.size(); ++i) {
-		float a = stof(fp.at(i)[1]);
-		if (fpImp < a) {
-			item = fp.at(i)[0];
-			stringprice = to_string(a);
-			food.push_back(item);
-			food.push_back(stringprice);
-		}
+	infile.close();
+
+	sort(fp.begin(), fp.end());
+
+	for (auto item : fp) {
+		cout << item << "\t\t" << item;
 	}
 
+	*/
 
-	
 
-	infile.close();*/
+
+	//Create minimum and maxixmum for vector
 }
 
 void filterVeg() {
-	/*vector<vector<string> > vegmenu;//
-	
-	vector<array< string, 4> > veg;
+	//vector<vector<string> > vegmenu;//
+	//
+	//vector<array< string, 4> > veg;
 
-	ifstream infile;
-	infile.open("menuItems.csv", ios::in);
+	//ifstream infile;
+	//infile.open("menuItems.csv", ios::in);
 
-	string line, row, item, stringprice;
+	//string line, row, item, stringprice;
 
-	while (getline(infile, line)) {
-		stringstream ss(line);
-		int i = 0;
-		vector<string> b;
-		while (getline(ss, row, ',')) {
-			b[i] = row;
-			i++;
-			
-		}
-		vegmenu.push_back(b);
-	}
-	for (auto i : vegmenu) {
-		if ()
+	//while (getline(infile, line)) {
+	//	stringstream ss(line);
+	//	int i = 0;
+	//	vector<string> b;
+	//	while (getline(ss, row, ',')) {
+	//		b[i] = row;
+	//		i++;
+	//		
+	//	}
+	//	vegmenu.push_back(b);
+	//}
+	//for (auto i : vegmenu) {
+	//	if ()
 
-	}*/
+	//}
 
 	//vector<array<string, 2> > matrix;
 	//vector<array<string, 2> > food;
@@ -331,8 +332,8 @@ void filterVeg() {
 	//	if (matrixImp < a) {
 	//		item = matrix.at(i)[0];
 	//		string stringprice = to_string(a);
-	//		//food.push_back(item);
-	//		//food.push_back(stringprice);
+	//		food.push_back(item);
+	//		food.push_back(stringprice);
 	//	}
 	//}
 	//
