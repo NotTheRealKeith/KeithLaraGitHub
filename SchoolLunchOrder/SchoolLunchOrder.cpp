@@ -245,6 +245,68 @@ exit:
 }
 
 void filterPrice() {
+
+	/*vector<array<string, 2> > fp;
+	vector<array<string, 2> > food;
+
+	ifstream infile;
+	infile.open("menuItems.csv", ios::in);
+
+	string line, row, item, stringprice;
+	float fpImp;
+
+	while (getline(infile, line)) {
+		stringstream ss(line);
+		int i = 0;
+		array<string, 2> b;
+		while (getline(ss, row, ',')) {
+			b[i++] = row;
+		}
+		fp.push_back(b);
+	}
+
+	for (int i = 0; i < fp.size(); ++i) {
+		float a = stof(fp.at(i)[1]);
+		if (fpImp < a) {
+			item = fp.at(i)[0];
+			stringprice = to_string(a);
+			food.push_back(item);
+			food.push_back(stringprice);
+		}
+	}
+
+
+	
+
+	infile.close();*/
+}
+
+void filterVeg() {
+	/*vector<vector<string> > vegmenu;//
+	
+	vector<array< string, 4> > veg;
+
+	ifstream infile;
+	infile.open("menuItems.csv", ios::in);
+
+	string line, row, item, stringprice;
+
+	while (getline(infile, line)) {
+		stringstream ss(line);
+		int i = 0;
+		vector<string> b;
+		while (getline(ss, row, ',')) {
+			b[i] = row;
+			i++;
+			
+		}
+		vegmenu.push_back(b);
+	}
+	for (auto i : vegmenu) {
+		if ()
+
+	}*/
+
 	//vector<array<string, 2> > matrix;
 	//vector<array<string, 2> > food;
 
@@ -276,6 +338,7 @@ void filterPrice() {
 	//
 
 	//infile.close();
+
 }
 
 int parentOrder(int person){
@@ -308,7 +371,7 @@ int parentOrder(int person){
 		filterPrice();
 		break;
 	case 2:
-		//Filter vege opt
+		filterVeg();
 		break;
 	case 3:
 		//Filter gf opt
