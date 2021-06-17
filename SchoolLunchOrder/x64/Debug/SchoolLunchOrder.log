@@ -1,9 +1,11 @@
 ﻿  SchoolLunchOrder.cpp
 C:\Users\270096195\OneDrive - UP Education\Desktop\CS103\ActualAssignment\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(130,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
 C:\Users\270096195\OneDrive - UP Education\Desktop\CS103\ActualAssignment\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(149,14): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-C:\Users\270096195\OneDrive - UP Education\Desktop\CS103\ActualAssignment\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(263,10): warning C4129: 'M': unrecognized character escape sequence
-C:\Users\270096195\OneDrive - UP Education\Desktop\CS103\ActualAssignment\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(258,6): warning C4101: 'i': unreferenced local variable
-C:\Users\270096195\OneDrive - UP Education\Desktop\CS103\ActualAssignment\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(291,6): warning C4101: 'itemPrice': unreferenced local variable
-C:\Users\270096195\OneDrive - UP Education\Desktop\CS103\ActualAssignment\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(482,14): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-C:\Users\270096195\OneDrive - UP Education\Desktop\CS103\ActualAssignment\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(409,7): warning C4101: 'c': unreferenced local variable
+C:\Users\270096195\OneDrive - UP Education\Desktop\CS103\ActualAssignment\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(257,8): warning C4101: 'fpImp': unreferenced local variable
+C:\Users\270096195\OneDrive - UP Education\Desktop\CS103\ActualAssignment\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(296,6): warning C4101: 'itemPrice': unreferenced local variable
+C:\Users\270096195\OneDrive - UP Education\Desktop\CS103\ActualAssignment\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(352,10): warning C4129: 'M': unrecognized character escape sequence
+C:\Users\270096195\OneDrive - UP Education\Desktop\CS103\ActualAssignment\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(347,6): warning C4101: 'i': unreferenced local variable
+C:\Users\270096195\OneDrive - UP Education\Desktop\CS103\ActualAssignment\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(380,6): warning C4101: 'itemPrice': unreferenced local variable
+C:\Users\270096195\OneDrive - UP Education\Desktop\CS103\ActualAssignment\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(589,14): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\270096195\OneDrive - UP Education\Desktop\CS103\ActualAssignment\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(498,7): warning C4101: 'c': unreferenced local variable
   SchoolLunchOrder.vcxproj -> C:\Users\270096195\OneDrive - UP Education\Desktop\CS103\ActualAssignment\KeithLaraGitHub\SchoolLunchOrder\x64\Debug\SchoolLunchOrder.exe
