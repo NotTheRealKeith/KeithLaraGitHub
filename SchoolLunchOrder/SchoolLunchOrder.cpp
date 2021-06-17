@@ -191,7 +191,6 @@ loginpin:
 		}
 	
 	infile.close();
-
 	return a;
 }
 
@@ -243,41 +242,40 @@ int parentLogin() {
 exit:
 	infile.close();
 	return a;
-	
 }
 
 void filterPrice() {
-	vector<array<string, 2> > matrix;
-	vector<array<string, 2> > food;
+	//vector<array<string, 2> > matrix;
+	//vector<array<string, 2> > food;
 
-	ifstream infile;
-	infile.open("menuItems.csv", ios::in);
+	//ifstream infile;
+	//infile.open("menuItems.csv", ios::in);
 
-	string line, row, item;
-	float matrixImp;
+	//string line, row, item;
+	//float matrixImp;
 
-	while (getline(infile, line)) {
-		stringstream ss(line);
-		int i = 0;
-		array<string, 2> b;
-		while (getline(ss, row, ',')) {
-			b[i++] = row;
-		}
-		matrix.push_back(b);
-	}
+	//while (getline(infile, line)) {
+	//	stringstream ss(line);
+	//	int i = 0;
+	//	array<string, 2> b;
+	//	while (getline(ss, row, ',')) {
+	//		b[i++] = row;
+	//	}
+	//	matrix.push_back(b);
+	//}
 
-	for (int i = 0; i < matrix.size(); ++i) {
-		float a = stof(matrix.at(i)[1]);
-		if (matrixImp < a) {
-			item = matrix.at(i)[0];
-			string stringprice = to_string(a);
-			//food.push_back(item);
-			//food.push_back(stringprice);
-		}
-	}
-	
+	//for (int i = 0; i < matrix.size(); ++i) {
+	//	float a = stof(matrix.at(i)[1]);
+	//	if (matrixImp < a) {
+	//		item = matrix.at(i)[0];
+	//		string stringprice = to_string(a);
+	//		//food.push_back(item);
+	//		//food.push_back(stringprice);
+	//	}
+	//}
+	//
 
-	infile.close();
+	//infile.close();
 }
 
 int parentOrder(int person){
@@ -328,59 +326,63 @@ int parentOrder(int person){
 	}
 	return 0;
 }
-
 // ===== ^^ LARA CODE SECTION ^^ =====
 
 // ===== vv KEITH CODE SECTION vv =====
 
 // -- menu preview CANNOT ORDER FROM HERE (IN PROGRESS)  --
-void  menuPreview() {
-	struct MenuItems menu[9];
-	struct MenuItems* ptrmenu = menu;
-
-	int i;
-
-	fstream outfile;
+void writeMenuPreview() {
+	fstream outfile; // writes into the csv file with menu item data
 
 	outfile.open("menuItems.csv", ios::out);
-	cout << "\n\t\t\Menu Preview\t\t\t" << endl;
-	underLine(80);
-
 	outfile << "Ham Sandwich" << ","
-		<< "4.50" << endl
+		<< "4.50" << "," << "2" << "," << "2" << endl
 		<< "Vegetarian Sandwich" << ","
-		<< "5.00" << endl
-		<< "Chicken and Avo" << ", "
-		<< "6.50" << endl << endl
-		<< "Steak and Cheese" << ", "
-		<< "4.50" << endl
-		<< "Butter Chicken" << "-, "
-		<< "5.50" << endl
-		<< "Mushroom and Cheese" << "-, "
-		<< "6.50" << endl << endl
-		<< "Cheese" << "-, "
-		<< "4.50" << endl
-		<< "Pepperoni" << "-, "
-		<< "5.50" << endl
-		<< "Veg (GF)" << "-, "
-		<< "6.50" << endl;
+		<< "5.00" "," << "2" << "," << "1" << endl
+		<< "Chicken and Avo\t\t" << ","
+		<< "6.50" "," << "1" << "," << "2" << endl
+		<< "Steak and Cheese" << ","
+		<< "4.50" "," << "2" << "," << "2" << endl
+		<< "Butter Chicken" << ","
+		<< "5.50" "," << "2" << "," << "2" << endl
+		<< "Mushroom and Cheese" << ","
+		<< "6.50" "," << "1" << "," << "1" << endl
+		<< "Cheese" << ","
+		<< "4.50" "," << "2" << "," << "2" << endl
+		<< "Pepperoni" << ","
+		<< "5.50" "," << "2" << "," << "2" << endl
+		<< "Veg (GF)" << ","
+		<< "6.50" "," << "1" << "," << "1" << endl;
 	outfile.close();
+}
 
-	fstream infile;
+void  menuPreview() {
+	vector<array<string, 4>>  vectorMenu;
+	int i;
 
+	fstream infile; // reading the file 
 	infile.open("menuItems.csv", ios::in);
 
-	string readData;
-	int itemPrice;
-
-	cout << "Menu Items: \n\n";
-	while (getline(infile, readData)) {
-		cout << readData << endl;
+	string line, row;
+	while (getline(infile, line)) { // this loop gets the data from the csv and push_backs into a vector
+		stringstream ss(line);
+		int i = 0;
+		array<string, 4> m;
+		while (getline(ss, row, ',')) {//while inside that row. 
+			m[i] = row;
+			i++;
+		}
+		vectorMenu.push_back(m);
 	}
-
-	infile.close();
-
+	// only for printing out data from vector
+	for (int i = 0; i < vectorMenu.size(); i++) {
+		cout << vectorMenu.at(i)[0] << " - " << vectorMenu.at(i)[1] << endl;
+	}
 }
+
+//admin update menu function
+
+//check complaints functions
 
 // ===== ^^ KEITH CODE SECTION ^^ =====
 
@@ -395,7 +397,7 @@ int main()
 	struct ParentAcc* ptrParent;
 
 	ptrParent = &Parent;
-
+	writeMenuPreview();
 	// --- added intro screen below V --- //
 	cout << "\n\t\t\tSchool Lunch Order System\t\t\t" << endl;
 	underLine(80);
@@ -531,11 +533,11 @@ MenuSelect:
 
 			cout << "\n\n\n Enter 1 to return back to Parent Menu: ";
 			cin >> flag;
-		redoparentbulk:
+		redoparentorder:
 			if (flag != 1) {
 				cout << "invalid input! Try again: ";
 				cin >> flag;
-				goto redoparentbulk;
+				goto redoparentorder;
 			}
 			else {
 				goto MenuParentSelect;
