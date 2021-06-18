@@ -247,9 +247,20 @@ exit:
 
 void filterPrice() {
 
-	/*vector<array<string, 2> > fp;
-	vector<array<string, 2> > food;
-	array<string, 2> fo;
+
+
+	/*sort(fp.begin(), fp.end());
+
+	for (auto item : fp) {
+		cout << item << "\t\t" << item;
+	}
+
+	*/
+
+	vector<array<string, 4> > fp;
+	vector<float> price;
+	vector<string> item;
+	float a;
 
 	ifstream infile;
 	infile.open("menuItems.csv", ios::in);
@@ -260,103 +271,139 @@ void filterPrice() {
 	while (getline(infile, line)) {
 		stringstream ss(line);
 		int i = 0;
-		array<string, 2> b;
+		array<string, 4> b;
 		while (getline(ss, row, ',')) {
 			b[i++] = row;
 		}
 		fp.push_back(b);
 	}
 
-	infile.close();
-
-	sort(fp.begin(), fp.end());
-
-	for (auto item : fp) {
-		cout << item << "\t\t" << item;
+	for (int i = 0; i < fp.size(); i++) {
+		a = stof(fp.at(i)[1]);
+		price.push_back(a);
+		sort(price.begin(), price.end());
 	}
-
-	*/
 
 
 
 	//Create minimum and maxixmum for vector
+
+
 }
 
 void filterVeg() {
-	//vector<vector<string> > vegmenu;//
-	//
-	//vector<array< string, 4> > veg;
+	vector<array<string, 4> > vegmenu;//
+	vector<int> vegetarian;
 
-	//ifstream infile;
-	//infile.open("menuItems.csv", ios::in);
+	float vege;
 
-	//string line, row, item, stringprice;
+	ifstream infile;
+	infile.open("menuItems.csv", ios::in);
 
-	//while (getline(infile, line)) {
-	//	stringstream ss(line);
-	//	int i = 0;
-	//	vector<string> b;
-	//	while (getline(ss, row, ',')) {
-	//		b[i] = row;
-	//		i++;
-	//		
-	//	}
-	//	vegmenu.push_back(b);
-	//}
-	//for (auto i : vegmenu) {
-	//	if ()
+	string line, row, item, stringprice;
 
-	//}
+	while (getline(infile, line)) {
+		stringstream ss(line);
+		int i = 0;
+		array<string, 4> v;
+		while (getline(ss, row, ',')) {
+			v[i] = row;
+			i++;
+		}
+		vegmenu.push_back(v);
+	}
 
-	//vector<array<string, 2> > matrix;
-	//vector<array<string, 2> > food;
+	int a;
+	array<string, 4> ve;
 
-	//ifstream infile;
-	//infile.open("menuItems.csv", ios::in);
+	for (int i = 0; i < vegmenu.size(); i++) {
+		vege = stof(vegmenu.at(i)[3]);
 
-	//string line, row, item;
-	//float matrixImp;
+		if (vege == 1) {
+			vegetarian.push_back(i);
+		}
 
-	//while (getline(infile, line)) {
-	//	stringstream ss(line);
-	//	int i = 0;
-	//	array<string, 2> b;
-	//	while (getline(ss, row, ',')) {
-	//		b[i++] = row;
-	//	}
-	//	matrix.push_back(b);
-	//}
+	}
 
-	//for (int i = 0; i < matrix.size(); ++i) {
-	//	float a = stof(matrix.at(i)[1]);
-	//	if (matrixImp < a) {
-	//		item = matrix.at(i)[0];
-	//		string stringprice = to_string(a);
-	//		food.push_back(item);
-	//		food.push_back(stringprice);
-	//	}
-	//}
-	//
+	for (int i = 0; i < vegetarian.size(); i++) {
+		a = vegetarian.at(i);
+		cout << vegmenu.at(a)[0] << " - " << vegmenu.at(a)[1] << endl;
+	}
 
-	//infile.close();
+	infile.close();
+
+}
+
+void filterGF() {
+	vector<array<string, 4> > gfmenu;//
+	vector<int> GF;
+
+	float gf;
+
+	ifstream infile;
+	infile.open("menuItems.csv", ios::in);
+
+	string line, row, item, stringprice;
+
+	while (getline(infile, line)) {
+		stringstream ss(line);
+		int i = 0;
+		array<string, 4> v;
+		while (getline(ss, row, ',')) {
+			v[i] = row;
+			i++;
+		}
+		gfmenu.push_back(v);
+	}
+
+	int a;
+	array<string, 4> ve;
+
+	for (int i = 0; i < gfmenu.size(); i++) {
+		gf = stof(gfmenu.at(i)[2]);
+
+		if (gf == 1) {
+			GF.push_back(i);
+		}
+
+	}
+
+	for (int i = 0; i < GF.size(); i++) {
+		a = GF.at(i);
+		cout << gfmenu.at(a)[0] << " - " << gfmenu.at(a)[1] << endl;
+	}
+
+	infile.close();
 
 }
 
 int parentOrder(int person){
 	int option;
-	menu:
-	ifstream infile;
+menu:
+
+	cout << "\n\n\t\t\t\tMenu";
+	cout << "\n----------------------------------------------\n\n";
+	vector<array<string, 4>>  vectorMenu;
+	int i;
+
+	fstream infile; // reading the file 
 	infile.open("menuItems.csv", ios::in);
 
-	string readData;
-	int itemPrice;
-
-	cout << "Menu Items: \n\n";
-	while (getline(infile, readData)) {
-		cout << readData << endl;
+	string line, row;
+	while (getline(infile, line)) { // this loop gets the data from the csv and push_backs into a vector
+		stringstream ss(line);
+		int i = 0;
+		array<string, 4> m;
+		while (getline(ss, row, ',')) {//while inside that row. 
+			m[i] = row;
+			i++;
+		}
+		vectorMenu.push_back(m);
 	}
-
-	infile.close();
+	// only for printing out data from vector
+	for (int i = 0; i < vectorMenu.size(); i++) {
+		cout << vectorMenu.at(i)[0] << " - " << vectorMenu.at(i)[1] << endl;
+	}
 	
 	cout << "\n\n\nMake a selection from the options below:";
 	cout << "\n\n1. Filter by price (low to high)";
@@ -375,7 +422,7 @@ int parentOrder(int person){
 		filterVeg();
 		break;
 	case 3:
-		//Filter gf opt
+		filterGF();
 		break;
 	case 4:
 		//Order
@@ -584,6 +631,7 @@ MenuSelect:
 
 		cout << "\n  Enter Option: ";
 		cin >> option;
+		cout << endl << endl;
 
 		switch (option) {
 		case 1:
