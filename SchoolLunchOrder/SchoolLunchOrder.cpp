@@ -54,6 +54,9 @@ struct ParentComplaint {
 struct MenuItems {
 	string itemName;
 	float itemPrice;
+	string menuID;
+	int itemVeg;
+	int itemGF;
 };
 
 /*struct AdminAcc {
@@ -394,16 +397,38 @@ int parentOrder(int person){
 
 // ===== vv KEITH CODE SECTION vv =====
 
-// -- menu preview CANNOT ORDER FROM HERE (IN PROGRESS)  --
+// -- writes menu into csv  --
 void writeMenuPreview() {
+	array<string, 9> menuID;
+	unsigned int id;
+	string iD;
+
+	string assignID[9];
+
+	
+	
+
+	for (int i = 0; i < 9; i++) {
+	redoID:
+		srand(time(NULL));
+		id = rand() % 10000000 + 9999999;
+		iD = to_string(id);
+		for (int j = 0; j < 9; j++) {
+			if (assignID[j] == iD) {
+				goto redoID;
+			}
+		}
+		iD = assignID[i];
+	}
+
 	fstream outfile; // writes into the csv file with menu item data
 
 	outfile.open("menuItems.csv", ios::out);
-	outfile << "Ham Sandwich" << ","
+	outfile << assignID[0] << "Ham Sandwich" << ","
 		<< "4.50" << "," << "2" << "," << "2" << endl
-		<< "Vegetarian Sandwich" << ","
+		<< assignID[1] << "Vegetarian Sandwich" << ","
 		<< "5.00" "," << "2" << "," << "1" << endl
-		<< "Chicken and Avo\t\t" << ","
+		<< assignID[2] << "Chicken and Avo\t\t" << ","
 		<< "6.50" "," << "1" << "," << "2" << endl
 		<< "Steak and Cheese" << ","
 		<< "4.50" "," << "2" << "," << "2" << endl
@@ -420,6 +445,7 @@ void writeMenuPreview() {
 	outfile.close();
 }
 
+// --- reads menu csv file 
 void  menuPreview() {
 	vector<array<string, 4>>  vectorMenu;
 	int i;
@@ -444,7 +470,51 @@ void  menuPreview() {
 	}
 }
 
-//admin update menu function
+//admin update menu function 
+void adminUpdateMenu() {
+	vector<array<string, 4>>  vectorMenu;
+	int i;
+
+	fstream infile; // reading the file 
+	infile.open("menuItems.csv", ios::in);
+
+	string line, row;
+	while (getline(infile, line)) { // this loop gets the data from the csv and push_backs into a vector
+		stringstream ss(line);
+		int i = 0;
+		array<string, 4> m;
+		while (getline(ss, row, ',')) {//while inside that row. 
+			m[i] = row;
+			i++;
+		}
+		vectorMenu.push_back(m);
+	}
+
+	int choice;
+	//Asking admin if they would like to make changes
+	cout << "What changes would you like to make?\n\n";
+	cout << "1. Change a Menu Item Name\n";
+	cout << "2. Change a Menu Item Price\n\n";
+	cout << "Please make a selection: (1 or 2) ";
+	cin >> choice;
+
+	if (choice == 1) {
+		int itemNameChoice;
+		cout << "\n\nMenu Name Change\n\n";
+		menuPreview();
+
+		cout << "what item would you like to change?(choose from 1 -6)\n";
+		cin >> itemNameChoice;
+		if (itemNameChoice == 1) {
+			for (int i = 0; i < vectorMenu.size(); i++) {
+				cout << vectorMenu.at(i)[0] << endl;
+			}
+		}
+
+
+	}
+
+}
 
 //check complaints functions
 
@@ -660,7 +730,7 @@ MenuSelect:
 	}
 
 	else if (a == 2) {
-		//admin screen
+		adminUpdateMenu();
 	}
 
 }
