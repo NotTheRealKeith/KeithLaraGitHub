@@ -2,8 +2,10 @@
 C:\Users\keith\OneDrive\Desktop\cppFolder\keithlaraclone\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(134,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
 C:\Users\keith\OneDrive\Desktop\cppFolder\keithlaraclone\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(153,14): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
 C:\Users\keith\OneDrive\Desktop\cppFolder\keithlaraclone\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(355,6): warning C4101: 'itemPrice': unreferenced local variable
-C:\Users\keith\OneDrive\Desktop\cppFolder\keithlaraclone\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(428,6): warning C4101: 'i': unreferenced local variable
-C:\Users\keith\OneDrive\Desktop\cppFolder\keithlaraclone\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(453,6): warning C4101: 'i': unreferenced local variable
-C:\Users\keith\OneDrive\Desktop\cppFolder\keithlaraclone\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(696,14): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-C:\Users\keith\OneDrive\Desktop\cppFolder\keithlaraclone\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(605,7): warning C4101: 'c': unreferenced local variable
+C:\Users\keith\OneDrive\Desktop\cppFolder\keithlaraclone\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(410,13): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\keith\OneDrive\Desktop\cppFolder\keithlaraclone\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(448,6): warning C4101: 'i': unreferenced local variable
+C:\Users\keith\OneDrive\Desktop\cppFolder\keithlaraclone\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(473,6): warning C4101: 'i': unreferenced local variable
+C:\Users\keith\OneDrive\Desktop\cppFolder\keithlaraclone\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(512,7): warning C4101: 'itemPriceChoice': unreferenced local variable
+C:\Users\keith\OneDrive\Desktop\cppFolder\keithlaraclone\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(718,14): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\keith\OneDrive\Desktop\cppFolder\keithlaraclone\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(627,7): warning C4101: 'c': unreferenced local variable
   SchoolLunchOrder.vcxproj -> C:\Users\keith\OneDrive\Desktop\cppFolder\keithlaraclone\KeithLaraGitHub\SchoolLunchOrder\x64\Debug\SchoolLunchOrder.exe

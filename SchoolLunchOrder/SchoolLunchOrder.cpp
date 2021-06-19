@@ -404,10 +404,7 @@ void writeMenuPreview() {
 	string iD;
 
 	string assignID[9];
-
 	
-	
-
 	for (int i = 0; i < 9; i++) {
 	redoID:
 		srand(time(NULL));
@@ -430,17 +427,17 @@ void writeMenuPreview() {
 		<< "5.00" "," << "2" << "," << "1" << endl
 		<< assignID[2] << "Chicken and Avo\t\t" << ","
 		<< "6.50" "," << "1" << "," << "2" << endl
-		<< "Steak and Cheese" << ","
+		<< assignID[3] << "Steak and Cheese" << ","
 		<< "4.50" "," << "2" << "," << "2" << endl
-		<< "Butter Chicken" << ","
+		<< assignID[4] << "Butter Chicken" << ","
 		<< "5.50" "," << "2" << "," << "2" << endl
-		<< "Mushroom and Cheese" << ","
+		<< assignID[5] << "Mushroom and Cheese" << ","
 		<< "6.50" "," << "1" << "," << "1" << endl
-		<< "Cheese" << ","
+		<< assignID[6] << "Cheese" << ","
 		<< "4.50" "," << "2" << "," << "2" << endl
-		<< "Pepperoni" << ","
+		<< assignID[7] << "Pepperoni" << ","
 		<< "5.50" "," << "2" << "," << "2" << endl
-		<< "Veg (GF)" << ","
+		<< assignID[8] << "Veg (GF)" << ","
 		<< "6.50" "," << "1" << "," << "1" << endl;
 	outfile.close();
 }
@@ -503,14 +500,16 @@ void adminUpdateMenu() {
 		cout << "\n\nMenu Name Change\n\n";
 		menuPreview();
 
-		cout << "what item would you like to change?(choose from 1 -6)\n";
+		cout << "\n\nwhat item would you like to change?(choose from 1 -6)\n";
 		cin >> itemNameChoice;
 		if (itemNameChoice == 1) {
 			for (int i = 0; i < vectorMenu.size(); i++) {
 				cout << vectorMenu.at(i)[0] << endl;
 			}
 		}
-
+	}
+	else if (choice == 2) {
+		int itemPriceChoice;
 
 	}
 
