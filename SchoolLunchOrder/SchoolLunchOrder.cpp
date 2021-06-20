@@ -34,9 +34,9 @@ struct ParentOrder {
 	string orderDate;
 	ParentAcc parentID;
 	ParentAcc childName;
-	string itemOrderName;
-	float itemOrderPrice;
-	int quantity;
+	vector<string> itemOrderName;
+	vector<float> itemOrderPrice;
+	vector<int> quantity;
 	bool paymentStatus;
 };
 
@@ -65,6 +65,8 @@ struct MenuItems {
 	string pinNum;
 };*/
 // ===== ^^ Write stuctures here ^^ =====
+
+void menuPreview();
 
 // -- create underlines only --
 void underLine(int x) {
@@ -248,28 +250,91 @@ exit:
 	return a;
 }
 
-void filterPrice() {
+void MakeOrder() {
+	vector<array<string, 7> > oNcheck;
+	vector<array<string, 4> > Menuorder;
+	ParentOrder order;
+	ParentOrder* ptrorder;
+	unsigned int on;
+	int option;
+	string line, row, oN, line2, row2;
 
+	ptrorder = &order;
 
+	srand(time(NULL));
+	on = rand() % 10000000 + 9999999;
+	oN = to_string(on);
 
-	/*sort(fp.begin(), fp.end());
+	ifstream fileid;
+	fileid.open("parentorder.csv", ios::in);
 
-	for (auto item : fp) {
-		cout << item << "\t\t" << item;
+	while (getline(fileid, line)) {
+		stringstream ss(line);
+		int i = 0;
+		array<string, 7> f;
+		while (getline(ss, row, ',')) {
+			f[i++] = row;
+		}
+		oNcheck.push_back(f);
+	}
+oNchk:
+	for (int i = 0; i < oNcheck.size(); ++i) {
+		if (oN == oNcheck.at(i)[0]) {
+			srand(time(NULL));
+			on = rand() % 1000000 + 999999;
+			oN = to_string(on);
+			goto oNchk;
+		}
 	}
 
-	*/
+	fileid.close();
 
+	ptrorder->orderNumber = oN;
+
+	cout << "\n\n\t\tOrder Screen (" << ptrorder->orderNumber << ")";
+	cout << "\n--------------------------------------------------------" << endl << endl;
+	menuPreview();
+
+	cout << "\n\nEnter the number next to the item you would like to order \n(enter 100 if you'd like to go back to the main menu)";
+	cout << "\n\nEnter option: ";
+	cin >> option;
+
+	fstream infile2; // reading the file 
+	infile2.open("menuItems.csv", ios::in);
+
+	while (getline(infile2, line2)) { // this loop gets the data from the csv and push_backs into a vector
+		stringstream ss(line2);
+		int i = 0;
+		array<string, 4> me;
+		while (getline(ss, row2, ',')) {//while inside that row. 
+			me[i] = row2;
+			i++;
+		}
+		Menuorder.push_back(me);
+	}
+
+	infile2.close();
+
+	for (int i = 0; i < Menuorder.max_size(); i++) {
+		if (option == i) {
+			//add the Menuorder.at(i)[0] and Menuorder.at(i)[1] to the cart order thing
+		}
+	}
+}
+
+void filterPrice() {
 	vector<array<string, 4> > fp;
 	vector<float> price;
-	vector<string> item;
+	vector<string> Price;
+	vector<string> Item;
 	float a;
+	string c;
+
 
 	ifstream infile;
 	infile.open("menuItems.csv", ios::in);
 
-	string line, row, item, stringprice;
-	float fpImp;
+	string line, row, item;
 
 	while (getline(infile, line)) {
 		stringstream ss(line);
@@ -284,18 +349,44 @@ void filterPrice() {
 	for (int i = 0; i < fp.size(); i++) {
 		a = stof(fp.at(i)[1]);
 		price.push_back(a);
-		sort(price.begin(), price.end());
+	}
+
+	sort(price.begin(), price.end());
+
+	for (int i = 0; i < price.size(); i++) {
+		c = to_string(price[i]);
+		Price.push_back(c);
 	}
 
 
+	/*for (int i = 0; i < fp.size(); i++) {
+		for (int j = 0; j < fp.size(); j++) {
+			if (Price[i] == fp.at(j)[1]) {
+				for (int k = 0; k < Item.size(); k++) {
 
-	//Create minimum and maxixmum for vector
+						if (Item[k] != fp.at(j)[0]) {
+							Item.push_back(fp.at(j)[0]);
+						}
+						else {
+							continue;
+						}
+					
+				}
+			}
+		}
+	}
 
+	for (int i = 0; i < price.size(); i++) {
+		cout << "\n" << Item[i] << "\t\t\t$" << Price[i];
+	}*/
 
+	//Find a way to push the items into a vector that correlates to the sorted price vector
+
+	infile.close();
 }
 
 void filterVeg() {
-	vector<array<string, 4> > vegmenu;//
+	vector<array<string, 4> > vegmenu;
 	vector<int> vegetarian;
 
 	float vege;
@@ -428,7 +519,7 @@ menu:
 		filterGF();
 		break;
 	case 4:
-		//Order
+		MakeOrder();
 		break;
 	case 5:
 		return 0;
