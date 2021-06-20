@@ -1,7 +1,13 @@
 ﻿  SchoolLunchOrder.cpp
-C:\Users\keith\OneDrive\Desktop\cppFolder\keithlaraclone\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(134,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-C:\Users\keith\OneDrive\Desktop\cppFolder\keithlaraclone\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(153,14): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-C:\Users\keith\OneDrive\Desktop\cppFolder\keithlaraclone\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(271,20): error C2371: 'item': redefinition; different basic types
-C:\Users\keith\OneDrive\Desktop\cppFolder\keithlaraclone\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(265): message : see declaration of 'item'
-C:\Users\keith\OneDrive\Desktop\cppFolder\keithlaraclone\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(457,13): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-C:\Users\keith\OneDrive\Desktop\cppFolder\keithlaraclone\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(766,14): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\me\Desktop\CS103\CS103Assessment\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(136,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\me\Desktop\CS103\CS103Assessment\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(155,14): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\me\Desktop\CS103\CS103Assessment\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(264,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\me\Desktop\CS103\CS103Assessment\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(283,14): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\me\Desktop\CS103\CS103Assessment\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(481,6): warning C4101: 'i': unreferenced local variable
+C:\Users\me\Desktop\CS103\CS103Assessment\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(548,13): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\me\Desktop\CS103\CS103Assessment\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(586,6): warning C4101: 'i': unreferenced local variable
+C:\Users\me\Desktop\CS103\CS103Assessment\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(611,6): warning C4101: 'i': unreferenced local variable
+C:\Users\me\Desktop\CS103\CS103Assessment\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(650,7): warning C4101: 'itemPriceChoice': unreferenced local variable
+C:\Users\me\Desktop\CS103\CS103Assessment\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(857,14): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\me\Desktop\CS103\CS103Assessment\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(765,7): warning C4101: 'c': unreferenced local variable
+  SchoolLunchOrder.vcxproj -> C:\Users\me\Desktop\CS103\CS103Assessment\KeithLaraGitHub\SchoolLunchOrder\x64\Debug\SchoolLunchOrder.exe
