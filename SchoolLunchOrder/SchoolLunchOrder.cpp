@@ -11,6 +11,7 @@
 #include <algorithm>
 #include <stdlib.h>
 #include <string>
+#include <ctime>
 using namespace std;
 
 // ===== vv Write stuctures here vv =====
@@ -32,12 +33,16 @@ struct ParentAcc {
 struct ParentOrder {
 	string orderNumber;
 	string orderDate;
-	ParentAcc parentID;
-	ParentAcc childName;
+	string parentID;
+	string childName;
+	string paymentStatus; //(1 or 2)
+	float total;
+};
+
+struct Order {
 	vector<string> itemOrderName;
-	vector<float> itemOrderPrice;
-	vector<int> quantity;
-	bool paymentStatus;
+	vector<float> itemPrice;
+	vector<char> orderday;
 };
 
 struct ParentComplaint {
@@ -45,10 +50,12 @@ struct ParentComplaint {
 	string compItem;
 	string comptDesc;
 	string compNumber;
-	ParentAcc firstName;
-	ParentAcc contactNum;
+	string firstName;
+	string contactNum;
 	bool actionStatus;
 };
+
+
 
 
 struct MenuItems {
@@ -250,20 +257,32 @@ exit:
 	return a;
 }
 
-void MakeOrder() {
+void MakeOrder(int parent) {
 	vector<array<string, 7> > oNcheck;
+	vector<array<string, 9> > parentinfo;
 	vector<array<string, 4> > Menuorder;
+	vector<int> printitems;
 	ParentOrder order;
 	ParentOrder* ptrorder;
 	unsigned int on;
-	int option;
-	string line, row, oN, line2, row2;
+	int option, discount = 0;
+	float total, Total = 0, Newtotal;
+	string line, row, oN, line2, row2, line3, row3, date, day, month, year;
+	char orderday, paymentproceed, continueorder;
+	time_t now = time(0);
+	tm* ltm = localtime(&now);
 
 	ptrorder = &order;
 
 	srand(time(NULL));
 	on = rand() % 10000000 + 9999999;
 	oN = to_string(on);
+
+	day = ltm->tm_mday;
+	month = (1 + ltm->tm_mon);
+	year = (1900 + ltm->tm_year);
+
+	date = day + "/" + month + "/" + year;
 
 	ifstream fileid;
 	fileid.open("parentorder.csv", ios::in);
@@ -289,24 +308,29 @@ oNchk:
 
 	fileid.close();
 
-	ptrorder->orderNumber = oN;
+	ifstream parentfile;
+	parentfile.open("parentlogin.csv", ios::in);
 
-	cout << "\n\n\t\tOrder Screen (" << ptrorder->orderNumber << ")";
-	cout << "\n--------------------------------------------------------" << endl << endl;
-	menuPreview();
+	while (getline(parentfile, line3)) {
+		stringstream ss(line3);
+		int i = 0;
+		array<string, 9> p;
+		while (getline(ss, row3, ',')) {
+			p[i++] = row3;
+		}
+		parentinfo.push_back(p);
+	}
 
-	cout << "\n\nEnter the number next to the item you would like to order \n(enter 100 if you'd like to go back to the main menu)";
-	cout << "\n\nEnter option: ";
-	cin >> option;
+	parentfile.close();
 
-	fstream infile2; // reading the file 
+	fstream infile2;
 	infile2.open("menuItems.csv", ios::in);
 
-	while (getline(infile2, line2)) { // this loop gets the data from the csv and push_backs into a vector
+	while (getline(infile2, line2)) {
 		stringstream ss(line2);
 		int i = 0;
 		array<string, 4> me;
-		while (getline(ss, row2, ',')) {//while inside that row. 
+		while (getline(ss, row2, ',')) {
 			me[i] = row2;
 			i++;
 		}
@@ -315,10 +339,104 @@ oNchk:
 
 	infile2.close();
 
-	for (int i = 0; i < Menuorder.max_size(); i++) {
-		if (option == i) {
-			//add the Menuorder.at(i)[0] and Menuorder.at(i)[1] to the cart order thing
+	ptrorder->orderNumber = oN;
+	ptrorder->parentID = parentinfo.at(parent)[0];
+	continueordering:
+	cout << "\n\n\t\tOrder Screen (" << ptrorder->orderNumber << ")\n";
+	underLine(80);
+	cout << endl << endl;
+	menuPreview();
+
+	cout << "\n\nEnter the number next to the item you would like to order \n(Enter 100 if you'd like to go back to the main menu)";
+	cout << "\n\nEnter option: ";
+	cin >> option;
+	printitems.push_back(option);
+	cout << "\n\nEnter day you would like the food delivered";
+	redoday:
+	cout << "\n\n\tm - Monday\n\tt - Tuesday\n\tw - Wednesday\n\tu - Thursday\n\tf - Friday";
+	cout << "\n\nEnter option: ";
+	cin >> orderday;
+	if (orderday == 'm' || orderday == 't' || orderday == 'w' || orderday == 'u' || orderday == 'f') {
+		
+	}
+	else {
+		cout << "\n\nPlease enter a valid day (m, t, w, u or f)";
+		goto redoday;
+	}
+
+	ofstream orderfile;
+	orderfile.open(ptrorder->orderNumber + ".csv", ios::app);
+
+
+	for (int d = 0; d < Menuorder.max_size(); d++) {
+		if ((option - 1) == d) {
+			orderfile << Menuorder.at(d)[0] << "," << Menuorder.at(d)[1] << "," << orderday << "," << date << endl;
+			break;
 		}
+	}
+
+	orderfile.close();
+
+	paymentproceedredo:
+	cout << "\n\nProceed to payment? (y/n)";
+	cin >> paymentproceed;
+
+	if (paymentproceed == 'y') {
+		cout << "\n\n\tBill for " << parentinfo.at(parent)[1] << " (" << ptrorder->orderNumber << ") " << endl;
+		underLine(80);
+
+		cout << "\nItems ordered on (" << date << "):" << endl;
+		for (int i = 0; i < printitems.size(); i++) {
+			cout << "\n\t" << Menuorder.at(printitems[i])[0] << "   $" << Menuorder.at(printitems[i])[1];
+			total = stof(Menuorder.at(printitems[i])[1]);
+			Total = total + Total;
+			discount++;
+		}
+
+		if (discount >= 15 && discount < 25) {
+			Newtotal = Total * 0.95;
+			cout << "\n\nDiscount applied: 5%\t\tTotal:\t\t$" << Newtotal;
+		}
+		else if (discount >= 25 && discount < 40) {
+			Newtotal = Total * 0.9;
+			cout << "\n\nDiscount applied: 10%\t\tTotal:\t\t$" << Newtotal;
+		}
+		else if (discount >= 40) {
+			Newtotal = Total * 0.85;
+			cout << "\n\nDiscount applied: 15%\t\tTotal:\t\t$" << Newtotal;
+		}
+		else {
+			Newtotal = Total;
+			cout << "\n\n\t\t\t\tTotal:  $" << Newtotal;
+		}
+
+		cout << "\n\nStudent: " << parentinfo.at(parent)[5] << "\t\t\t\tClass: " << parentinfo.at(parent)[6] << endl << endl;
+
+		ofstream parentorderfile;
+		parentorderfile.open("parentOrder.csv", ios::out);
+
+		parentorderfile << ptrorder->orderNumber << "," << date << "," << discount << "," << Newtotal << "," << "paid" << "," << parentinfo.at(parent)[5] << "," << parentinfo.at(parent)[6] << endl;
+
+		parentorderfile.close();
+	}
+	else if (paymentproceed == 'n') {
+		contord:
+		cout << "\n\nContinue Ordering? (y/n)";
+		cin >> continueorder;
+		if (continueorder == 'y') {
+			goto continueordering;
+		}
+		else if (continueorder == 'n') {
+
+		}
+		else {
+			cout << "\n\nPlease enter a valid option (y/n)";
+			goto contord;
+		}
+	}
+	else {
+		cout << "\n\nPlease enter a valid option (y or n)";
+		goto paymentproceedredo;
 	}
 }
 
@@ -519,7 +637,7 @@ menu:
 		filterGF();
 		break;
 	case 4:
-		MakeOrder();
+		MakeOrder(person);
 		break;
 	case 5:
 		return 0;
@@ -563,19 +681,19 @@ void writeMenuPreview() {
 		<< "4.50" << "," << "2" << "," << "2" << endl
 		<< assignID[1] << "Vegetarian Sandwich" << ","
 		<< "5.00" "," << "2" << "," << "1" << endl
-		<< assignID[2] << "Chicken and Avo\t\t" << ","
+		<< assignID[2] << "Chicken and Avocado Sandwich (GF)" << ","
 		<< "6.50" "," << "1" << "," << "2" << endl
-		<< assignID[3] << "Steak and Cheese" << ","
+		<< assignID[3] << "Steak and Cheese Pie" << ","
 		<< "4.50" "," << "2" << "," << "2" << endl
-		<< assignID[4] << "Butter Chicken" << ","
+		<< assignID[4] << "Butter Chicken Pie" << ","
 		<< "5.50" "," << "2" << "," << "2" << endl
-		<< assignID[5] << "Mushroom and Cheese" << ","
+		<< assignID[5] << "Mushroom and Cheese Pie (GF)" << ","
 		<< "6.50" "," << "1" << "," << "1" << endl
-		<< assignID[6] << "Cheese" << ","
+		<< assignID[6] << "Cheese Pizza" << ","
 		<< "4.50" "," << "2" << "," << "2" << endl
-		<< assignID[7] << "Pepperoni" << ","
+		<< assignID[7] << "Pepperoni Pizza" << ","
 		<< "5.50" "," << "2" << "," << "2" << endl
-		<< assignID[8] << "Veg (GF)" << ","
+		<< assignID[8] << "Vegetarian Pizza (GF)" << ","
 		<< "6.50" "," << "1" << "," << "1" << endl;
 	outfile.close();
 }
@@ -601,7 +719,7 @@ void  menuPreview() {
 	}
 	// only for printing out data from vector
 	for (int i = 0; i < vectorMenu.size(); i++) {
-		cout << vectorMenu.at(i)[0] << " - " << vectorMenu.at(i)[1] << endl;
+		cout << "\n" << (i + 1) << ". " <<  vectorMenu.at(i)[0] << "  -  $" << vectorMenu.at(i)[1] << endl;
 	}
 }
 
