@@ -687,11 +687,11 @@ void writeMenuPreview() {
 	for (int i = 0; i < 9; i++) {
 	redoID:
 		srand(time(NULL));
-		id = rand() % 10000000 + 9999999;
+		id = (rand() % (10000000 - 9999999) + 9999999);
 		iD = to_string(id);
 		for (int j = 0; j < 9; j++) {
 			if (assignID[j] == iD) {
-				goto redoID;
+				cout << iD;
 			}
 		}
 		iD = assignID[i];
@@ -700,7 +700,7 @@ void writeMenuPreview() {
 	fstream outfile; // writes into the csv file with menu item data
 
 	outfile.open("menuItems.csv", ios::out);
-	outfile << assignID[0] << "Ham Sandwich" << ","
+	outfile << "Ham Sandwich" << ","
 		<< "4.50" << "," << "2" << "," << "2" << endl
 		<< assignID[1] << "Vegetarian Sandwich" << ","
 		<< "5.00" "," << "2" << "," << "1" << endl
@@ -778,21 +778,29 @@ void adminUpdateMenu() {
 	cin >> choice;
 
 	if (choice == 1) {
-		int itemNameChoice;
+		string itemNameChoice;
+		string newItemName;
+		cin.ignore();
 		cout << "\n\nMenu Name Change\n\n";
 		menuPreview();
 
-		cout << "\n\nwhat item would you like to change?(choose from 1 -6)\n";
-		cin >> itemNameChoice;
-		if (itemNameChoice == 1) {
-			for (int i = 0; i < vectorMenu.size(); i++) {
-				cout << vectorMenu.at(i)[0] << endl;
-			}
+		cout << "\n\nwhat item would you like to change?(Please type the Name of item)\n";
+		getline(cin,itemNameChoice);
+		// checks if the user selected item matches with the item in that vector cell
+		if (itemNameChoice == vectorMenu[0][0]) {
+			cout << "\nYou would like to change " << vectorMenu[0][0]; //if it matches, it will then ask the user what they want to
+			cout << "\nPlease Enter new item Name: ";
+			getline(cin,newItemName);
+
+			vectorMenu[0][0] = newItemName;
+			cout << vectorMenu[0][0];
 		}
 	}
+
 	else if (choice == 2) {
 		int itemPriceChoice;
-
+		cout << "\n\nMenu Price Change\n\n";
+		menuPreview();
 	}
 
 }
@@ -910,10 +918,6 @@ MenuSelect:
 		cout << "It seems your selection was invalid, please select one of the given options: " << endl;
 		goto MenuSelect;
 	}
-
-	
-
-	
 
 	if (a == 0) {
 		//Too many attempts to log in
