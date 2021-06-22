@@ -1,16 +1,18 @@
 ﻿  SchoolLunchOrder.cpp
-C:\Users\me\Desktop\CS103\CS103Assessment\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(143,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-C:\Users\me\Desktop\CS103\CS103Assessment\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(162,14): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-C:\Users\me\Desktop\CS103\CS103Assessment\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(277,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-C:\Users\me\Desktop\CS103\CS103Assessment\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(302,14): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-C:\Users\me\Desktop\CS103\CS103Assessment\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(397,21): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\me\Desktop\CS103\CS103Assessment\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(401,21): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\me\Desktop\CS103\CS103Assessment\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(405,21): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\me\Desktop\CS103\CS103Assessment\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(599,6): warning C4101: 'i': unreferenced local variable
-C:\Users\me\Desktop\CS103\CS103Assessment\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(666,13): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-C:\Users\me\Desktop\CS103\CS103Assessment\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(704,6): warning C4101: 'i': unreferenced local variable
-C:\Users\me\Desktop\CS103\CS103Assessment\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(729,6): warning C4101: 'i': unreferenced local variable
-C:\Users\me\Desktop\CS103\CS103Assessment\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(768,7): warning C4101: 'itemPriceChoice': unreferenced local variable
-C:\Users\me\Desktop\CS103\CS103Assessment\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(975,14): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-C:\Users\me\Desktop\CS103\CS103Assessment\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(883,7): warning C4101: 'c': unreferenced local variable
-  SchoolLunchOrder.vcxproj -> C:\Users\me\Desktop\CS103\CS103Assessment\KeithLaraGitHub\SchoolLunchOrder\x64\Debug\SchoolLunchOrder.exe
+C:\Users\270096195\OneDrive - UP Education\Desktop\CS103\ActualAssignment\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(149,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\270096195\OneDrive - UP Education\Desktop\CS103\ActualAssignment\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(168,14): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\270096195\OneDrive - UP Education\Desktop\CS103\ActualAssignment\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(284,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\270096195\OneDrive - UP Education\Desktop\CS103\ActualAssignment\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(309,14): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\270096195\OneDrive - UP Education\Desktop\CS103\ActualAssignment\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(405,21): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\270096195\OneDrive - UP Education\Desktop\CS103\ActualAssignment\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(409,21): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\270096195\OneDrive - UP Education\Desktop\CS103\ActualAssignment\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(413,21): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\270096195\OneDrive - UP Education\Desktop\CS103\ActualAssignment\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(622,6): warning C4101: 'i': unreferenced local variable
+C:\Users\270096195\OneDrive - UP Education\Desktop\CS103\ActualAssignment\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(689,13): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\270096195\OneDrive - UP Education\Desktop\CS103\ActualAssignment\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(728,6): warning C4101: 'i': unreferenced local variable
+C:\Users\270096195\OneDrive - UP Education\Desktop\CS103\ActualAssignment\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(755,6): warning C4101: 'i': unreferenced local variable
+C:\Users\270096195\OneDrive - UP Education\Desktop\CS103\ActualAssignment\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(794,7): warning C4101: 'itemPriceChoice': unreferenced local variable
+C:\Users\270096195\OneDrive - UP Education\Desktop\CS103\ActualAssignment\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(1019,14): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\270096195\OneDrive - UP Education\Desktop\CS103\ActualAssignment\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(1027,3): error C2360: initialization of 'pc' is skipped by 'case' label
+C:\Users\270096195\OneDrive - UP Education\Desktop\CS103\ActualAssignment\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(1020): message : see declaration of 'pc'
+C:\Users\270096195\OneDrive - UP Education\Desktop\CS103\ActualAssignment\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(1027,3): error C2360: initialization of 'ParentComp' is skipped by 'case' label
+C:\Users\270096195\OneDrive - UP Education\Desktop\CS103\ActualAssignment\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(1014): message : see declaration of 'ParentComp'
