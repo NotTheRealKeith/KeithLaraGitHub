@@ -12,6 +12,7 @@
 #include <stdlib.h>
 #include <string>
 #include <ctime>
+#include <windows.h> 
 using namespace std;
 
 // ===== vv Write stuctures here vv =====
@@ -85,21 +86,25 @@ void underLine(int x) {
 	cout << endl;
 }
 
+void changeColour(int desiredColour) {
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), desiredColour);
+}
+
 // ===== vv LARA CODE SECTION vv =====
 void bulkDiscount() {
 	cout << "\n\t\t\tBulk Discount Offers\t\t\t" << endl;
 	underLine(80);
 
 	cout << "\nItems can be ordered over different days for the children \n(including different weeks)";
-	cout << "\n\n1. 15 Items Ordered = 5% off total order";
-	cout << "\n2. 25 Items Ordered = 10% off total order";
-	cout << "\n1. 40+ Items Ordered = 15% off total order";
+	cout << "\n\n1. 5 Items Ordered = 5% off total order";
+	cout << "\n2. 10 Items Ordered = 10% off total order";
+	cout << "\n3. 20+ Items Ordered = 15% off total order";
 }
 
 void contactDetails() {
 	cout << "\n\t\t\tContact Details\t\t\t" << endl;
 	underLine(80);
-	cout << "\nIf you would like to contact us regarding any queries you \nmay have you may reach us via our phone number and email \nshown below: ";
+	cout << "\nIf you would like to contact us regarding any queries you \nmay have you can reach us via our phone number and email \nshown below: ";
 	cout << "\n\nContact Number: (04) 578 - 2364";
 	cout << "\n\nEmail: schoollunchsystem@gmail.com";
 	cout << "\n\nOffice Location 45 School St, Thorndon, Wellington, NZ";
@@ -107,6 +112,7 @@ void contactDetails() {
 }
 
 int ParentReg(ParentAcc* ptr) {
+	system("cls");
 	vector<array<string, 9>>  matrix;
 	vector<array<string, 9>>  idcheck;
 	int num, a;
@@ -171,7 +177,7 @@ loginpin:
 	ptr->parentID = to_string(id);
 
 	ofstream outfile;
-	outfile.open("parentlogin.csv", ios::out);
+	outfile.open("parentlogin.csv", ios::app);
 
 	outfile << ptr->parentID << ","
 		<< ptr->firstName << ","
@@ -208,6 +214,7 @@ loginpin:
 }
 
 int parentLogin() {
+	system("cls");
 	vector<array<string, 9>>  matrix;
 	string firstname, line, row, pin;
 	int a = -1;
@@ -265,9 +272,9 @@ void MakeOrder(int parent) {
 	ParentOrder order;
 	ParentOrder* ptrorder;
 	unsigned int on;
-	int option, discount = 0;
+	int option, discount = 0, day, month, year;
 	float total, Total = 0, Newtotal;
-	string line, row, oN, line2, row2, line3, row3, date, day, month, year;
+	string line, row, oN, line2, row2, line3, row3, date;
 	char orderday, paymentproceed, continueorder;
 	time_t now = time(0);
 	tm* ltm = localtime(&now);
@@ -282,7 +289,7 @@ void MakeOrder(int parent) {
 	month = (1 + ltm->tm_mon);
 	year = (1900 + ltm->tm_year);
 
-	date = day + "/" + month + "/" + year;
+	date = to_string(day) + "/" + to_string(month) + "/" + to_string(year);
 
 	ifstream fileid;
 	fileid.open("parentorder.csv", ios::in);
@@ -341,7 +348,8 @@ oNchk:
 
 	ptrorder->orderNumber = oN;
 	ptrorder->parentID = parentinfo.at(parent)[0];
-	continueordering:
+continueordering:
+	system("cls");
 	cout << "\n\n\t\tOrder Screen (" << ptrorder->orderNumber << ")\n";
 	underLine(80);
 	cout << endl << endl;
@@ -364,26 +372,26 @@ oNchk:
 		goto redoday;
 	}
 
-	ofstream orderfile;
-	orderfile.open(ptrorder->orderNumber + ".csv", ios::app);
-
-
-	for (int d = 0; d < Menuorder.max_size(); d++) {
-		if ((option - 1) == d) {
-			orderfile << Menuorder.at(d)[0] << "," << Menuorder.at(d)[1] << "," << orderday << "," << date << endl;
-			break;
-		}
-	}
-
-	orderfile.close();
-
 	paymentproceedredo:
-	cout << "\n\nProceed to payment? (y/n)";
+	cout << "\n\nProceed to payment? (y/n) ";
 	cin >> paymentproceed;
 
 	if (paymentproceed == 'y') {
+		ofstream orderfile;
+		orderfile.open(ptrorder->orderNumber + ".csv", ios::app);
+
+
+		for (int d = 0; d < Menuorder.max_size(); d++) {
+			if ((option - 1) == d) {
+				orderfile << Menuorder.at(d)[0] << "," << Menuorder.at(d)[1] << "," << orderday << "," << date << endl;
+				break;
+			}
+		}
+
+		orderfile.close();
+		system("cls");
 		cout << "\n\n\tBill for " << parentinfo.at(parent)[1] << " (" << ptrorder->orderNumber << ") " << endl;
-		underLine(80);
+		underLine(80); //Fix somewhere around here
 
 		cout << "\nItems ordered on (" << date << "):" << endl;
 		for (int i = 0; i < printitems.size(); i++) {
@@ -393,24 +401,24 @@ oNchk:
 			discount++;
 		}
 
-		if (discount >= 15 && discount < 25) {
+		if (discount >= 5 && discount < 10) {
 			Newtotal = Total * 0.95;
 			cout << "\n\nDiscount applied: 5%\t\tTotal:\t\t$" << Newtotal;
 		}
-		else if (discount >= 25 && discount < 40) {
+		else if (discount >= 10 && discount < 20) {
 			Newtotal = Total * 0.9;
 			cout << "\n\nDiscount applied: 10%\t\tTotal:\t\t$" << Newtotal;
 		}
-		else if (discount >= 40) {
+		else if (discount >= 20) {
 			Newtotal = Total * 0.85;
 			cout << "\n\nDiscount applied: 15%\t\tTotal:\t\t$" << Newtotal;
 		}
 		else {
 			Newtotal = Total;
-			cout << "\n\n\t\t\t\tTotal:  $" << Newtotal;
+			cout << "\n\nTotal:  $" << Newtotal;
 		}
 
-		cout << "\n\nStudent: " << parentinfo.at(parent)[5] << "\t\t\t\tClass: " << parentinfo.at(parent)[6] << endl << endl;
+		cout << "\nStudent: " << parentinfo.at(parent)[5] << "\t\t\t\tClass: " << parentinfo.at(parent)[6] << endl << endl;
 
 		ofstream parentorderfile;
 		parentorderfile.open("parentOrder.csv", ios::out);
@@ -424,6 +432,18 @@ oNchk:
 		cout << "\n\nContinue Ordering? (y/n)";
 		cin >> continueorder;
 		if (continueorder == 'y') {
+			ofstream orderfile;
+			orderfile.open(ptrorder->orderNumber + ".csv", ios::app);
+
+
+			for (int d = 0; d < Menuorder.max_size(); d++) {
+				if ((option - 1) == d) {
+					orderfile << Menuorder.at(d)[0] << "," << Menuorder.at(d)[1] << "," << orderday << "," << date << endl;
+					break;
+				}
+			}
+
+			orderfile.close();
 			goto continueordering;
 		}
 		else if (continueorder == 'n') {
@@ -441,6 +461,7 @@ oNchk:
 }
 
 void filterPrice() {
+	system("cls");
 	vector<array<string, 4> > fp;
 	vector<float> price;
 	vector<string> Price;
@@ -504,6 +525,7 @@ void filterPrice() {
 }
 
 void filterVeg() {
+	system("cls");
 	vector<array<string, 4> > vegmenu;
 	vector<int> vegetarian;
 
@@ -547,7 +569,8 @@ void filterVeg() {
 }
 
 void filterGF() {
-	vector<array<string, 4> > gfmenu;
+	system("cls");
+	vector<array<string, 4> > gfmenu;//
 	vector<int> GF;
 
 	float gf;
@@ -592,7 +615,7 @@ void filterGF() {
 int parentOrder(int person){
 	int option;
 menu:
-
+	system("cls");
 	cout << "\n\n\t\t\t\tMenu";
 	cout << "\n----------------------------------------------\n\n";
 	vector<array<string, 4>>  vectorMenu;
@@ -700,6 +723,7 @@ void writeMenuPreview() {
 
 // --- reads menu csv file 
 void  menuPreview() {
+	system("cls");
 	vector<array<string, 4>>  vectorMenu;
 	int i;
 
@@ -717,6 +741,8 @@ void  menuPreview() {
 		}
 		vectorMenu.push_back(m);
 	}
+	cout << "\n\n\t\t\tMenu";
+	cout << "\n----------------------------------------------\n\n";
 	// only for printing out data from vector
 	for (int i = 0; i < vectorMenu.size(); i++) {
 		cout << "\n" << (i + 1) << ". " <<  vectorMenu.at(i)[0] << "  -  $" << vectorMenu.at(i)[1] << endl;
@@ -795,12 +821,14 @@ int main()
 
 	ptrParent = &Parent;
 	writeMenuPreview();
+MenuSelect:
+	system("cls");
 	// --- added intro screen below V --- //
 	cout << "\n\t\t\tSchool Lunch Order System\t\t\t" << endl;
 	underLine(80);
 
 	cout << "\n\tPlease make a selection from the options below:" << endl;
-MenuSelect:
+
 	cout << "\n\t1.  Preview of Menu" << endl;
 	cout << "\t2.  Bulk Discount Offers" << endl;
 	cout << "\t3.  School Contact Details & Location" << endl;
@@ -808,19 +836,23 @@ MenuSelect:
 	cout << "\t5.  Register a new account" << endl;
 
 	cout << "\n\n";
-
+	changeColour(11);
 	cout << "\n  Selection: ";
+	changeColour(7);
 	cin >> index;
-
 	switch (index) {
 	case 1:
+		system("cls");
 		menuPreview();
-
+		changeColour(11);
 		cout << "\n\n\n Enter 1 to return back to Main Menu: ";
+		changeColour(7);
 		cin >> flag;
 
 		if (flag != 1) {   //find a way to make this loop if condition is not met (IN PROGRESS)
+			changeColour(4);
 			cout << "invalid input! Try again: ";
+			changeColour(7);
 		}
 		else {
 			goto MenuSelect;
@@ -828,13 +860,17 @@ MenuSelect:
 
 		break;
 	case 2:
+		system("cls");
 		bulkDiscount();
-
+		changeColour(11);
 		cout << "\n\n\n Enter 1 to return back to Main Menu: ";
+		changeColour(7);
 		cin >> flag;
 	redo1:
 		if (flag != 1) {
+			changeColour(4);
 			cout << "invalid input! Try again: ";
+			changeColour(7);
 			cin >> flag;
 			goto redo1;
 		}
@@ -843,13 +879,17 @@ MenuSelect:
 		}
 		break;
 	case 3:
+		system("cls");
 		contactDetails();
-
+		changeColour(11);
 		cout << "\n\n\n Enter 1 to return back to Main Menu: ";
+		changeColour(7);
 		cin >> flag;
 	redo2:
 		if (flag != 1) {
+			changeColour(4);
 			cout << "invalid input! Try again: ";
+			changeColour(7);
 			cin >> flag;
 			goto redo2;
 		}
@@ -901,6 +941,7 @@ MenuSelect:
 
 		infile.close();
 	MenuParentSelect:
+		system("cls");
 		cout << "\n\t\t\tParent School Lunch System " << matrix.at(b)[1] << endl;
 		underLine(80);
 
@@ -909,6 +950,7 @@ MenuSelect:
 		cout << "\t2.  Bulk Discount Offers" << endl;
 		cout << "\t3.  School Contact Details & Location" << endl;
 		cout << "\t4.  Make a Complaint" << endl;
+		cout << "\t5.  Log Out" << endl;
 		cout << "\n\n";
 
 		cout << "\n  Enter Option: ";
@@ -939,6 +981,7 @@ MenuSelect:
 			break;
 
 		case 2:
+			system("cls");
 			bulkDiscount();
 
 			cout << "\n\n\n Enter 1 to return back to Parent Menu: ";
@@ -955,6 +998,7 @@ MenuSelect:
 			break;
 
 		case 3:
+			system("cls");
 			contactDetails();
 
 			cout << "\n\n\n Enter 1 to return back to Main Menu: ";
@@ -983,6 +1027,11 @@ MenuSelect:
 
 			cout << "\n\t\t\tComplaint Form (" << ptrParentComp->compNumber << ")" << endl;
 			underLine(80);
+			break;
+		case 5:
+			//Include log out feature
+			break;
+		default:
 			break;
 		}
 
