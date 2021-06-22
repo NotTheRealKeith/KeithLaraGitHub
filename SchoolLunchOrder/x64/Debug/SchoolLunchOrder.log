@@ -1,3 +1,6 @@
+<<<<<<< HEAD
+﻿  SchoolLunchOrder.vcxproj -> C:\Users\keith\OneDrive\Desktop\cppFolder\keithlaraclone\KeithLaraGitHub\SchoolLunchOrder\x64\Debug\SchoolLunchOrder.exe
+=======
 ﻿  SchoolLunchOrder.cpp
 C:\Users\me\Desktop\CS103\CS103Assessment\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(143,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
 C:\Users\me\Desktop\CS103\CS103Assessment\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(162,14): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
@@ -14,3 +17,4 @@ C:\Users\me\Desktop\CS103\CS103Assessment\KeithLaraGitHub\SchoolLunchOrder\Schoo
 C:\Users\me\Desktop\CS103\CS103Assessment\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(975,14): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
 C:\Users\me\Desktop\CS103\CS103Assessment\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(883,7): warning C4101: 'c': unreferenced local variable
   SchoolLunchOrder.vcxproj -> C:\Users\me\Desktop\CS103\CS103Assessment\KeithLaraGitHub\SchoolLunchOrder\x64\Debug\SchoolLunchOrder.exe
+>>>>>>> 8a271aa3f69af021aaa06dd06489bc8a01585c98
