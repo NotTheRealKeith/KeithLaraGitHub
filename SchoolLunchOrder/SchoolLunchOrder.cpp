@@ -252,11 +252,15 @@ int parentLogin() {
 				goto exit;
 			}
 		}
+		changeColour(4);
 		cout << "\n\nWrong login information try again (you have " << n-- << " more attempts!\n";
+		changeColour(7);
 	}
 
 	if (a == -1) {
+		changeColour(4);
 		cout << "\n\nThe number of login attempts has been exceeded, try again another time.";
+		changeColour(7);
 	}
 
 exit:
@@ -264,7 +268,7 @@ exit:
 	return a;
 }
 
-void MakeOrder(int parent) {
+int MakeOrder(int parent) {
 	vector<array<string, 7> > oNcheck;
 	vector<array<string, 9> > parentinfo;
 	vector<array<string, 4> > Menuorder;
@@ -354,84 +358,125 @@ continueordering:
 	underLine(80);
 	cout << endl << endl;
 	menuPreview();
-
 	cout << "\n\nEnter the number next to the item you would like to order \n(Enter 100 if you'd like to go back to the main menu)";
+	changeColour(11);
 	cout << "\n\nEnter option: ";
+	changeColour(7);
 	cin >> option;
+	for (int optionsize = 1; optionsize < Menuorder.size(); optionsize++) {
+		if (option == optionsize) {
+			goto continuingorder;
+		}
+	}
+	if (option == 100) {
+		return 0;
+		}
+	else {
+		cout << "\n\nPlease enter a valid option (1 - " << Menuorder.size() << ")\n\n";
+		changeColour(11);
+		system("pause");
+		changeColour(7);
+		goto continueordering;
+	}
+	
+	continuingorder:
 	printitems.push_back(option);
+redoday:
 	cout << "\n\nEnter day you would like the food delivered";
-	redoday:
 	cout << "\n\n\tm - Monday\n\tt - Tuesday\n\tw - Wednesday\n\tu - Thursday\n\tf - Friday";
+	changeColour(11);
 	cout << "\n\nEnter option: ";
+	changeColour(7);
 	cin >> orderday;
 	if (orderday == 'm' || orderday == 't' || orderday == 'w' || orderday == 'u' || orderday == 'f') {
 		
 	}
 	else {
+		changeColour(4);
 		cout << "\n\nPlease enter a valid day (m, t, w, u or f)";
+		changeColour(7);
 		goto redoday;
 	}
 
+contorderredo:
+	changeColour(11);
+	cout << "\n\nContinue Ordering? (y/n) ";
+	changeColour(7);
+	cin >> continueorder;
+
+	if (continueorder == 'n') {
 	paymentproceedredo:
-	cout << "\n\nProceed to payment? (y/n) ";
-	cin >> paymentproceed;
+		changeColour(11);
+		cout << "\n\nProceed to payment? (y/n)";
+		changeColour(7);
+		cin >> paymentproceed;
+		if (paymentproceed == 'y') {
+			ofstream orderfile;
+			orderfile.open(ptrorder->orderNumber + ".csv", ios::app);
 
-	if (paymentproceed == 'y') {
-		ofstream orderfile;
-		orderfile.open(ptrorder->orderNumber + ".csv", ios::app);
 
-
-		for (int d = 0; d < Menuorder.max_size(); d++) {
-			if ((option - 1) == d) {
-				orderfile << Menuorder.at(d)[0] << "," << Menuorder.at(d)[1] << "," << orderday << "," << date << endl;
-				break;
+			for (int d = 0; d < Menuorder.max_size(); d++) {
+				if ((option - 1) == d) {
+					orderfile << Menuorder.at(d)[0] << "," << Menuorder.at(d)[1] << "," << orderday << "," << date << endl;
+					break;
+				}
 			}
-		}
 
-		orderfile.close();
-		system("cls");
-		cout << "\n\n\tBill for " << parentinfo.at(parent)[1] << " (" << ptrorder->orderNumber << ") " << endl;
-		underLine(80); //Fix somewhere around here
+			orderfile.close();
+			system("cls");
+			cout << "\n\n\tBill for " << parentinfo.at(parent)[1] << " (" << ptrorder->orderNumber << ") " << endl;
+			underLine(65);
 
-		cout << "\nItems ordered on (" << date << "):" << endl;
-		for (int i = 0; i < printitems.size(); i++) {
-			cout << "\n\t" << Menuorder.at(printitems[i])[0] << "   $" << Menuorder.at(printitems[i])[1];
-			total = stof(Menuorder.at(printitems[i])[1]);
-			Total = total + Total;
-			discount++;
-		}
+			cout << "\nItems ordered on (" << date << "):" << endl;
+			for (int i = 0; i < printitems.size(); i++) {
+				cout << "\n\t" << Menuorder.at(printitems[i])[0] << "     $" << Menuorder.at(printitems[i])[1];
+				total = stof(Menuorder.at(printitems[i])[1]);
+				Total = total + Total;
+				discount++;
+			}
 
-		if (discount >= 5 && discount < 10) {
-			Newtotal = Total * 0.95;
-			cout << "\n\nDiscount applied: 5%\t\tTotal:\t\t$" << Newtotal;
+			if (discount >= 5 && discount < 10) {
+				Newtotal = Total * 0.95;
+				cout << "\n\n\nDiscount applied: 5%\t\tTotal:\t\t$" << Newtotal;
+			}
+			else if (discount >= 10 && discount < 20) {
+				Newtotal = Total * 0.9;
+				cout << "\n\n\nDiscount applied: 10%\t\tTotal:\t\t$" << Newtotal;
+			}
+			else if (discount >= 20) {
+				Newtotal = Total * 0.85;
+				cout << "\n\n\nDiscount applied: 15%\t\tTotal:\t\t$" << Newtotal;
+			}
+			else {
+				Newtotal = Total;
+				cout << "\n\n\nTotal:  $" << Newtotal;
+			}
+
+			cout << "\nStudent: " << parentinfo.at(parent)[5] << "\t\t\t\tClass: " << parentinfo.at(parent)[6] << endl << endl;
+
+			ofstream parentorderfile;
+			parentorderfile.open("parentOrder.csv", ios::out);
+
+			parentorderfile << ptrorder->orderNumber << "," << date << "," << discount << "," << Newtotal << "," << "paid" << "," << parentinfo.at(parent)[5] << "," << parentinfo.at(parent)[6] << endl;
+
+			parentorderfile.close();
+
+			changeColour(11);
+			system("pause");
+			changeColour(7);
+			return 0;
 		}
-		else if (discount >= 10 && discount < 20) {
-			Newtotal = Total * 0.9;
-			cout << "\n\nDiscount applied: 10%\t\tTotal:\t\t$" << Newtotal;
-		}
-		else if (discount >= 20) {
-			Newtotal = Total * 0.85;
-			cout << "\n\nDiscount applied: 15%\t\tTotal:\t\t$" << Newtotal;
+		else if (paymentproceed == 'n') {
+			return 0;
 		}
 		else {
-			Newtotal = Total;
-			cout << "\n\nTotal:  $" << Newtotal;
+			changeColour(4);
+			cout << "\n\nPlease enter a valid option (y/n)";
+			changeColour(7);
+			goto paymentproceedredo;
 		}
-
-		cout << "\nStudent: " << parentinfo.at(parent)[5] << "\t\t\t\tClass: " << parentinfo.at(parent)[6] << endl << endl;
-
-		ofstream parentorderfile;
-		parentorderfile.open("parentOrder.csv", ios::out);
-
-		parentorderfile << ptrorder->orderNumber << "," << date << "," << discount << "," << Newtotal << "," << "paid" << "," << parentinfo.at(parent)[5] << "," << parentinfo.at(parent)[6] << endl;
-
-		parentorderfile.close();
 	}
-	else if (paymentproceed == 'n') {
-		contord:
-		cout << "\n\nContinue Ordering? (y/n)";
-		cin >> continueorder;
-		if (continueorder == 'y') {
+	else if (continueorder == 'y') {
 			ofstream orderfile;
 			orderfile.open(ptrorder->orderNumber + ".csv", ios::app);
 
@@ -445,19 +490,15 @@ continueordering:
 
 			orderfile.close();
 			goto continueordering;
-		}
-		else if (continueorder == 'n') {
-
-		}
-		else {
-			cout << "\n\nPlease enter a valid option (y/n)";
-			goto contord;
-		}
+		
 	}
 	else {
+		changeColour(4);
 		cout << "\n\nPlease enter a valid option (y or n)";
-		goto paymentproceedredo;
+		changeColour(7);
+		goto contorderredo;
 	}
+
 }
 
 void filterPrice() {
@@ -522,6 +563,9 @@ void filterPrice() {
 	//Find a way to push the items into a vector that correlates to the sorted price vector
 
 	infile.close();
+	changeColour(11);
+	system("pause");
+	changeColour(7);
 }
 
 void filterVeg() {
@@ -559,13 +603,20 @@ void filterVeg() {
 
 	}
 
+	cout << "\n\t\t\tVegetarian Menu\n";
+	underLine(72);
+
 	for (int i = 0; i < vegetarian.size(); i++) {
 		a = vegetarian.at(i);
-		cout << vegmenu.at(a)[0] << " - " << vegmenu.at(a)[1] << endl;
+		cout << "\n\t\t" << vegmenu.at(a)[0] << " - " << vegmenu.at(a)[1] << endl;
 	}
 
 	infile.close();
 
+	cout << "\n\n\t";
+	changeColour(11);
+	system("pause");
+	changeColour(7);
 }
 
 void filterGF() {
@@ -603,20 +654,43 @@ void filterGF() {
 
 	}
 
+	cout << "\n\t\t\tGluten Free Menu\n";
+	underLine(72);
+
 	for (int i = 0; i < GF.size(); i++) {
 		a = GF.at(i);
-		cout << gfmenu.at(a)[0] << " - " << gfmenu.at(a)[1] << endl;
+		cout << "\n\n\t\t" << gfmenu.at(a)[0] << " - " << gfmenu.at(a)[1] << endl;
 	}
 
 	infile.close();
 
+	cout << "\n\t\t";
+	changeColour(11);
+	system("pause");
+	changeColour(7);
+}
+
+void Parentcomplaint(int parent) {
+	struct ParentComplaint ParentComp;
+	struct ParentComplaint* ptrParentComp;
+
+	ptrParentComp = &ParentComp;
+
+	srand(time(NULL));
+	int pc = rand() % 100000 + 99999;
+
+	ptrParentComp->compNumber = to_string(pc);
+
+	cout << "\n\t\t\tComplaint Form (" << ptrParentComp->compNumber << ")" << endl;
+	underLine(80);
 }
 
 int parentOrder(int person){
 	int option;
+	int returnordervalue;
 menu:
 	system("cls");
-	cout << "\n\n\t\t\t\tMenu";
+	cout << "\n\n\t\tMenu";
 	cout << "\n----------------------------------------------\n\n";
 	vector<array<string, 4>>  vectorMenu;
 	int i;
@@ -637,30 +711,35 @@ menu:
 	}
 	// only for printing out data from vector
 	for (int i = 0; i < vectorMenu.size(); i++) {
-		cout << vectorMenu.at(i)[0] << " - " << vectorMenu.at(i)[1] << endl;
+		cout << "\t" << vectorMenu.at(i)[0] << "  -  $" << vectorMenu.at(i)[1] << endl;
 	}
 	
 	cout << "\n\n\nMake a selection from the options below:";
-	cout << "\n\n1. Filter by price (low to high)";
-	cout << "\n2. Filter only vegetarian options";
-	cout << "\n3. Filter only GF options";
-	cout << "\n4. Order Food";
-	cout << "\n5. Go back to main menu";
+	cout << "\n\n\t1. Filter by price (low to high)";
+	cout << "\n\t2. Filter only vegetarian options";
+	cout << "\n\t3. Filter only GF options";
+	cout << "\n\t4. Order Food";
+	cout << "\n\t5. Go back to main menu";
+	changeColour(11);
 	cout << "\n\n\nEnter Option: ";
+	changeColour(7);
 	cin >> option;
 
 	switch (option) {
 	case 1:
 		filterPrice();
+		goto menu;
 		break;
 	case 2:
 		filterVeg();
+		goto menu;
 		break;
 	case 3:
 		filterGF();
+		goto menu;
 		break;
 	case 4:
-		MakeOrder(person);
+		returnordervalue = MakeOrder(person);
 		break;
 	case 5:
 		return 0;
@@ -751,6 +830,7 @@ void  menuPreview() {
 
 //admin update menu function 
 void adminUpdateMenu() {
+	system("cls");
 	vector<array<string, 4>>  vectorMenu;
 	int i;
 
@@ -953,7 +1033,9 @@ MenuSelect:
 		cout << "\t5.  Log Out" << endl;
 		cout << "\n\n";
 
+		changeColour(11);
 		cout << "\n  Enter Option: ";
+		changeColour(7);
 		cin >> option;
 		cout << endl << endl;
 
@@ -966,10 +1048,12 @@ MenuSelect:
 			if (OrderReturn == 0) {
 				goto MenuParentSelect;
 			}
-
-			cout << "\n\n\n Enter 1 to return back to Parent Menu: ";
-			cin >> flag;
 		redoparentorder:
+			changeColour(11);
+			cout << "\n\n\n Enter 1 to return back to Parent Menu: ";
+			changeColour(7);
+			cin >> flag;
+		
 			if (flag != 1) {
 				cout << "invalid input! Try again: ";
 				cin >> flag;
@@ -983,10 +1067,12 @@ MenuSelect:
 		case 2:
 			system("cls");
 			bulkDiscount();
-
-			cout << "\n\n\n Enter 1 to return back to Parent Menu: ";
-			cin >> flag;
 		redoparentbulk:
+			changeColour(11);
+			cout << "\n\n\n Enter 1 to return back to Parent Menu: ";
+			changeColour(7);
+			cin >> flag;
+		
 			if (flag != 1) {
 				cout << "invalid input! Try again: ";
 				cin >> flag;
@@ -1000,10 +1086,12 @@ MenuSelect:
 		case 3:
 			system("cls");
 			contactDetails();
-
-			cout << "\n\n\n Enter 1 to return back to Main Menu: ";
-			cin >> flag;
 		redoparentcontact:
+			changeColour(11);
+			cout << "\n\n\n Enter 1 to return back to Main Menu: ";
+			changeColour(7);
+			cin >> flag;
+
 			if (flag != 1) {
 				cout << "invalid input! Try again: ";
 				cin >> flag;
@@ -1015,23 +1103,16 @@ MenuSelect:
 			break;
 
 		case 4:
-			struct ParentComplaint ParentComp;
-			struct ParentComplaint* ptrParentComp;
-
-			ptrParentComp = &ParentComp;
-
-			srand(time(NULL));
-			int pc = rand() % 100000 + 99999;
-
-			ptrParentComp->compNumber = to_string(pc);
-
-			cout << "\n\t\t\tComplaint Form (" << ptrParentComp->compNumber << ")" << endl;
-			underLine(80);
+			Parentcomplaint(b);
 			break;
 		case 5:
-			//Include log out feature
+			goto MenuSelect;
 			break;
 		default:
+			changeColour(4);
+			cout << "\n\nPlease enter a valid option";
+			changeColour(7);
+			goto MenuParentSelect;
 			break;
 		}
 
