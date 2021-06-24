@@ -429,8 +429,8 @@ contorderredo:
 
 			cout << "\nItems ordered on (" << date << "):" << endl;
 			for (int i = 0; i < printitems.size(); i++) {
-				cout << "\n\t" << Menuorder.at(printitems[i])[0] << "     $" << Menuorder.at(printitems[i])[1];
-				total = stof(Menuorder.at(printitems[i])[1]);
+				cout << "\n\t" << Menuorder.at(printitems[i] - 1)[0] << "     $" << Menuorder.at(printitems[i] - 1)[1];
+				total = stof(Menuorder.at(printitems[i]- 1)[1]);
 				Total = total + Total;
 				discount++;
 			}
@@ -455,7 +455,7 @@ contorderredo:
 			cout << "\nStudent: " << parentinfo.at(parent)[5] << "\t\t\t\tClass: " << parentinfo.at(parent)[6] << endl << endl;
 
 			ofstream parentorderfile;
-			parentorderfile.open("parentOrder.csv", ios::out);
+			parentorderfile.open("parentOrder.csv", ios::app);
 
 			parentorderfile << ptrorder->orderNumber << "," << date << "," << discount << "," << Newtotal << "," << "paid" << "," << parentinfo.at(parent)[5] << "," << parentinfo.at(parent)[6] << endl;
 
@@ -505,6 +505,8 @@ void filterPrice() {
 	system("cls");
 	vector<array<string, 4> > fp;
 	vector<float> price;
+	vector<array<float, 2> > priceFilter;
+	array<float, 2> Item_Price;
 	vector<string> Price;
 	vector<string> Item;
 	float a;
@@ -525,44 +527,24 @@ void filterPrice() {
 		}
 		fp.push_back(b);
 	}
+	infile.close();
+
+	for (float j = 0; j < fp.size(); j++) {
+			Item_Price[0] = stof(fp.at(j)[1]);
+			Item_Price[1] = j;
+		priceFilter.push_back(Item_Price);
+	}
+
+	sort(priceFilter.begin(), priceFilter.end());
+
+	cout << "\n\t\t\tPrice from low to high\n";
+	underLine(72);
 
 	for (int i = 0; i < fp.size(); i++) {
-		a = stof(fp.at(i)[1]);
-		price.push_back(a);
+		cout << "\n\t\t" << fp.at(priceFilter.at(i)[1])[0] << " -  $" << priceFilter.at(i)[0] << endl;
 	}
 
-	sort(price.begin(), price.end());
-
-	for (int i = 0; i < price.size(); i++) {
-		c = to_string(price[i]);
-		Price.push_back(c);
-	}
-
-
-	/*for (int i = 0; i < fp.size(); i++) {
-		for (int j = 0; j < fp.size(); j++) {
-			if (Price[i] == fp.at(j)[1]) {
-				for (int k = 0; k < Item.size(); k++) {
-
-						if (Item[k] != fp.at(j)[0]) {
-							Item.push_back(fp.at(j)[0]);
-						}
-						else {
-							continue;
-						}
-					
-				}
-			}
-		}
-	}
-
-	for (int i = 0; i < price.size(); i++) {
-		cout << "\n" << Item[i] << "\t\t\t$" << Price[i];
-	}*/
-
-	//Find a way to push the items into a vector that correlates to the sorted price vector
-
-	infile.close();
+	cout << "\n\n\n\t\t";
 	changeColour(11);
 	system("pause");
 	changeColour(7);
@@ -671,9 +653,10 @@ void filterGF() {
 }
 
 void Parentcomplaint(int parent) {
+	system("cls");
 	struct ParentComplaint ParentComp;
 	struct ParentComplaint* ptrParentComp;
-
+	string complaintdate, complaintitem, complaintdescription;
 	ptrParentComp = &ParentComp;
 
 	srand(time(NULL));
@@ -683,6 +666,22 @@ void Parentcomplaint(int parent) {
 
 	cout << "\n\t\t\tComplaint Form (" << ptrParentComp->compNumber << ")" << endl;
 	underLine(80);
+	cout << "\n\nPlease enter the order date for the complaint (formatted as dd/mm/yyyy): ";
+	cin >> complaintdate;
+	cin.ignore();
+	cout << "\n\nPlease enter the item ordered: ";
+	getline(cin, complaintitem);
+	cout << "\n\nPlease enter the complaint description: ";
+	getline(cin, complaintdescription);
+	cout << endl << endl;
+
+	ofstream complaintfile;
+	complaintfile.open("parentComplaint.csv", ios::app);
+
+	complaintfile << ptrParentComp->compNumber << "," << complaintdate << "," << complaintitem << "," << complaintdescription << endl;
+
+	complaintfile.close();
+
 }
 
 int parentOrder(int person){
@@ -1104,6 +1103,21 @@ MenuSelect:
 
 		case 4:
 			Parentcomplaint(b);
+		redoparentcomplaint:
+			changeColour(11);
+			cout << "\n\n\n Enter 1 to return back to Main Menu: ";
+			changeColour(7);
+			cin >> flag;
+
+			if (flag != 1) {
+				cout << "invalid input! Try again: ";
+				cin >> flag;
+				goto redoparentcomplaint;
+			}
+			else {
+				goto MenuParentSelect;
+			}
+			
 			break;
 		case 5:
 			goto MenuSelect;
