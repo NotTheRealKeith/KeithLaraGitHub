@@ -272,13 +272,14 @@ int MakeOrder(int parent) {
 	vector<array<string, 7> > oNcheck;
 	vector<array<string, 9> > parentinfo;
 	vector<array<string, 4> > Menuorder;
+	vector<array<int, 2> > quantityordered;
 	vector<int> printitems;
 	ParentOrder order;
 	ParentOrder* ptrorder;
 	unsigned int on;
 	int option, discount = 0, day, month, year;
 	float total, Total = 0, Newtotal;
-	string line, row, oN, line2, row2, line3, row3, date;
+	string line, row, oN, line2, row2, line3, row3, date, line4, row4;
 	char orderday, paymentproceed, continueorder;
 	time_t now = time(0);
 	tm* ltm = localtime(&now);
@@ -350,6 +351,22 @@ oNchk:
 
 	infile2.close();
 
+	fstream infile4; //Daily order read in to then push back into the file through ios::out
+	infile4.open("dailyOrder.csv", ios::in);
+
+	while (getline(infile4, line4)) {
+		stringstream ss(line4);
+		int i = 0;
+		array<int, 2> daily;
+		while (getline(ss, row4, ',')) {
+			daily[i] = stof(row4);
+			i++;
+		}
+		quantityordered.push_back(daily);
+	}
+
+	infile4.close();
+
 	ptrorder->orderNumber = oN;
 	ptrorder->parentID = parentinfo.at(parent)[0];
 continueordering:
@@ -411,6 +428,15 @@ contorderredo:
 		changeColour(7);
 		cin >> paymentproceed;
 		if (paymentproceed == 'y') {
+
+			for (int o = 0; o < printitems.size(); o++) {
+				for (int s = 0; s < quantityordered.size(); s++) {
+					if ((printitems[o] - 1) == quantityordered.at(s)[0]) {
+						 = quantityordered.at(s)[1];
+					}
+				}
+			}
+
 			ofstream orderfile;
 			orderfile.open(ptrorder->orderNumber + ".csv", ios::app);
 
@@ -430,6 +456,7 @@ contorderredo:
 			cout << "\nItems ordered on (" << date << "):" << endl;
 			for (int i = 0; i < printitems.size(); i++) {
 				cout << "\n\t" << Menuorder.at(printitems[i] - 1)[0] << "     $" << Menuorder.at(printitems[i] - 1)[1];
+
 				total = stof(Menuorder.at(printitems[i]- 1)[1]);
 				Total = total + Total;
 				discount++;
@@ -504,14 +531,8 @@ contorderredo:
 void filterPrice() {
 	system("cls");
 	vector<array<string, 4> > fp;
-	vector<float> price;
 	vector<array<float, 2> > priceFilter;
 	array<float, 2> Item_Price;
-	vector<string> Price;
-	vector<string> Item;
-	float a;
-	string c;
-
 
 	ifstream infile;
 	infile.open("menuItems.csv", ios::in);
@@ -595,7 +616,7 @@ void filterVeg() {
 
 	infile.close();
 
-	cout << "\n\n\t";
+	cout << "\n\n\n\t\t";
 	changeColour(11);
 	system("pause");
 	changeColour(7);
@@ -646,7 +667,7 @@ void filterGF() {
 
 	infile.close();
 
-	cout << "\n\t\t";
+	cout << "\n\n\n\t\t";
 	changeColour(11);
 	system("pause");
 	changeColour(7);
@@ -819,7 +840,7 @@ void  menuPreview() {
 		}
 		vectorMenu.push_back(m);
 	}
-	cout << "\n\n\t\t\tMenu";
+	cout << "\n\n\t\tMenu";
 	cout << "\n----------------------------------------------\n\n";
 	// only for printing out data from vector
 	for (int i = 0; i < vectorMenu.size(); i++) {
