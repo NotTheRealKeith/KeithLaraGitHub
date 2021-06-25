@@ -779,6 +779,11 @@ void adminUpdateMenu() {
 
 }
 
+//View weekly sales
+void weeklySalesFunc() {
+
+}
+
 //check complaints functions
 
 // ===== ^^ KEITH CODE SECTION ^^ =====
