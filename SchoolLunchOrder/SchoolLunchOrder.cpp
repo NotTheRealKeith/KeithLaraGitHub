@@ -432,7 +432,7 @@ contorderredo:
 			for (int o = 0; o < printitems.size(); o++) {
 				for (int s = 0; s < quantityordered.size(); s++) {
 					if ((printitems[o] - 1) == quantityordered.at(s)[0]) {
-						 = quantityordered.at(s)[1];
+						/* = quantityordered.at(s)[1];*/
 					}
 				}
 			}
@@ -902,6 +902,11 @@ void adminUpdateMenu() {
 		cout << "\n\nMenu Price Change\n\n";
 		menuPreview();
 	}
+
+}
+
+//View weekly sales
+void weeklySalesFunc() {
 
 }
 
