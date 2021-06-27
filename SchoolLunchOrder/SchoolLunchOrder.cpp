@@ -66,7 +66,7 @@ struct MenuItems {
 void menuPreview();
 
 // -- create underlines only --
-void underLine(int x) { 
+void underLine(int x) {
 	int i;
 
 	for (i = 0; i < x; i++) {
@@ -202,7 +202,7 @@ idchk:
 	return a;
 }
 
-int parentLogin() { //Login function for parents (also admin that is hardcoded in) 
+int parentLogin() { //Login function for parents (also admin that is hardcoded in)
 	system("cls");
 	vector<array<string, 9>>  matrix;
 	string firstname, line, row, pin;
@@ -499,13 +499,8 @@ contorderredo:
 		}
 	}
 	else if (continueorder == 'y') {
-<<<<<<< HEAD
 		ofstream orderfile;
-		orderfile.open(ptrorder->orderNumber + ".csv", ios::app);
-=======
-			ofstream orderfile;
-			orderfile.open(ptrorder->orderNumber + "order.csv", ios::app);
->>>>>>> c14b07bbf88891fc932225865f3ee72ad1f8a983
+		orderfile.open(ptrorder->orderNumber + "order.csv", ios::app);
 
 		for (int d = 0; d < Menuorder.max_size(); d++) {
 			if ((option - 1) == d) {
@@ -666,7 +661,6 @@ void filterGF() {
 	changeColour(11);
 	system("pause");
 	changeColour(7);
-	
 }
 
 void Parentcomplaint(int parent) {
@@ -903,7 +897,7 @@ void adminUpdateMenu() {
 				cout << vectorMenu.at(0)[0] << " has been updated into the menu! Press Enter to go back to admin account page!\n";
 				changeColour(7);
 				cin.ignore();
-				 // INCOMPLETE SECTION | SKIPS REALLY FAST FOR SOME REASON
+				// INCOMPLETE SECTION | SKIPS REALLY FAST FOR SOME REASON
 			}
 			//else if (choice == 2) {
 			//	cout << "\nPlease Enter new item Price: ";
@@ -915,7 +909,6 @@ void adminUpdateMenu() {
 			//	cin.ignore();
 			//	break; // INCOMPLETE SECTION | SKIPS REALLY FAST FOR SOME REASON
 			//}
-			
 		}
 		// checks if the user selected item matches with the item in cell 2
 		else if (itemNameChoice == vectorMenu.at(1)[0]) {
