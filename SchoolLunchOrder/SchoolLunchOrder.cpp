@@ -895,6 +895,28 @@ void adminUpdateMenu() {
 			vectorMenu[0][0] = newItemName;
 			cout << vectorMenu[0][0];
 		}
+
+		// re-writing/updating Menu Items Data 
+		ofstream updateCSVWithNewData("menuItems.csv", ios::out);
+			updateCSVWithNewData << vectorMenu[0][0] << ","
+				<< "4.50" << "," << "2" << "," << "2" << endl
+				<< "Vegetarian Sandwich" << ","
+				<< "5.00" "," << "2" << "," << "1" << endl
+				<< "Chicken and Avocado Sandwich (GF)" << ","
+				<< "6.50" "," << "1" << "," << "2" << endl
+				<< "Steak and Cheese Pie" << ","
+				<< "4.50" "," << "2" << "," << "2" << endl
+				<< "Butter Chicken Pie" << ","
+				<< "5.50" "," << "2" << "," << "2" << endl
+				<< "Mushroom and Cheese Pie (GF)" << ","
+				<< "6.50" "," << "1" << "," << "1" << endl
+				<< "Cheese Pizza" << ","
+				<< "4.50" "," << "2" << "," << "2" << endl
+				<< "Pepperoni Pizza" << ","
+				<< "5.50" "," << "2" << "," << "2" << endl
+				<< "Vegetarian Pizza (GF)" << ","
+				<< "6.50" "," << "1" << "," << "1" << endl;	
+		updateCSVWithNewData.close();
 	}
 
 	else if (choice == 2) {
@@ -904,6 +926,11 @@ void adminUpdateMenu() {
 	}
 
 }
+
+//Menu update | Menu Item NAME
+//void itemNameUpdate() {
+	// I was going to put the item name update into a seprate function
+//}
 
 //View weekly sales
 void weeklySalesFunc() {
