@@ -438,7 +438,7 @@ contorderredo:
 			}
 
 			ofstream orderfile;
-			orderfile.open(ptrorder->orderNumber + ".csv", ios::app);
+			orderfile.open(ptrorder->orderNumber + "order.csv", ios::app);
 
 
 			for (int d = 0; d < Menuorder.max_size(); d++) {
@@ -505,7 +505,7 @@ contorderredo:
 	}
 	else if (continueorder == 'y') {
 			ofstream orderfile;
-			orderfile.open(ptrorder->orderNumber + ".csv", ios::app);
+			orderfile.open(ptrorder->orderNumber + "order.csv", ios::app);
 
 
 			for (int d = 0; d < Menuorder.max_size(); d++) {
