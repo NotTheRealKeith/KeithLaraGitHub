@@ -21,13 +21,10 @@ struct ParentAcc {
 	string lastName;
 	string pinNum;
 	string contactNum;
-
 	string childName;
 	string childRoomNum;
-
 	string cardNum;
 	string cardExpiry;
-
 	string parentID;
 };
 
@@ -56,9 +53,6 @@ struct ParentComplaint {
 	bool actionStatus;
 };
 
-
-
-
 struct MenuItems {
 	string itemName;
 	float itemPrice;
@@ -67,17 +61,12 @@ struct MenuItems {
 	int itemGF;
 };
 
-/*struct AdminAcc {
-	string firstName;
-	string lastName;
-	string pinNum;
-};*/
 // ===== ^^ Write stuctures here ^^ =====
 
 void menuPreview();
 
 // -- create underlines only --
-void underLine(int x) {
+void underLine(int x) { 
 	int i;
 
 	for (i = 0; i < x; i++) {
@@ -86,12 +75,12 @@ void underLine(int x) {
 	cout << endl;
 }
 
-void changeColour(int desiredColour) {
+void changeColour(int desiredColour) { //A function to change the color of text within the program
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), desiredColour);
 }
 
 // ===== vv LARA CODE SECTION vv =====
-void bulkDiscount() {
+void bulkDiscount() { //Hard coded output describing the bulk discounts
 	cout << "\n\t\t\tBulk Discount Offers\t\t\t" << endl;
 	underLine(80);
 
@@ -101,7 +90,7 @@ void bulkDiscount() {
 	cout << "\n3. 20+ Items Ordered = 15% off total order";
 }
 
-void contactDetails() {
+void contactDetails() { //Hard coded output describing the contact details
 	cout << "\n\t\t\tContact Details\t\t\t" << endl;
 	underLine(80);
 	cout << "\nIf you would like to contact us regarding any queries you \nmay have you can reach us via our phone number and email \nshown below: ";
@@ -111,7 +100,7 @@ void contactDetails() {
 	cout << "\n\nOffice Hours: 1pm - 5pm, Monday - Friday";
 }
 
-int ParentReg(ParentAcc* ptr) {
+int ParentReg(ParentAcc* ptr) { //Function that allows the user to register as a parent within the system by inputing their details and then storing into a parent csv file
 	system("cls");
 	vector<array<string, 9>>  matrix;
 	vector<array<string, 9>>  idcheck;
@@ -213,7 +202,7 @@ loginpin:
 	return a;
 }
 
-int parentLogin() {
+int parentLogin() { //Login function for parents (also admin that is hardcoded in) 
 	system("cls");
 	vector<array<string, 9>>  matrix;
 	string firstname, line, row, pin;
@@ -432,7 +421,8 @@ contorderredo:
 			for (int o = 0; o < printitems.size(); o++) {
 				for (int s = 0; s < quantityordered.size(); s++) {
 					if ((printitems[o] - 1) == quantityordered.at(s)[0]) {
-						/* = quantityordered.at(s)[1];*/
+						quantityordered.at(s)[1] = quantityordered.at(s)[1] + 1;
+						break;
 					}
 				}
 			}
@@ -487,6 +477,15 @@ contorderredo:
 			parentorderfile << ptrorder->orderNumber << "," << date << "," << discount << "," << Newtotal << "," << "paid" << "," << parentinfo.at(parent)[5] << "," << parentinfo.at(parent)[6] << endl;
 
 			parentorderfile.close();
+
+			ofstream dailyreportfile2;
+
+			dailyreportfile2.open("dailyOrder.csv", ios::out); //Writing the amount ordered into the daily order report file
+			for (int i = 0; i < quantityordered.size(); i++) {
+				dailyreportfile2 << quantityordered.at(i)[0] << "," << quantityordered.at(i)[1] << endl;
+			}
+
+			dailyreportfile2.close();
 
 			changeColour(11);
 			system("pause");
@@ -671,6 +670,7 @@ void filterGF() {
 	changeColour(11);
 	system("pause");
 	changeColour(7);
+	
 }
 
 void Parentcomplaint(int parent) {
@@ -895,6 +895,28 @@ void adminUpdateMenu() {
 			vectorMenu[0][0] = newItemName;
 			cout << vectorMenu[0][0];
 		}
+
+		// re-writing/updating Menu Items Data 
+		ofstream updateCSVWithNewData("menuItems.csv", ios::out);
+			updateCSVWithNewData << vectorMenu[0][0] << ","
+				<< "4.50" << "," << "2" << "," << "2" << endl
+				<< "Vegetarian Sandwich" << ","
+				<< "5.00" "," << "2" << "," << "1" << endl
+				<< "Chicken and Avocado Sandwich (GF)" << ","
+				<< "6.50" "," << "1" << "," << "2" << endl
+				<< "Steak and Cheese Pie" << ","
+				<< "4.50" "," << "2" << "," << "2" << endl
+				<< "Butter Chicken Pie" << ","
+				<< "5.50" "," << "2" << "," << "2" << endl
+				<< "Mushroom and Cheese Pie (GF)" << ","
+				<< "6.50" "," << "1" << "," << "1" << endl
+				<< "Cheese Pizza" << ","
+				<< "4.50" "," << "2" << "," << "2" << endl
+				<< "Pepperoni Pizza" << ","
+				<< "5.50" "," << "2" << "," << "2" << endl
+				<< "Vegetarian Pizza (GF)" << ","
+				<< "6.50" "," << "1" << "," << "1" << endl;	
+		updateCSVWithNewData.close();
 	}
 
 	else if (choice == 2) {
@@ -904,6 +926,11 @@ void adminUpdateMenu() {
 	}
 
 }
+
+//Menu update | Menu Item NAME
+//void itemNameUpdate() {
+	// I was going to put the item name update into a seprate function
+//}
 
 //View weekly sales
 void weeklySalesFunc() {
