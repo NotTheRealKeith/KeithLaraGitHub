@@ -1397,20 +1397,14 @@ void DailyOrderReport() {
 	}
 
 	for (int i = 0; i < menuDaily.size(); i++) {
-<<<<<<< HEAD
-		cout << "\n\t" << (i + 1) << ". " << menuDaily.at(i)[0] << " \t\t\t\t" << readingDaily.at(i)[1] << endl;
-		/*for (int j = 0; j < (50 - characters[i]); j++) {
-			cout << " ";
-		}*/
-		/*cout << "                  " << readingDaily.at(i)[1];*/
-=======
+
 		cout << "\n\t" << (i + 1) << ". " << menuDaily.at(i)[0];
 		for (int j = 0; j < (50 - characters[i]); j++) { //Using the character asmounts we stored to evenly space out the quantity
 			cout << " ";
 		
 		}
 		cout << readingDaily.at(i)[1];
->>>>>>> df20a98fabeeb640e876d21cbf89dcb0407c65c5
+
 	}
 
 	cout << "\n\n\n\t\t";
@@ -1552,12 +1546,9 @@ MenuSelect: //Label to return to main menu
 		}
 
 		infile.close();
-<<<<<<< HEAD
-		//parent account screen
-	MenuParentSelect:
-=======
+
 	MenuParentSelect: //The parent screen
->>>>>>> df20a98fabeeb640e876d21cbf89dcb0407c65c5
+
 		system("cls");
 		cout << "\n\t\t\tParent School Lunch System " << matrix.at(b)[1] << endl;
 		underLine(80);
