@@ -63,7 +63,21 @@ struct MenuItems {
 
 // ===== ^^ Write stuctures here ^^ =====
 
-void menuPreview();
+/*int countingChar(string* p) {
+	char str[] = ;
+
+	int count = 0;
+
+	for (int i = 0; str[i] != '/0'; i++)
+
+	{
+		count++;
+	}
+
+	return count;
+}*/
+
+void menuPreview(); //Calling the function at the top so it can be used in other functions
 
 // -- create underlines only --
 void underLine(int x) {
@@ -117,7 +131,7 @@ int ParentReg(ParentAcc* ptr) { //Function that allows the user to register as a
 loginpin:
 	cout << "\n\nLogin Pin (This will be used as your password to login, must \nbe 4 numbers): ";
 	cin >> num;
-	if (num > 999 && num < 10000) {
+	if (num > 999 && num < 10000) { //Checks if the number is 4 digits
 		ptr->pinNum = to_string(num);
 	}
 	else {
@@ -152,7 +166,7 @@ loginpin:
 		idcheck.push_back(f);
 	}
 idchk:
-	for (int i = 0; i < idcheck.size(); ++i) {
+	for (int i = 0; i < idcheck.size(); ++i) { //Checks to see id the id is already in the file
 		if (iD == idcheck.at(i)[0]) {
 			srand(time(NULL));
 			id = rand() % 1000000 + 999999;
@@ -166,7 +180,7 @@ idchk:
 	ptr->parentID = to_string(id);
 
 	ofstream outfile;
-	outfile.open("parentlogin.csv", ios::app);
+	outfile.open("parentlogin.csv", ios::app); //Pushes the parents info into the file
 
 	outfile << ptr->parentID << ","
 		<< ptr->firstName << ","
@@ -841,7 +855,7 @@ void  menuPreview() {
 void adminUpdateMenu() {
 	system("cls");
 	vector<array<string, 4>>  vectorMenu;
-	int i;
+	int i, a;
 
 	fstream infile; // reading the file
 	infile.open("menuItems.csv", ios::in);
@@ -861,7 +875,7 @@ void adminUpdateMenu() {
 	int choice;
 	string itemNameChoice;
 	string newItemName;
-	float newItemPrice;
+	string newItemPrice;
 	cin.ignore();
 	cout << "\n\nMenu Name Change\n\n";
 	menuPreview();
@@ -870,7 +884,7 @@ void adminUpdateMenu() {
 	getline(cin, itemNameChoice);
 
 	// re-writing/updating menu item name with user input
-	ofstream updateCSVWithNewData("menuItems.csv", ios::out);
+	
 	for (int i = 0; i < vectorMenu.size(); i++) {
 		// checks if the user selected item matches with the item in cell 1
 		if (itemNameChoice == vectorMenu.at(0)[0]) {
@@ -891,7 +905,11 @@ void adminUpdateMenu() {
 				changeColour(11);
 				cout << vectorMenu.at(0)[0] << " has been updated into the menu! Press Enter to go back to admin account page!\n";
 				changeColour(7);
-				cin.ignore();// INCOMPLETE SECTION | SKIPS REALLY FAST FOR SOME REASON
+				cout << "\n\n\n";
+				changeColour(11);
+				system("pause");
+				changeColour(7);// INCOMPLETE SECTION | SKIPS REALLY FAST FOR SOME REASON
+				
 			}
 			else if (choice == 2) {
 				cin.ignore();
@@ -902,6 +920,7 @@ void adminUpdateMenu() {
 				cout << vectorMenu.at(0)[1] << " has been updated into the menu! Press Enter to go back to admin account page!\n";
 				changeColour(7);
 				cin.ignore();
+				a = 0; //This is for the price to be entered from newItemPrice instead of the vector
 				
 			}
 		}
@@ -994,29 +1013,61 @@ void adminUpdateMenu() {
 			cin.ignore();
 		}
 
-		updateCSVWithNewData << vectorMenu.at(i)[0] << "," << vectorMenu.at(i)[1] << "," << vectorMenu.at(i)[2] << "," << vectorMenu.at(i)[3] << "," << endl;
+		break;
 	}
+
+	ofstream updateCSVWithNewData("menuItems.csv", ios::out);
+
+	for (int i = 0; i < vectorMenu.size(); i++) {
+		if (a == i) {
+			updateCSVWithNewData << vectorMenu.at(i)[0] << "," << newItemPrice << "," << vectorMenu.at(i)[2] << "," << vectorMenu.at(i)[3] << "," << endl;
+		}
+		else {
+			updateCSVWithNewData << vectorMenu.at(i)[0] << "," << vectorMenu.at(i)[1] << "," << vectorMenu.at(i)[2] << "," << vectorMenu.at(i)[3] << "," << endl;
+		}
+	}
+	
 	updateCSVWithNewData.close();
 }
 
-//View weekly sales
+//View weekly number of orders and total recieved for the week
 void weeklySalesFunc() {
-	/*system("cls");
+	system("cls");
+	vector<array<string, 7>> weeklyorder;
+	float total = 0;
+	int order = 0;
 
 	fstream infile; // reading the file
-	infile.open("menuItems.csv", ios::in);
+	infile.open("parentOrder.csv", ios::in);
 
 	string line, row;
 	while (getline(infile, line)) { // this loop gets the data from the csv and push_backs into a vector
 		stringstream ss(line);
 		int i = 0;
-		array<string, 4> m;
+		array<string, 7> m;
 		while (getline(ss, row, ',')) {//while inside that row.
 			m[i] = row;
 			i++;
 		}
-		vectorMenu.push_back(m);
-	}*/
+		weeklyorder.push_back(m);
+	}
+
+	infile.close();
+
+	for (int i = 0; i < weeklyorder.size(); i++) {
+		total = total + stof(weeklyorder.at(i)[3]);
+		order++;
+	}
+
+	cout << "\n\n\t\tWeekly Sales Report";
+	cout << "\n---------------------------------------------------\n\n";
+	cout << "\nNumber of orders:                            " << order;
+	cout << "\n\nTotal recieved for the week:                 $" << total;
+
+	cout << "\n\n\n";
+	changeColour(11);
+	system("pause");
+	changeColour(7);
 }
 
 //View complaints made by parents
@@ -1085,17 +1136,19 @@ void ViewComplaints() {
 	changeColour(7);
 }
 
+//Function to show the quantity ordered for different items daily
 void DailyOrderReport() {
 	system("cls");
 	vector<array<int, 2> > readingDaily;
 	vector<array<string, 4> > menuDaily;
+	vector<int> characters;
 
 	ifstream infile;
 	infile.open("dailyorder.csv", ios::in);
 
 	string line, row, item, line2, row2;
 
-	while (getline(infile, line)) {
+	while (getline(infile, line)) { //Reading out of the daily order file for the quantity ordered
 		stringstream ss(line);
 		int i = 0;
 		array<int, 2> b;
@@ -1107,7 +1160,7 @@ void DailyOrderReport() {
 	infile.close();
 
 	fstream infile2;
-	infile2.open("menuItems.csv", ios::in);
+	infile2.open("menuItems.csv", ios::in); //Reading out of menu file for the menu items
 
 	while (getline(infile2, line2)) {
 		stringstream ss(line2);
@@ -1127,8 +1180,17 @@ void DailyOrderReport() {
 
 	cout << "\n\n\tItems:\t\t\t\t\t\tQuantity Ordered:\n";
 
+	/*for (int i = 0; i < menuDaily.size(); i++) {
+		int a = countingChar(&menuDaily.at(i)[0]);
+		characters.push_back(a);
+	}*/
+
 	for (int i = 0; i < menuDaily.size(); i++) {
-		cout << "\n\t\t" << (i + 1) << ". " << menuDaily.at(i)[0] << "\t\t\t" << readingDaily.at(i)[1];
+		cout << "\n\t" << (i + 1) << ". " << menuDaily.at(i)[0];
+		/*for (int j = 0; j < (50 - characters[i]); j++) {
+			cout << " ";
+		}*/
+		cout << readingDaily.at(i)[1];
 	}
 
 	cout << "\n\n\n\t\t";
