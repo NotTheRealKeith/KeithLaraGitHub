@@ -689,7 +689,7 @@ void Parentcomplaint(int parent) {
 	ofstream complaintfile;
 	complaintfile.open("parentComplaint.csv", ios::app);
 
-	complaintfile << ptrParentComp->compNumber << "," << complaintdate << "," << complaintitem << "," << complaintdescription << endl;
+	complaintfile << ptrParentComp->compNumber << "," << complaintdate << "," << complaintitem << "," << complaintdescription << "," << "n" << endl;
 
 	complaintfile.close();
 }
@@ -1006,6 +1006,88 @@ void adminUpdateMenu() {
 
 //View weekly sales
 void weeklySalesFunc() {
+	/*system("cls");
+
+	fstream infile; // reading the file
+	infile.open("menuItems.csv", ios::in);
+
+	string line, row;
+	while (getline(infile, line)) { // this loop gets the data from the csv and push_backs into a vector
+		stringstream ss(line);
+		int i = 0;
+		array<string, 4> m;
+		while (getline(ss, row, ',')) {//while inside that row.
+			m[i] = row;
+			i++;
+		}
+		vectorMenu.push_back(m);
+	}*/
+}
+
+//View complaints made by parents
+void ViewComplaints() {
+	system("cls");
+	vector<array<string, 5> > complaint;
+	string line, row;
+	int option;
+
+	fstream infile; // reading the file
+	infile.open("parentComplaint.csv", ios::in);
+
+	while (getline(infile, line)) { // this loop gets the data from the csv and push_backs into a vector
+		stringstream ss(line);
+		int i = 0;
+		array<string, 5> m;
+		while (getline(ss, row, ',')) {//while inside that row.
+			m[i] = row;
+			i++;
+		}
+		complaint.push_back(m);
+	}
+
+	infile.close(); //Closing the file
+
+	cout << "\n\n\t\t\t\t\t\tParent Complaints";
+	cout << "\n\t\t\t\t---------------------------------------------------\n\n";
+
+	for (int i = 0; i < complaint.size(); i++) {
+		if (complaint.at(i)[4] == "n") {
+			cout << "\n\t" << (i + 1) << ".  Complaint Number: " << complaint.at(i)[0] << "\tDate: " << complaint.at(i)[1] << "\tItem: " << complaint.at(i)[2] << "\n\t\tComplaint Description: " << complaint.at(i)[3] << endl;
+		}
+	}
+
+	changeColour(11);
+	cout << "\n\n\tWhich complaint would you like to resolve? (Select from numbers shown above, enter -1 if no complaints showing) ";
+	changeColour(7);
+	cin >> option;
+
+	for (int i = 0; i < complaint.size(); i++) { //Finding the complaint the user would like to resolve
+		if ((option - 1) == i) {
+			complaint.at(i)[4] = "y";
+			break;
+		}
+		else if (option == -2) {
+			break;
+		}
+	}
+
+	ofstream outfile;
+	outfile.open("parentComplaint.csv", ios::out);
+
+	for (int i = 0; i < complaint.size(); i++) { //Updating the file with a yes in the 5th column standing for resolved
+		outfile << complaint.at(i)[0] << "," << complaint.at(i)[1] << "," << complaint.at(i)[2] << "," << complaint.at(i)[3] << "," << complaint.at(i)[4] << endl;
+	}
+	
+	outfile.close();
+
+	if (option > 0) { //Doesnt print out if user enters -1
+		cout << "\n\n\tComplaint has been resolved successfully!";
+	}
+
+	cout << "\n\n\n\t\t";
+	changeColour(11);
+	system("pause");
+	changeColour(7);
 }
 
 void DailyOrderReport() {
@@ -1051,7 +1133,7 @@ void DailyOrderReport() {
 	cout << "\n\n\tItems:\t\t\t\t\t\tQuantity Ordered:\n";
 
 	for (int i = 0; i < menuDaily.size(); i++) {
-		cout << "\n\t\t" << (i + 1) << ". " << menuDaily.at(i)[0] << "\t" << readingDaily.at(i)[1];
+		cout << "\n\t\t" << (i + 1) << ". " << menuDaily.at(i)[0] << "\t\t\t" << readingDaily.at(i)[1];
 	}
 
 	cout << "\n\n\n\t\t";
@@ -1075,8 +1157,9 @@ int main()
 	struct ParentAcc* ptrParent;
 
 	ptrParent = &Parent;
+
 	writeMenuPreview();
-MenuSelect:
+MenuSelect: //Label to return to main menu
 	system("cls");
 	// --- added intro screen below V --- //
 	cout << "\n\t\t\tSchool Lunch Order System\t\t\t" << endl;
@@ -1153,15 +1236,15 @@ MenuSelect:
 		}
 		break;
 	case 4:
-		b = parentLogin();
+		b = parentLogin(); //Returns b from the function with the corresponding log in
 		if (b == -1) {
-			a = 0;
+			a = 0; //Too many attempts to log in
 		}
 		else if (b == -5) {
-			a = 2;
+			a = 2; //Admin log in
 		}
 		else {
-			a = 1;
+			a = 1; //Parent log in
 		}
 		break;
 	case 5:
@@ -1175,7 +1258,7 @@ MenuSelect:
 	}
 
 	if (a == 0) {
-		//Too many attempts to log in
+		//Too many attempts to log in, exits program
 	}
 	else if (a == 1) {
 		string line, row;
@@ -1330,11 +1413,16 @@ MenuSelect:
 
 		switch (option) {
 		case 1:
+			ViewComplaints();
+			goto AdminSelect;
 			break;
 		case 2:
 			DailyOrderReport();
+			goto AdminSelect;
 			break;
 		case 3:
+			weeklySalesFunc();
+			goto AdminSelect;
 			break;
 		case 4:
 			adminUpdateMenu();
