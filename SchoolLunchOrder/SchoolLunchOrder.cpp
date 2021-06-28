@@ -1,5 +1,5 @@
 // schoolLunchOrderSystem_LaraKeith.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
+// so much pain fr homie
 
 //  ===== THIS CODE HOLDS LARA AND KEITH'S CODE FOR OUR SCHOOL LUNCH ORDER SYSTEM =====
 
@@ -896,6 +896,7 @@ void adminUpdateMenu() {
 	// re-writing/updating menu item name with user input
 
 	for (int i = 0; i < vectorMenu.size(); i++) {
+
 		// checks if the user selected item matches with the item in cell 1
 		if (itemNameChoice == vectorMenu.at(0)[0]) {
 			cout << "\nYou would like to change " << vectorMenu.at(0)[0]; //if it matches, it will then ask the user what they want to change it too
@@ -918,7 +919,7 @@ void adminUpdateMenu() {
 				cout << "\n\n\n";
 				changeColour(11);
 				system("pause");
-				changeColour(7);// INCOMPLETE SECTION | SKIPS REALLY FAST FOR SOME REASON
+				changeColour(7);
 			}
 			else if (choice == 2) {
 				cin.ignore();
@@ -943,7 +944,6 @@ void adminUpdateMenu() {
 			changeColour(7);
 			cin >> choice;
 
-			// checks if the user selected item matches with the item in cell 2
 			if (choice == 1) {
 				cin.ignore();
 				cout << "\nPlease Enter new item Name: ";
@@ -955,7 +955,7 @@ void adminUpdateMenu() {
 				cout << "\n\n\n";
 				changeColour(11);
 				system("pause");
-				changeColour(7);// INCOMPLETE SECTION | SKIPS REALLY FAST FOR SOME REASON
+				changeColour(7);
 			}
 			else if (choice == 2) {
 				cin.ignore();
@@ -991,7 +991,7 @@ void adminUpdateMenu() {
 				cout << "\n\n\n";
 				changeColour(11);
 				system("pause");
-				changeColour(7);// INCOMPLETE SECTION | SKIPS REALLY FAST FOR SOME REASON
+				changeColour(7);
 			}
 			else if (choice == 2) {
 				cin.ignore();
@@ -1027,7 +1027,7 @@ void adminUpdateMenu() {
 				cout << "\n\n\n";
 				changeColour(11);
 				system("pause");
-				changeColour(7);// INCOMPLETE SECTION | SKIPS REALLY FAST FOR SOME REASON
+				changeColour(7);
 			}
 			else if (choice == 2) {
 				cin.ignore();
@@ -1063,7 +1063,7 @@ void adminUpdateMenu() {
 				cout << "\n\n\n";
 				changeColour(11);
 				system("pause");
-				changeColour(7);// INCOMPLETE SECTION | SKIPS REALLY FAST FOR SOME REASON
+				changeColour(7);
 			}
 			else if (choice == 2) {
 				cin.ignore();
@@ -1099,7 +1099,7 @@ void adminUpdateMenu() {
 				cout << "\n\n\n";
 				changeColour(11);
 				system("pause");
-				changeColour(7);// INCOMPLETE SECTION | SKIPS REALLY FAST FOR SOME REASON
+				changeColour(7);
 			}
 			else if (choice == 2) {
 				cin.ignore();
@@ -1135,7 +1135,7 @@ void adminUpdateMenu() {
 				cout << "\n\n\n";
 				changeColour(11);
 				system("pause");
-				changeColour(7);// INCOMPLETE SECTION | SKIPS REALLY FAST FOR SOME REASON
+				changeColour(7);
 			}
 			else if (choice == 2) {
 				cin.ignore();
@@ -1171,7 +1171,7 @@ void adminUpdateMenu() {
 				cout << "\n\n\n";
 				changeColour(11);
 				system("pause");
-				changeColour(7);// INCOMPLETE SECTION | SKIPS REALLY FAST FOR SOME REASON
+				changeColour(7);
 			}
 			else if (choice == 2) {
 				cin.ignore();
@@ -1207,7 +1207,7 @@ void adminUpdateMenu() {
 				cout << "\n\n\n";
 				changeColour(11);
 				system("pause");
-				changeColour(7);// INCOMPLETE SECTION | SKIPS REALLY FAST FOR SOME REASON
+				changeColour(7);
 			}
 			else if (choice == 2) {
 				cin.ignore();
@@ -1225,6 +1225,7 @@ void adminUpdateMenu() {
 		break;
 	}
 
+	// updating the csv file with the user input
 	ofstream updateCSVWithNewData("menuItems.csv", ios::out);
 
 	a = -1;
@@ -1396,12 +1397,20 @@ void DailyOrderReport() {
 	}
 
 	for (int i = 0; i < menuDaily.size(); i++) {
+<<<<<<< HEAD
+		cout << "\n\t" << (i + 1) << ". " << menuDaily.at(i)[0] << " \t\t\t\t" << readingDaily.at(i)[1] << endl;
+		/*for (int j = 0; j < (50 - characters[i]); j++) {
+			cout << " ";
+		}*/
+		/*cout << "                  " << readingDaily.at(i)[1];*/
+=======
 		cout << "\n\t" << (i + 1) << ". " << menuDaily.at(i)[0];
 		for (int j = 0; j < (50 - characters[i]); j++) { //Using the character asmounts we stored to evenly space out the quantity
 			cout << " ";
 		
 		}
 		cout << readingDaily.at(i)[1];
+>>>>>>> df20a98fabeeb640e876d21cbf89dcb0407c65c5
 	}
 
 	cout << "\n\n\n\t\t";
@@ -1409,8 +1418,6 @@ void DailyOrderReport() {
 	system("pause");
 	changeColour(7);
 }
-
-//check complaints functions
 
 // ===== ^^ KEITH CODE SECTION ^^ =====
 
@@ -1448,14 +1455,14 @@ MenuSelect: //Label to return to main menu
 	cin >> index;
 	switch (index) {
 	case 1:
-		system("cls");
+		system("cls"); // clears screen 
 		menuPreview();
 		changeColour(11);
 		cout << "\n\n\n Enter 1 to return back to Main Menu: ";
 		changeColour(7);
 		cin >> flag;
 
-		if (flag != 1) {   //find a way to make this loop if condition is not met (IN PROGRESS)
+		if (flag != 1) {  
 			changeColour(4);
 			cout << "invalid input! Try again: ";
 			changeColour(7);
@@ -1545,7 +1552,12 @@ MenuSelect: //Label to return to main menu
 		}
 
 		infile.close();
+<<<<<<< HEAD
+		//parent account screen
+	MenuParentSelect:
+=======
 	MenuParentSelect: //The parent screen
+>>>>>>> df20a98fabeeb640e876d21cbf89dcb0407c65c5
 		system("cls");
 		cout << "\n\t\t\tParent School Lunch System " << matrix.at(b)[1] << endl;
 		underLine(80);
