@@ -894,7 +894,7 @@ void adminUpdateMenu() {
 	getline(cin, itemNameChoice);
 
 	// re-writing/updating menu item name with user input
-	
+
 	for (int i = 0; i < vectorMenu.size(); i++) {
 		// checks if the user selected item matches with the item in cell 1
 		if (itemNameChoice == vectorMenu.at(0)[0]) {
@@ -919,7 +919,6 @@ void adminUpdateMenu() {
 				changeColour(11);
 				system("pause");
 				changeColour(7);// INCOMPLETE SECTION | SKIPS REALLY FAST FOR SOME REASON
-				
 			}
 			else if (choice == 2) {
 				cin.ignore();
@@ -930,97 +929,297 @@ void adminUpdateMenu() {
 				cout << vectorMenu.at(0)[1] << " has been updated into the menu! Press Enter to go back to admin account page!\n";
 				changeColour(7);
 				cin.ignore();
-				a = 0; //This is for the price to be entered from newItemPrice instead of the vector
-				
+				a = -1; //This is for the price to be entered from newItemPrice instead of the vector
 			}
 		}
 		// checks if the user selected item matches with the item in cell 2
 		else if (itemNameChoice == vectorMenu.at(1)[0]) {
 			cout << "\nYou would like to change " << vectorMenu.at(1)[0]; //if it matches, it will then ask the user what they want to change it too
-			cout << "\nPlease Enter new item Name: ";
-			getline(cin, newItemName);
-			vectorMenu.at(1)[0] = newItemName;
+			cout << "What changes would you like to make?\n\n";
+			cout << "1. Change a Menu Item Name\n";
+			cout << "2. Change a Menu Item Price\n\n";
 			changeColour(11);
-			cout << vectorMenu.at(1)[0] << " has been updated into the menu! Press Enter to go back to admin account page!\n";
+			cout << "Please make a selection: (1 or 2) ";
 			changeColour(7);
-			cin.ignore();
+			cin >> choice;
+
+			// checks if the user selected item matches with the item in cell 2
+			if (choice == 1) {
+				cin.ignore();
+				cout << "\nPlease Enter new item Name: ";
+				getline(cin, newItemName);
+				vectorMenu.at(1)[0] = newItemName;
+				changeColour(11);
+				cout << vectorMenu.at(1)[0] << " has been updated into the menu! Press Enter to go back to admin account page!\n";
+				changeColour(7);
+				cout << "\n\n\n";
+				changeColour(11);
+				system("pause");
+				changeColour(7);// INCOMPLETE SECTION | SKIPS REALLY FAST FOR SOME REASON
+			}
+			else if (choice == 2) {
+				cin.ignore();
+				cout << "\nPlease Enter new item Price: ";
+				cin >> newItemPrice;
+				vectorMenu.at(1)[1] = newItemPrice;
+				changeColour(11);
+				cout << vectorMenu.at(1)[1] << " has been updated into the menu! Press Enter to go back to admin account page!\n";
+				changeColour(7);
+				cin.ignore();
+				a = -1; //This is for the price to be entered from newItemPrice instead of the vector
+			}
 		}
 		// checks if the user selected item matches with the item in cell 3
 		else if (itemNameChoice == vectorMenu.at(2)[0]) {
 			cout << "\nYou would like to change " << vectorMenu.at(2)[0]; //if it matches, it will then ask the user what they want to change it too
-			cout << "\nPlease Enter new item Name: ";
-			getline(cin, newItemName);
-			vectorMenu.at(2)[0] = newItemName;
+			cout << "What changes would you like to make?\n\n";
+			cout << "1. Change a Menu Item Name\n";
+			cout << "2. Change a Menu Item Price\n\n";
 			changeColour(11);
-			cout << vectorMenu.at(2)[0] << " has been updated into the menu! Press Enter to go back to admin account page!\n";
+			cout << "Please make a selection: (1 or 2) ";
 			changeColour(7);
-			cin.ignore();
+			cin >> choice;
+
+			if (choice == 1) {
+				cin.ignore();
+				cout << "\nPlease Enter new item Name: ";
+				getline(cin, newItemName);
+				vectorMenu.at(2)[0] = newItemName;
+				changeColour(11);
+				cout << vectorMenu.at(2)[0] << " has been updated into the menu! Press Enter to go back to admin account page!\n";
+				changeColour(7);
+				cout << "\n\n\n";
+				changeColour(11);
+				system("pause");
+				changeColour(7);// INCOMPLETE SECTION | SKIPS REALLY FAST FOR SOME REASON
+			}
+			else if (choice == 2) {
+				cin.ignore();
+				cout << "\nPlease Enter new item Price: ";
+				cin >> newItemPrice;
+				vectorMenu.at(2)[1] = newItemPrice;
+				changeColour(11);
+				cout << vectorMenu.at(2)[1] << " has been updated into the menu! Press Enter to go back to admin account page!\n";
+				changeColour(7);
+				cin.ignore();
+				a = -1; //This is for the price to be entered from newItemPrice instead of the vector
+			}
 		}
 		// checks if the user selected item matches with the item in cell 4
 		else if (itemNameChoice == vectorMenu.at(3)[0]) {
 			cout << "\nYou would like to change " << vectorMenu.at(3)[0]; //if it matches, it will then ask the user what they want to change it too
-			cout << "\nPlease Enter new item Name: ";
-			getline(cin, newItemName);
-			vectorMenu.at(3)[0] = newItemName;
+			cout << "What changes would you like to make?\n\n";
+			cout << "1. Change a Menu Item Name\n";
+			cout << "2. Change a Menu Item Price\n\n";
 			changeColour(11);
-			cout << vectorMenu.at(3)[0] << " has been updated into the menu! Press Enter to go back to admin account page!\n";
+			cout << "Please make a selection: (1 or 2) ";
 			changeColour(7);
-			cin.ignore();
+			cin >> choice;
+
+			if (choice == 1) {
+				cin.ignore();
+				cout << "\nPlease Enter new item Name: ";
+				getline(cin, newItemName);
+				vectorMenu.at(3)[0] = newItemName;
+				changeColour(11);
+				cout << vectorMenu.at(3)[0] << " has been updated into the menu! Press Enter to go back to admin account page!\n";
+				changeColour(7);
+				cout << "\n\n\n";
+				changeColour(11);
+				system("pause");
+				changeColour(7);// INCOMPLETE SECTION | SKIPS REALLY FAST FOR SOME REASON
+			}
+			else if (choice == 2) {
+				cin.ignore();
+				cout << "\nPlease Enter new item Price: ";
+				cin >> newItemPrice;
+				vectorMenu.at(3)[1] = newItemPrice;
+				changeColour(11);
+				cout << vectorMenu.at(3)[1] << " has been updated into the menu! Press Enter to go back to admin account page!\n";
+				changeColour(7);
+				cin.ignore();
+				a = -1; //This is for the price to be entered from newItemPrice instead of the vector
+			}
 		}
 		// checks if the user selected item matches with the item in cell 5
 		else if (itemNameChoice == vectorMenu.at(4)[0]) {
 			cout << "\nYou would like to change " << vectorMenu.at(4)[0]; //if it matches, it will then ask the user what they want to change it too
-			cout << "\nPlease Enter new item Name: ";
-			getline(cin, newItemName);
-			vectorMenu.at(4)[0] = newItemName;
+			cout << "What changes would you like to make?\n\n";
+			cout << "1. Change a Menu Item Name\n";
+			cout << "2. Change a Menu Item Price\n\n";
 			changeColour(11);
-			cout << vectorMenu.at(4)[0] << " has been updated into the menu! Press Enter to go back to admin account page!\n";
+			cout << "Please make a selection: (1 or 2) ";
 			changeColour(7);
-			cin.ignore();
+			cin >> choice;
+
+			if (choice == 1) {
+				cin.ignore();
+				cout << "\nPlease Enter new item Name: ";
+				getline(cin, newItemName);
+				vectorMenu.at(4)[0] = newItemName;
+				changeColour(11);
+				cout << vectorMenu.at(4)[0] << " has been updated into the menu! Press Enter to go back to admin account page!\n";
+				changeColour(7);
+				cout << "\n\n\n";
+				changeColour(11);
+				system("pause");
+				changeColour(7);// INCOMPLETE SECTION | SKIPS REALLY FAST FOR SOME REASON
+			}
+			else if (choice == 2) {
+				cin.ignore();
+				cout << "\nPlease Enter new item Price: ";
+				cin >> newItemPrice;
+				vectorMenu.at(4)[1] = newItemPrice;
+				changeColour(11);
+				cout << vectorMenu.at(4)[1] << " has been updated into the menu! Press Enter to go back to admin account page!\n";
+				changeColour(7);
+				cin.ignore();
+				a = -1; //This is for the price to be entered from newItemPrice instead of the vector
+			}
 		}
 		// checks if the user selected item matches with the item in cell 6
 		else if (itemNameChoice == vectorMenu.at(5)[0]) {
 			cout << "\nYou would like to change " << vectorMenu.at(5)[0]; //if it matches, it will then ask the user what they want to change it too
-			cout << "\nPlease Enter new item Name: ";
-			getline(cin, newItemName);
-			vectorMenu.at(5)[0] = newItemName;
+			cout << "What changes would you like to make?\n\n";
+			cout << "1. Change a Menu Item Name\n";
+			cout << "2. Change a Menu Item Price\n\n";
 			changeColour(11);
-			cout << vectorMenu.at(5)[0] << " has been updated into the menu! Press Enter to go back to admin account page!\n";
+			cout << "Please make a selection: (1 or 2) ";
 			changeColour(7);
-			cin.ignore();
+			cin >> choice;
+
+			if (choice == 1) {
+				cin.ignore();
+				cout << "\nPlease Enter new item Name: ";
+				getline(cin, newItemName);
+				vectorMenu.at(5)[0] = newItemName;
+				changeColour(11);
+				cout << vectorMenu.at(5)[0] << " has been updated into the menu! Press Enter to go back to admin account page!\n";
+				changeColour(7);
+				cout << "\n\n\n";
+				changeColour(11);
+				system("pause");
+				changeColour(7);// INCOMPLETE SECTION | SKIPS REALLY FAST FOR SOME REASON
+			}
+			else if (choice == 2) {
+				cin.ignore();
+				cout << "\nPlease Enter new item Price: ";
+				cin >> newItemPrice;
+				vectorMenu.at(5)[1] = newItemPrice;
+				changeColour(11);
+				cout << vectorMenu.at(5)[1] << " has been updated into the menu! Press Enter to go back to admin account page!\n";
+				changeColour(7);
+				cin.ignore();
+				a = -1; //This is for the price to be entered from newItemPrice instead of the vector
+			}
 		}
 		// checks if the user selected item matches with the item in cell 7
 		else if (itemNameChoice == vectorMenu.at(6)[0]) {
 			cout << "\nYou would like to change " << vectorMenu.at(6)[0]; //if it matches, it will then ask the user what they want to change it too
-			cout << "\nPlease Enter new item Name: ";
-			getline(cin, newItemName);
-			vectorMenu.at(6)[0] = newItemName;
+			cout << "What changes would you like to make?\n\n";
+			cout << "1. Change a Menu Item Name\n";
+			cout << "2. Change a Menu Item Price\n\n";
 			changeColour(11);
-			cout << vectorMenu.at(6)[0] << " has been updated into the menu! Press Enter to go back to admin account page!\n";
+			cout << "Please make a selection: (1 or 2) ";
 			changeColour(7);
-			cin.ignore();
+			cin >> choice;
+
+			if (choice == 1) {
+				cin.ignore();
+				cout << "\nPlease Enter new item Name: ";
+				getline(cin, newItemName);
+				vectorMenu.at(6)[0] = newItemName;
+				changeColour(11);
+				cout << vectorMenu.at(6)[0] << " has been updated into the menu! Press Enter to go back to admin account page!\n";
+				changeColour(7);
+				cout << "\n\n\n";
+				changeColour(11);
+				system("pause");
+				changeColour(7);// INCOMPLETE SECTION | SKIPS REALLY FAST FOR SOME REASON
+			}
+			else if (choice == 2) {
+				cin.ignore();
+				cout << "\nPlease Enter new item Price: ";
+				cin >> newItemPrice;
+				vectorMenu.at(6)[1] = newItemPrice;
+				changeColour(11);
+				cout << vectorMenu.at(6)[1] << " has been updated into the menu! Press Enter to go back to admin account page!\n";
+				changeColour(7);
+				cin.ignore();
+				a = -1; //This is for the price to be entered from newItemPrice instead of the vector
+			}
 		}
 		// checks if the user selected item matches with the item in cell 8
 		else if (itemNameChoice == vectorMenu.at(7)[0]) {
 			cout << "\nYou would like to change " << vectorMenu.at(7)[0]; //if it matches, it will then ask the user what they want to change it too
-			cout << "\nPlease Enter new item Name: ";
-			getline(cin, newItemName);
-			vectorMenu.at(7)[0] = newItemName;
+			cout << "What changes would you like to make?\n\n";
+			cout << "1. Change a Menu Item Name\n";
+			cout << "2. Change a Menu Item Price\n\n";
 			changeColour(11);
-			cout << vectorMenu.at(7)[0] << " has been updated into the menu! Press Enter to go back to admin account page!\n";
+			cout << "Please make a selection: (1 or 2) ";
 			changeColour(7);
-			cin.ignore();
+			cin >> choice;
+
+			if (choice == 1) {
+				cin.ignore();
+				cout << "\nPlease Enter new item Name: ";
+				getline(cin, newItemName);
+				vectorMenu.at(7)[0] = newItemName;
+				changeColour(11);
+				cout << vectorMenu.at(7)[0] << " has been updated into the menu! Press Enter to go back to admin account page!\n";
+				changeColour(7);
+				cout << "\n\n\n";
+				changeColour(11);
+				system("pause");
+				changeColour(7);// INCOMPLETE SECTION | SKIPS REALLY FAST FOR SOME REASON
+			}
+			else if (choice == 2) {
+				cin.ignore();
+				cout << "\nPlease Enter new item Price: ";
+				cin >> newItemPrice;
+				vectorMenu.at(7)[1] = newItemPrice;
+				changeColour(11);
+				cout << vectorMenu.at(7)[1] << " has been updated into the menu! Press Enter to go back to admin account page!\n";
+				changeColour(7);
+				cin.ignore();
+				a = -1; //This is for the price to be entered from newItemPrice instead of the vector
+			}
 		}
 		// checks if the user selected item matches with the item in cell 9
 		else if (itemNameChoice == vectorMenu.at(8)[0]) {
 			cout << "\nYou would like to change " << vectorMenu.at(8)[0]; //if it matches, it will then ask the user what they want to change it too
-			cout << "\nPlease Enter new item Name: ";
-			getline(cin, newItemName);
-			vectorMenu.at(8)[0] = newItemName;
+			cout << "What changes would you like to make?\n\n";
+			cout << "1. Change a Menu Item Name\n";
+			cout << "2. Change a Menu Item Price\n\n";
 			changeColour(11);
-			cout << vectorMenu.at(8)[0] << " has been updated into the menu! Press Enter to go back to admin account page!\n";
+			cout << "Please make a selection: (1 or 2) ";
 			changeColour(7);
-			cin.ignore();
+			cin >> choice;
+
+			if (choice == 1) {
+				cin.ignore();
+				cout << "\nPlease Enter new item Name: ";
+				getline(cin, newItemName);
+				vectorMenu.at(8)[0] = newItemName;
+				changeColour(11);
+				cout << vectorMenu.at(8)[0] << " has been updated into the menu! Press Enter to go back to admin account page!\n";
+				changeColour(7);
+				cout << "\n\n\n";
+				changeColour(11);
+				system("pause");
+				changeColour(7);// INCOMPLETE SECTION | SKIPS REALLY FAST FOR SOME REASON
+			}
+			else if (choice == 2) {
+				cin.ignore();
+				cout << "\nPlease Enter new item Price: ";
+				cin >> newItemPrice;
+				vectorMenu.at(8)[1] = newItemPrice;
+				changeColour(11);
+				cout << vectorMenu.at(8)[1] << " has been updated into the menu! Press Enter to go back to admin account page!\n";
+				changeColour(7);
+				cin.ignore();
+				a = -1; //This is for the price to be entered from newItemPrice instead of the vector
+			}
 		}
 
 		break;
@@ -1028,6 +1227,7 @@ void adminUpdateMenu() {
 
 	ofstream updateCSVWithNewData("menuItems.csv", ios::out);
 
+	a = -1;
 	for (int i = 0; i < vectorMenu.size(); i++) {
 		if (a == i) {
 			updateCSVWithNewData << vectorMenu.at(i)[0] << "," << newItemPrice << "," << vectorMenu.at(i)[2] << "," << vectorMenu.at(i)[3] << "," << endl;
@@ -1036,7 +1236,7 @@ void adminUpdateMenu() {
 			updateCSVWithNewData << vectorMenu.at(i)[0] << "," << vectorMenu.at(i)[1] << "," << vectorMenu.at(i)[2] << "," << vectorMenu.at(i)[3] << "," << endl;
 		}
 	}
-	
+
 	updateCSVWithNewData.close();
 }
 
@@ -1133,7 +1333,7 @@ void ViewComplaints() {
 	for (int i = 0; i < complaint.size(); i++) { //Updating the file with a yes in the 5th column standing for resolved
 		outfile << complaint.at(i)[0] << "," << complaint.at(i)[1] << "," << complaint.at(i)[2] << "," << complaint.at(i)[3] << "," << complaint.at(i)[4] << endl;
 	}
-	
+
 	outfile.close();
 
 	if (option > 0) { //Doesnt print out if user enters -1
