@@ -65,11 +65,23 @@ struct MenuItems {
 
 /*int countingChar(string* p) {
 	char str[] = ;
+<<<<<<< HEAD
 	int count = 0;
 	for (int i = 0; str[i] != '/0'; i++)
 	{
 		count++;
 	}
+=======
+
+	int count = 0;
+
+	for (int i = 0; str[i] != '/0'; i++)
+
+	{
+		count++;
+	}
+
+>>>>>>> f2392e08726de04c1f80e772835d4d630ddea492
 	return count;
 }*/
 
@@ -880,7 +892,11 @@ void adminUpdateMenu() {
 	getline(cin, itemNameChoice);
 
 	// re-writing/updating menu item name with user input
+<<<<<<< HEAD
 
+=======
+	
+>>>>>>> f2392e08726de04c1f80e772835d4d630ddea492
 	for (int i = 0; i < vectorMenu.size(); i++) {
 		// checks if the user selected item matches with the item in cell 1
 		if (itemNameChoice == vectorMenu.at(0)[0]) {
@@ -905,7 +921,11 @@ void adminUpdateMenu() {
 				changeColour(11);
 				system("pause");
 				changeColour(7);// INCOMPLETE SECTION | SKIPS REALLY FAST FOR SOME REASON
+<<<<<<< HEAD
 
+=======
+				
+>>>>>>> f2392e08726de04c1f80e772835d4d630ddea492
 			}
 			else if (choice == 2) {
 				cin.ignore();
@@ -917,7 +937,11 @@ void adminUpdateMenu() {
 				changeColour(7);
 				cin.ignore();
 				a = 0; //This is for the price to be entered from newItemPrice instead of the vector
+<<<<<<< HEAD
 
+=======
+				
+>>>>>>> f2392e08726de04c1f80e772835d4d630ddea492
 			}
 		}
 		// checks if the user selected item matches with the item in cell 2
@@ -1010,6 +1034,7 @@ void adminUpdateMenu() {
 		}
 
 		break;
+<<<<<<< HEAD
 	}
 
 	ofstream updateCSVWithNewData("menuItems.csv", ios::out);
@@ -1023,6 +1048,21 @@ void adminUpdateMenu() {
 		}
 	}
 
+=======
+	}
+
+	ofstream updateCSVWithNewData("menuItems.csv", ios::out);
+
+	for (int i = 0; i < vectorMenu.size(); i++) {
+		if (a == i) {
+			updateCSVWithNewData << vectorMenu.at(i)[0] << "," << newItemPrice << "," << vectorMenu.at(i)[2] << "," << vectorMenu.at(i)[3] << "," << endl;
+		}
+		else {
+			updateCSVWithNewData << vectorMenu.at(i)[0] << "," << vectorMenu.at(i)[1] << "," << vectorMenu.at(i)[2] << "," << vectorMenu.at(i)[3] << "," << endl;
+		}
+	}
+	
+>>>>>>> f2392e08726de04c1f80e772835d4d630ddea492
 	updateCSVWithNewData.close();
 }
 
