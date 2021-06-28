@@ -855,7 +855,7 @@ void  menuPreview() {
 void adminUpdateMenu() {
 	system("cls");
 	vector<array<string, 4>>  vectorMenu;
-	int i;
+	int i, a;
 
 	fstream infile; // reading the file
 	infile.open("menuItems.csv", ios::in);
@@ -872,16 +872,10 @@ void adminUpdateMenu() {
 		vectorMenu.push_back(m);
 	}
 
-	////Asking admin if they would like to make changes
-	//cout << "What changes would you like to make?\n\n";
-	//cout << "1. Change a Menu Item Name\n";
-	//cout << "2. Change a Menu Item Price\n\n";
-	//cout << "Please make a selection: (1 or 2) ";
-	//cin >> choice;
 	int choice;
 	string itemNameChoice;
 	string newItemName;
-	float newItemPrice;
+	string newItemPrice;
 	cin.ignore();
 	cout << "\n\nMenu Name Change\n\n";
 	menuPreview();
@@ -890,7 +884,7 @@ void adminUpdateMenu() {
 	getline(cin, itemNameChoice);
 
 	// re-writing/updating menu item name with user input
-	ofstream updateCSVWithNewData("menuItems.csv", ios::out);
+	
 	for (int i = 0; i < vectorMenu.size(); i++) {
 		// checks if the user selected item matches with the item in cell 1
 		if (itemNameChoice == vectorMenu.at(0)[0]) {
@@ -904,25 +898,31 @@ void adminUpdateMenu() {
 			cin >> choice;
 
 			if (choice == 1) {
+				cin.ignore();
 				cout << "\nPlease Enter new item Name: ";
 				getline(cin, newItemName);
 				vectorMenu.at(0)[0] = newItemName;
 				changeColour(11);
 				cout << vectorMenu.at(0)[0] << " has been updated into the menu! Press Enter to go back to admin account page!\n";
 				changeColour(7);
-				cin.ignore();
-				// INCOMPLETE SECTION | SKIPS REALLY FAST FOR SOME REASON
+				cout << "\n\n\n";
+				changeColour(11);
+				system("pause");
+				changeColour(7);// INCOMPLETE SECTION | SKIPS REALLY FAST FOR SOME REASON
+				
 			}
-			//else if (choice == 2) {
-			//	cout << "\nPlease Enter new item Price: ";
-			//	cin >> newItemPrice;
-			//	vectorMenu.at(0)[1] = newItemPrice;
-			//	changeColour(11);
-			//	cout << vectorMenu.at(0)[1] << " has been updated into the menu! Press Enter to go back to admin account page!\n";
-			//	changeColour(7);
-			//	cin.ignore();
-			//	break; // INCOMPLETE SECTION | SKIPS REALLY FAST FOR SOME REASON
-			//}
+			else if (choice == 2) {
+				cin.ignore();
+				cout << "\nPlease Enter new item Price: ";
+				cin >> newItemPrice;
+				vectorMenu.at(0)[1] = newItemPrice;
+				changeColour(11);
+				cout << vectorMenu.at(0)[1] << " has been updated into the menu! Press Enter to go back to admin account page!\n";
+				changeColour(7);
+				cin.ignore();
+				a = 0; //This is for the price to be entered from newItemPrice instead of the vector
+				
+			}
 		}
 		// checks if the user selected item matches with the item in cell 2
 		else if (itemNameChoice == vectorMenu.at(1)[0]) {
@@ -1013,8 +1013,20 @@ void adminUpdateMenu() {
 			cin.ignore();
 		}
 
-		updateCSVWithNewData << vectorMenu.at(i)[0] << "," << vectorMenu.at(i)[1] << "," << vectorMenu.at(i)[2] << "," << vectorMenu.at(i)[3] << "," << endl;
+		break;
 	}
+
+	ofstream updateCSVWithNewData("menuItems.csv", ios::out);
+
+	for (int i = 0; i < vectorMenu.size(); i++) {
+		if (a == i) {
+			updateCSVWithNewData << vectorMenu.at(i)[0] << "," << newItemPrice << "," << vectorMenu.at(i)[2] << "," << vectorMenu.at(i)[3] << "," << endl;
+		}
+		else {
+			updateCSVWithNewData << vectorMenu.at(i)[0] << "," << vectorMenu.at(i)[1] << "," << vectorMenu.at(i)[2] << "," << vectorMenu.at(i)[3] << "," << endl;
+		}
+	}
+	
 	updateCSVWithNewData.close();
 }
 

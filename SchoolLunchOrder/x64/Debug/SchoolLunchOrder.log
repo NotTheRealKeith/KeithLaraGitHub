@@ -22,12 +22,11 @@ C:\Users\me\Desktop\CS103\CS103Assessment\KeithLaraGitHub\SchoolLunchOrder\Schoo
 C:\Users\me\Desktop\CS103\CS103Assessment\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(791,13): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
 C:\Users\me\Desktop\CS103\CS103Assessment\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(790,8): warning C4102: 'redoID': unreferenced label
 C:\Users\me\Desktop\CS103\CS103Assessment\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(830,6): warning C4101: 'i': unreferenced local variable
-C:\Users\me\Desktop\CS103\CS103Assessment\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(884,8): warning C4101: 'newItemPrice': unreferenced local variable
 C:\Users\me\Desktop\CS103\CS103Assessment\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(858,6): warning C4101: 'i': unreferenced local variable
-C:\Users\me\Desktop\CS103\CS103Assessment\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(1144,17): warning C4244: '=': conversion from 'float' to '_Ty', possible loss of data
+C:\Users\me\Desktop\CS103\CS103Assessment\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(1155,17): warning C4244: '=': conversion from 'float' to '_Ty', possible loss of data
           with
           [
               _Ty=int
           ]
-C:\Users\me\Desktop\CS103\CS103Assessment\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(1310,7): warning C4101: 'c': unreferenced local variable
+C:\Users\me\Desktop\CS103\CS103Assessment\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(1321,7): warning C4101: 'c': unreferenced local variable
   SchoolLunchOrder.vcxproj -> C:\Users\me\Desktop\CS103\CS103Assessment\KeithLaraGitHub\SchoolLunchOrder\x64\Debug\SchoolLunchOrder.exe
