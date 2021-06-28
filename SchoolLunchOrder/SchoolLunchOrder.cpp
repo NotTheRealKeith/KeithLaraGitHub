@@ -65,6 +65,13 @@ struct MenuItems {
 
 /*int countingChar(string* p) {
 	char str[] = ;
+<<<<<<< HEAD
+	int count = 0;
+	for (int i = 0; str[i] != '/0'; i++)
+	{
+		count++;
+	}
+=======
 
 	int count = 0;
 
@@ -74,6 +81,7 @@ struct MenuItems {
 		count++;
 	}
 
+>>>>>>> f2392e08726de04c1f80e772835d4d630ddea492
 	return count;
 }*/
 
@@ -884,7 +892,11 @@ void adminUpdateMenu() {
 	getline(cin, itemNameChoice);
 
 	// re-writing/updating menu item name with user input
+<<<<<<< HEAD
+
+=======
 	
+>>>>>>> f2392e08726de04c1f80e772835d4d630ddea492
 	for (int i = 0; i < vectorMenu.size(); i++) {
 		// checks if the user selected item matches with the item in cell 1
 		if (itemNameChoice == vectorMenu.at(0)[0]) {
@@ -909,7 +921,11 @@ void adminUpdateMenu() {
 				changeColour(11);
 				system("pause");
 				changeColour(7);// INCOMPLETE SECTION | SKIPS REALLY FAST FOR SOME REASON
+<<<<<<< HEAD
+
+=======
 				
+>>>>>>> f2392e08726de04c1f80e772835d4d630ddea492
 			}
 			else if (choice == 2) {
 				cin.ignore();
@@ -921,7 +937,11 @@ void adminUpdateMenu() {
 				changeColour(7);
 				cin.ignore();
 				a = 0; //This is for the price to be entered from newItemPrice instead of the vector
+<<<<<<< HEAD
+
+=======
 				
+>>>>>>> f2392e08726de04c1f80e772835d4d630ddea492
 			}
 		}
 		// checks if the user selected item matches with the item in cell 2
@@ -1014,6 +1034,21 @@ void adminUpdateMenu() {
 		}
 
 		break;
+<<<<<<< HEAD
+	}
+
+	ofstream updateCSVWithNewData("menuItems.csv", ios::out);
+
+	for (int i = 0; i < vectorMenu.size(); i++) {
+		if (a == i) {
+			updateCSVWithNewData << vectorMenu.at(i)[0] << "," << newItemPrice << "," << vectorMenu.at(i)[2] << "," << vectorMenu.at(i)[3] << "," << endl;
+		}
+		else {
+			updateCSVWithNewData << vectorMenu.at(i)[0] << "," << vectorMenu.at(i)[1] << "," << vectorMenu.at(i)[2] << "," << vectorMenu.at(i)[3] << "," << endl;
+		}
+	}
+
+=======
 	}
 
 	ofstream updateCSVWithNewData("menuItems.csv", ios::out);
@@ -1027,6 +1062,7 @@ void adminUpdateMenu() {
 		}
 	}
 	
+>>>>>>> f2392e08726de04c1f80e772835d4d630ddea492
 	updateCSVWithNewData.close();
 }
 
@@ -1123,7 +1159,7 @@ void ViewComplaints() {
 	for (int i = 0; i < complaint.size(); i++) { //Updating the file with a yes in the 5th column standing for resolved
 		outfile << complaint.at(i)[0] << "," << complaint.at(i)[1] << "," << complaint.at(i)[2] << "," << complaint.at(i)[3] << "," << complaint.at(i)[4] << endl;
 	}
-	
+
 	outfile.close();
 
 	if (option > 0) { //Doesnt print out if user enters -1

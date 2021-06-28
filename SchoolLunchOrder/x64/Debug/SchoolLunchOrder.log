@@ -1,22 +1,47 @@
 ﻿  SchoolLunchOrder.cpp
+<<<<<<< HEAD
+C:\Users\keith\OneDrive\Desktop\cppFolder\keithlaraclone\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(148,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\keith\OneDrive\Desktop\cppFolder\keithlaraclone\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(167,14): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\keith\OneDrive\Desktop\cppFolder\keithlaraclone\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(287,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\keith\OneDrive\Desktop\cppFolder\keithlaraclone\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(312,14): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\keith\OneDrive\Desktop\cppFolder\keithlaraclone\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(360,19): warning C4244: '=': conversion from 'float' to '_Ty', possible loss of data
+=======
 C:\Users\me\Desktop\CS103\CS103Assessment\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(152,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
 C:\Users\me\Desktop\CS103\CS103Assessment\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(171,14): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
 C:\Users\me\Desktop\CS103\CS103Assessment\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(291,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
 C:\Users\me\Desktop\CS103\CS103Assessment\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(316,14): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
 C:\Users\me\Desktop\CS103\CS103Assessment\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(364,19): warning C4244: '=': conversion from 'float' to '_Ty', possible loss of data
+>>>>>>> f2392e08726de04c1f80e772835d4d630ddea492
           with
           [
               _Ty=int
           ]
+<<<<<<< HEAD
+C:\Users\keith\OneDrive\Desktop\cppFolder\keithlaraclone\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(462,22): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\keith\OneDrive\Desktop\cppFolder\keithlaraclone\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(466,22): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\keith\OneDrive\Desktop\cppFolder\keithlaraclone\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(470,22): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\keith\OneDrive\Desktop\cppFolder\keithlaraclone\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(556,30): warning C4244: 'argument': conversion from 'float' to 'const unsigned __int64', possible loss of data
+C:\Users\keith\OneDrive\Desktop\cppFolder\keithlaraclone\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(567,48): warning C4244: 'argument': conversion from '_Ty' to 'const unsigned __int64', possible loss of data
+=======
 C:\Users\me\Desktop\CS103\CS103Assessment\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(466,22): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
 C:\Users\me\Desktop\CS103\CS103Assessment\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(470,22): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
 C:\Users\me\Desktop\CS103\CS103Assessment\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(474,22): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
 C:\Users\me\Desktop\CS103\CS103Assessment\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(560,30): warning C4244: 'argument': conversion from 'float' to 'const unsigned __int64', possible loss of data
 C:\Users\me\Desktop\CS103\CS103Assessment\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(571,48): warning C4244: 'argument': conversion from '_Ty' to 'const unsigned __int64', possible loss of data
+>>>>>>> f2392e08726de04c1f80e772835d4d630ddea492
           with
           [
               _Ty=float
           ]
+<<<<<<< HEAD
+C:\Users\keith\OneDrive\Desktop\cppFolder\keithlaraclone\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(683,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\keith\OneDrive\Desktop\cppFolder\keithlaraclone\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(715,6): warning C4101: 'i': unreferenced local variable
+C:\Users\keith\OneDrive\Desktop\cppFolder\keithlaraclone\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(787,13): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\keith\OneDrive\Desktop\cppFolder\keithlaraclone\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(786,8): warning C4102: 'redoID': unreferenced label
+C:\Users\keith\OneDrive\Desktop\cppFolder\keithlaraclone\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(826,6): warning C4101: 'i': unreferenced local variable
+C:\Users\keith\OneDrive\Desktop\cppFolder\keithlaraclone\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(854,6): warning C4101: 'i': unreferenced local variable
+C:\Users\keith\OneDrive\Desktop\cppFolder\keithlaraclone\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(1152,17): warning C4244: '=': conversion from 'float' to '_Ty', possible loss of data
+=======
 C:\Users\me\Desktop\CS103\CS103Assessment\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(687,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
 C:\Users\me\Desktop\CS103\CS103Assessment\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(719,6): warning C4101: 'i': unreferenced local variable
 C:\Users\me\Desktop\CS103\CS103Assessment\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(791,13): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
@@ -24,9 +49,15 @@ C:\Users\me\Desktop\CS103\CS103Assessment\KeithLaraGitHub\SchoolLunchOrder\Schoo
 C:\Users\me\Desktop\CS103\CS103Assessment\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(830,6): warning C4101: 'i': unreferenced local variable
 C:\Users\me\Desktop\CS103\CS103Assessment\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(858,6): warning C4101: 'i': unreferenced local variable
 C:\Users\me\Desktop\CS103\CS103Assessment\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(1155,17): warning C4244: '=': conversion from 'float' to '_Ty', possible loss of data
+>>>>>>> f2392e08726de04c1f80e772835d4d630ddea492
           with
           [
               _Ty=int
           ]
+<<<<<<< HEAD
+C:\Users\keith\OneDrive\Desktop\cppFolder\keithlaraclone\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(1318,7): warning C4101: 'c': unreferenced local variable
+  SchoolLunchOrder.vcxproj -> C:\Users\keith\OneDrive\Desktop\cppFolder\keithlaraclone\KeithLaraGitHub\SchoolLunchOrder\x64\Debug\SchoolLunchOrder.exe
+=======
 C:\Users\me\Desktop\CS103\CS103Assessment\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(1321,7): warning C4101: 'c': unreferenced local variable
   SchoolLunchOrder.vcxproj -> C:\Users\me\Desktop\CS103\CS103Assessment\KeithLaraGitHub\SchoolLunchOrder\x64\Debug\SchoolLunchOrder.exe
+>>>>>>> f2392e08726de04c1f80e772835d4d630ddea492
