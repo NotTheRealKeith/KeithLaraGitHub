@@ -1,5 +1,5 @@
 // schoolLunchOrderSystem_LaraKeith.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
+// so much pain fr homie
 
 //  ===== THIS CODE HOLDS LARA AND KEITH'S CODE FOR OUR SCHOOL LUNCH ORDER SYSTEM =====
 
@@ -63,7 +63,21 @@ struct MenuItems {
 
 // ===== ^^ Write stuctures here ^^ =====
 
-void menuPreview();
+int countingChar(string* p) { //Function used to count the amount of characters in a string for better text design
+	string str = *p;
+	int count = 0;
+	char chr;
+
+	int i = 0;
+	while (str[i] != '\0') {
+		count++;
+		i++;
+	}
+
+	return count;
+}
+
+void menuPreview(); //Calling the function at the top so it can be used in other functions
 
 // -- create underlines only --
 void underLine(int x) {
@@ -117,7 +131,7 @@ int ParentReg(ParentAcc* ptr) { //Function that allows the user to register as a
 loginpin:
 	cout << "\n\nLogin Pin (This will be used as your password to login, must \nbe 4 numbers): ";
 	cin >> num;
-	if (num > 999 && num < 10000) {
+	if (num > 999 && num < 10000) { //Checks if the number is 4 digits
 		ptr->pinNum = to_string(num);
 	}
 	else {
@@ -152,7 +166,7 @@ loginpin:
 		idcheck.push_back(f);
 	}
 idchk:
-	for (int i = 0; i < idcheck.size(); ++i) {
+	for (int i = 0; i < idcheck.size(); ++i) { //Checks to see id the id is already in the file
 		if (iD == idcheck.at(i)[0]) {
 			srand(time(NULL));
 			id = rand() % 1000000 + 999999;
@@ -166,7 +180,7 @@ idchk:
 	ptr->parentID = to_string(id);
 
 	ofstream outfile;
-	outfile.open("parentlogin.csv", ios::app);
+	outfile.open("parentlogin.csv", ios::app); //Pushes the parents info into the file
 
 	outfile << ptr->parentID << ","
 		<< ptr->firstName << ","
@@ -247,7 +261,7 @@ int parentLogin() { //Login function for parents (also admin that is hardcoded i
 
 	if (a == -1) {
 		changeColour(4);
-		cout << "\n\nThe number of login attempts has been exceeded, try again another time.";
+		cout << "\n\nThe number of login attempts has been exceeded, try again another time."; //Will exit program
 		changeColour(7);
 	}
 
@@ -256,12 +270,13 @@ exit:
 	return a;
 }
 
-int MakeOrder(int parent) {
-	vector<array<string, 7> > oNcheck;
+int MakeOrder(int parent) { //Function that allows parents to order from the program
+	vector<array<string, 7> > oNcheck; //Intializing all the vectors we need
 	vector<array<string, 9> > parentinfo;
 	vector<array<string, 4> > Menuorder;
 	vector<array<int, 2> > quantityordered;
 	vector<int> printitems;
+	vector<int> charas; 
 	ParentOrder order;
 	ParentOrder* ptrorder;
 	unsigned int on;
@@ -269,22 +284,22 @@ int MakeOrder(int parent) {
 	float total, Total = 0, Newtotal;
 	string line, row, oN, line2, row2, line3, row3, date, line4, row4;
 	char orderday, paymentproceed, continueorder;
-	time_t now = time(0);
+	time_t now = time(0); //Creating our time so we can enter the date into the order
 	tm* ltm = localtime(&now);
 
 	ptrorder = &order;
 
-	srand(time(NULL));
-	on = rand() % 10000000 + 9999999;
+	srand(time(NULL)); //Making sure the number is random each time
+	on = rand() % 10000000 + 9999999; //Creating the order number
 	oN = to_string(on);
 
-	day = ltm->tm_mday;
+	day = ltm->tm_mday; //Making our times
 	month = (1 + ltm->tm_mon);
 	year = (1900 + ltm->tm_year);
 
 	date = to_string(day) + "/" + to_string(month) + "/" + to_string(year);
 
-	ifstream fileid;
+	ifstream fileid; //Opening the file to check that the order number hasn't already been used
 	fileid.open("parentorder.csv", ios::in);
 
 	while (getline(fileid, line)) {
@@ -297,7 +312,7 @@ int MakeOrder(int parent) {
 		oNcheck.push_back(f);
 	}
 oNchk:
-	for (int i = 0; i < oNcheck.size(); ++i) {
+	for (int i = 0; i < oNcheck.size(); ++i) { //If the order number is already in the file it will create a new order number
 		if (oN == oNcheck.at(i)[0]) {
 			srand(time(NULL));
 			on = rand() % 1000000 + 999999;
@@ -309,7 +324,7 @@ oNchk:
 	fileid.close();
 
 	ifstream parentfile;
-	parentfile.open("parentlogin.csv", ios::in);
+	parentfile.open("parentlogin.csv", ios::in); //Opening the file containing the parents information to allow them to order
 
 	while (getline(parentfile, line3)) {
 		stringstream ss(line3);
@@ -324,7 +339,7 @@ oNchk:
 	parentfile.close();
 
 	fstream infile2;
-	infile2.open("menuItems.csv", ios::in);
+	infile2.open("menuItems.csv", ios::in); //Opening the menu file to print out the items and prices
 
 	while (getline(infile2, line2)) {
 		stringstream ss(line2);
@@ -357,7 +372,7 @@ oNchk:
 
 	ptrorder->orderNumber = oN;
 	ptrorder->parentID = parentinfo.at(parent)[0];
-continueordering:
+continueordering: //Label to take the user back to the ordering screen
 	system("cls");
 	cout << "\n\n\t\tOrder Screen (" << ptrorder->orderNumber << ")\n";
 	underLine(80);
@@ -368,7 +383,7 @@ continueordering:
 	cout << "\n\nEnter option: ";
 	changeColour(7);
 	cin >> option;
-	for (int optionsize = 1; optionsize < Menuorder.size(); optionsize++) {
+	for (int optionsize = 1; optionsize <= Menuorder.size(); optionsize++) {
 		if (option == optionsize) {
 			goto continuingorder;
 		}
@@ -411,11 +426,12 @@ contorderredo:
 	if (continueorder == 'n') {
 	paymentproceedredo:
 		changeColour(11);
-		cout << "\n\nProceed to payment? (y/n)";
+		cout << "\n\nProceed to payment? (y/n)"; 
 		changeColour(7);
 		cin >> paymentproceed;
-		if (paymentproceed == 'y') {
-			for (int o = 0; o < printitems.size(); o++) {
+		if (paymentproceed == 'y') { 
+
+			for (int o = 0; o < printitems.size(); o++) { //For loop that counts the quantity of items ordered
 				for (int s = 0; s < quantityordered.size(); s++) {
 					if ((printitems[o] - 1) == quantityordered.at(s)[0]) {
 						quantityordered.at(s)[1] = quantityordered.at(s)[1] + 1;
@@ -429,36 +445,44 @@ contorderredo:
 
 			for (int d = 0; d < Menuorder.max_size(); d++) {
 				if ((option - 1) == d) {
-					orderfile << Menuorder.at(d)[0] << "," << Menuorder.at(d)[1] << "," << orderday << "," << date << endl;
+					orderfile << Menuorder.at(d)[0] << "," << Menuorder.at(d)[1] << "," << orderday << "," << date << endl; //Storing the order information into the file
 					break;
 				}
 			}
 
 			orderfile.close();
 			system("cls");
-			cout << "\n\n\tBill for " << parentinfo.at(parent)[1] << " (" << ptrorder->orderNumber << ") " << endl;
+			cout << "\n\n\tBill for " << parentinfo.at(parent)[1] << " (" << ptrorder->orderNumber << ") " << endl; //Printing out the bill for the parents
 			underLine(65);
+
+			for (int y = 0; y < printitems.size(); y++) {
+				int ch = countingChar(&Menuorder.at(printitems[y] - 1)[0]); //Using the character counting function to make the text more aesthetically pleasing
+				charas.push_back(ch);
+			}
 
 			cout << "\nItems ordered on (" << date << "):" << endl;
 			for (int i = 0; i < printitems.size(); i++) {
-				cout << "\n\t" << Menuorder.at(printitems[i] - 1)[0] << "     $" << Menuorder.at(printitems[i] - 1)[1];
-
+				cout << "\n\t" << Menuorder.at(printitems[i] - 1)[0];
+				for (int k = 0; k < (35 - charas[i]); k++) { //Taking the vector with the amount of characters in a string to space out the item and price
+					cout << " ";
+				}
+				cout << "$" <<  Menuorder.at(printitems[i] - 1)[1];
 				total = stof(Menuorder.at(printitems[i] - 1)[1]);
 				Total = total + Total;
 				discount++;
 			}
 
-			if (discount >= 5 && discount < 10) {
+			if (discount >= 5 && discount < 10) { //If else staements to apply any discounts
 				Newtotal = Total * 0.95;
-				cout << "\n\n\nDiscount applied: 5%\t\tTotal:\t\t$" << Newtotal;
+				cout << "\n\n\nDiscount applied: 5%\t\t\tTotal:\t$" << Newtotal;
 			}
 			else if (discount >= 10 && discount < 20) {
 				Newtotal = Total * 0.9;
-				cout << "\n\n\nDiscount applied: 10%\t\tTotal:\t\t$" << Newtotal;
+				cout << "\n\n\nDiscount applied: 10%\t\t\tTotal:\t$" << Newtotal;
 			}
 			else if (discount >= 20) {
 				Newtotal = Total * 0.85;
-				cout << "\n\n\nDiscount applied: 15%\t\tTotal:\t\t$" << Newtotal;
+				cout << "\n\n\nDiscount applied: 15%\t\t\tTotal:\t$" << Newtotal;
 			}
 			else {
 				Newtotal = Total;
@@ -467,7 +491,7 @@ contorderredo:
 
 			cout << "\nStudent: " << parentinfo.at(parent)[5] << "\t\t\t\tClass: " << parentinfo.at(parent)[6] << endl << endl;
 
-			ofstream parentorderfile;
+			ofstream parentorderfile; //placing the information into the parent order file containing all orders
 			parentorderfile.open("parentOrder.csv", ios::app);
 
 			parentorderfile << ptrorder->orderNumber << "," << date << "," << discount << "," << Newtotal << "," << "paid" << "," << parentinfo.at(parent)[5] << "," << parentinfo.at(parent)[6] << endl;
@@ -489,7 +513,7 @@ contorderredo:
 			return 0;
 		}
 		else if (paymentproceed == 'n') {
-			return 0;
+			return 0; //Takes back to the parent screen
 		}
 		else {
 			changeColour(4);
@@ -504,7 +528,7 @@ contorderredo:
 
 		for (int d = 0; d < Menuorder.max_size(); d++) {
 			if ((option - 1) == d) {
-				orderfile << Menuorder.at(d)[0] << "," << Menuorder.at(d)[1] << "," << orderday << "," << date << endl;
+				orderfile << Menuorder.at(d)[0] << "," << Menuorder.at(d)[1] << "," << orderday << "," << date << endl; //Enters option into file
 				break;
 			}
 		}
@@ -520,14 +544,14 @@ contorderredo:
 	}
 }
 
-void filterPrice() {
+void filterPrice() { //Function that filters menu items by price
 	system("cls");
 	vector<array<string, 4> > fp;
 	vector<array<float, 2> > priceFilter;
 	array<float, 2> Item_Price;
 
 	ifstream infile;
-	infile.open("menuItems.csv", ios::in);
+	infile.open("menuItems.csv", ios::in); //Reading in menu items and prices
 
 	string line, row, item;
 
@@ -543,12 +567,12 @@ void filterPrice() {
 	infile.close();
 
 	for (float j = 0; j < fp.size(); j++) {
-		Item_Price[0] = stof(fp.at(j)[1]);
-		Item_Price[1] = j;
+		Item_Price[0] = stof(fp.at(j)[1]); //Changing the price string to a float so that we can store it
+		Item_Price[1] = j; //Storing the item name in the same vector as an int to its position in the menu
 		priceFilter.push_back(Item_Price);
 	}
 
-	sort(priceFilter.begin(), priceFilter.end());
+	sort(priceFilter.begin(), priceFilter.end()); //Sorting from low to high for the float
 
 	cout << "\n\t\t\tPrice from low to high\n";
 	underLine(72);
@@ -563,7 +587,7 @@ void filterPrice() {
 	changeColour(7);
 }
 
-void filterVeg() {
+void filterVeg() { //Function that filters out only vegetarian options
 	system("cls");
 	vector<array<string, 4> > vegmenu;
 	vector<int> vegetarian;
@@ -571,7 +595,7 @@ void filterVeg() {
 	float vege;
 
 	ifstream infile;
-	infile.open("menuItems.csv", ios::in);
+	infile.open("menuItems.csv", ios::in); //Reading in the menu items and prices 
 
 	string line, row, item, stringprice;
 
@@ -592,7 +616,7 @@ void filterVeg() {
 	for (int i = 0; i < vegmenu.size(); i++) {
 		vege = stof(vegmenu.at(i)[3]);
 
-		if (vege == 1) {
+		if (vege == 1) { //If vege is = to 1 it means it is vegetarian, if it is 2 it is not vegetarian and will not be printed
 			vegetarian.push_back(i);
 		}
 	}
@@ -613,7 +637,7 @@ void filterVeg() {
 	changeColour(7);
 }
 
-void filterGF() {
+void filterGF() { //Function to filter out gluten free only menu items
 	system("cls");
 	vector<array<string, 4> > gfmenu;//
 	vector<int> GF;
@@ -621,7 +645,7 @@ void filterGF() {
 	float gf;
 
 	ifstream infile;
-	infile.open("menuItems.csv", ios::in);
+	infile.open("menuItems.csv", ios::in); //Reading in the menu items and prices
 
 	string line, row, item, stringprice;
 
@@ -642,7 +666,7 @@ void filterGF() {
 	for (int i = 0; i < gfmenu.size(); i++) {
 		gf = stof(gfmenu.at(i)[2]);
 
-		if (gf == 1) {
+		if (gf == 1) { //If gf is 1 it means it is gluten free and will be printed out, if it is 2 it is not gluten free and will not be printed out
 			GF.push_back(i);
 		}
 	}
@@ -663,7 +687,7 @@ void filterGF() {
 	changeColour(7);
 }
 
-void Parentcomplaint(int parent) {
+void Parentcomplaint(int parent) { //Function to allow parents to make a complaint
 	system("cls");
 	struct ParentComplaint ParentComp;
 	struct ParentComplaint* ptrParentComp;
@@ -671,7 +695,7 @@ void Parentcomplaint(int parent) {
 	ptrParentComp = &ParentComp;
 
 	srand(time(NULL));
-	int pc = rand() % 100000 + 99999;
+	int pc = rand() % 100000 + 99999; //Creating a random complaint number for the parents
 
 	ptrParentComp->compNumber = to_string(pc);
 
@@ -689,12 +713,12 @@ void Parentcomplaint(int parent) {
 	ofstream complaintfile;
 	complaintfile.open("parentComplaint.csv", ios::app);
 
-	complaintfile << ptrParentComp->compNumber << "," << complaintdate << "," << complaintitem << "," << complaintdescription << endl;
+	complaintfile << ptrParentComp->compNumber << "," << complaintdate << "," << complaintitem << "," << complaintdescription << "," << "n" << endl; //Reading the complaint details into a file
 
 	complaintfile.close();
 }
 
-int parentOrder(int person) {
+int parentOrder(int person) { //The parent menu screen function
 	int option;
 	int returnordervalue;
 menu:
@@ -705,7 +729,7 @@ menu:
 	int i;
 
 	fstream infile; // reading the file
-	infile.open("menuItems.csv", ios::in);
+	infile.open("menuItems.csv", ios::in); 
 
 	string line, row;
 	while (getline(infile, line)) { // this loop gets the data from the csv and push_backs into a vector
@@ -734,7 +758,7 @@ menu:
 	changeColour(7);
 	cin >> option;
 
-	switch (option) {
+	switch (option) { //Switch that calls different functions for either filtering or ordering
 	case 1:
 		filterPrice();
 		goto menu;
@@ -841,7 +865,7 @@ void  menuPreview() {
 void adminUpdateMenu() {
 	system("cls");
 	vector<array<string, 4>>  vectorMenu;
-	int i;
+	int i, a;
 
 	fstream infile; // reading the file
 	infile.open("menuItems.csv", ios::in);
@@ -858,16 +882,10 @@ void adminUpdateMenu() {
 		vectorMenu.push_back(m);
 	}
 
-	////Asking admin if they would like to make changes
-	//cout << "What changes would you like to make?\n\n";
-	//cout << "1. Change a Menu Item Name\n";
-	//cout << "2. Change a Menu Item Price\n\n";
-	//cout << "Please make a selection: (1 or 2) ";
-	//cin >> choice;
 	int choice;
 	string itemNameChoice;
 	string newItemName;
-	float newItemPrice;
+	string newItemPrice;
 	cin.ignore();
 	cout << "\n\nMenu Name Change\n\n";
 	menuPreview();
@@ -876,8 +894,9 @@ void adminUpdateMenu() {
 	getline(cin, itemNameChoice);
 
 	// re-writing/updating menu item name with user input
-	ofstream updateCSVWithNewData("menuItems.csv", ios::out);
+
 	for (int i = 0; i < vectorMenu.size(); i++) {
+
 		// checks if the user selected item matches with the item in cell 1
 		if (itemNameChoice == vectorMenu.at(0)[0]) {
 			cout << "\nYou would like to change " << vectorMenu.at(0)[0]; //if it matches, it will then ask the user what they want to change it too
@@ -890,135 +909,457 @@ void adminUpdateMenu() {
 			cin >> choice;
 
 			if (choice == 1) {
+				cin.ignore();
 				cout << "\nPlease Enter new item Name: ";
 				getline(cin, newItemName);
 				vectorMenu.at(0)[0] = newItemName;
 				changeColour(11);
 				cout << vectorMenu.at(0)[0] << " has been updated into the menu! Press Enter to go back to admin account page!\n";
 				changeColour(7);
-				cin.ignore();
-				// INCOMPLETE SECTION | SKIPS REALLY FAST FOR SOME REASON
+				cout << "\n\n\n";
+				changeColour(11);
+				system("pause");
+				changeColour(7);
 			}
-			//else if (choice == 2) {
-			//	cout << "\nPlease Enter new item Price: ";
-			//	cin >> newItemPrice;
-			//	vectorMenu.at(0)[1] = newItemPrice;
-			//	changeColour(11);
-			//	cout << vectorMenu.at(0)[1] << " has been updated into the menu! Press Enter to go back to admin account page!\n";
-			//	changeColour(7);
-			//	cin.ignore();
-			//	break; // INCOMPLETE SECTION | SKIPS REALLY FAST FOR SOME REASON
-			//}
+			else if (choice == 2) {
+				cin.ignore();
+				cout << "\nPlease Enter new item Price: ";
+				cin >> newItemPrice;
+				vectorMenu.at(0)[1] = newItemPrice;
+				changeColour(11);
+				cout << vectorMenu.at(0)[1] << " has been updated into the menu! Press Enter to go back to admin account page!\n";
+				changeColour(7);
+				cin.ignore();
+				a = -1; //This is for the price to be entered from newItemPrice instead of the vector
+			}
 		}
 		// checks if the user selected item matches with the item in cell 2
 		else if (itemNameChoice == vectorMenu.at(1)[0]) {
 			cout << "\nYou would like to change " << vectorMenu.at(1)[0]; //if it matches, it will then ask the user what they want to change it too
-			cout << "\nPlease Enter new item Name: ";
-			getline(cin, newItemName);
-			vectorMenu.at(1)[0] = newItemName;
+			cout << "What changes would you like to make?\n\n";
+			cout << "1. Change a Menu Item Name\n";
+			cout << "2. Change a Menu Item Price\n\n";
 			changeColour(11);
-			cout << vectorMenu.at(1)[0] << " has been updated into the menu! Press Enter to go back to admin account page!\n";
+			cout << "Please make a selection: (1 or 2) ";
 			changeColour(7);
-			cin.ignore();
+			cin >> choice;
+
+			if (choice == 1) {
+				cin.ignore();
+				cout << "\nPlease Enter new item Name: ";
+				getline(cin, newItemName);
+				vectorMenu.at(1)[0] = newItemName;
+				changeColour(11);
+				cout << vectorMenu.at(1)[0] << " has been updated into the menu! Press Enter to go back to admin account page!\n";
+				changeColour(7);
+				cout << "\n\n\n";
+				changeColour(11);
+				system("pause");
+				changeColour(7);
+			}
+			else if (choice == 2) {
+				cin.ignore();
+				cout << "\nPlease Enter new item Price: ";
+				cin >> newItemPrice;
+				vectorMenu.at(1)[1] = newItemPrice;
+				changeColour(11);
+				cout << vectorMenu.at(1)[1] << " has been updated into the menu! Press Enter to go back to admin account page!\n";
+				changeColour(7);
+				cin.ignore();
+				a = -1; //This is for the price to be entered from newItemPrice instead of the vector
+			}
 		}
 		// checks if the user selected item matches with the item in cell 3
 		else if (itemNameChoice == vectorMenu.at(2)[0]) {
 			cout << "\nYou would like to change " << vectorMenu.at(2)[0]; //if it matches, it will then ask the user what they want to change it too
-			cout << "\nPlease Enter new item Name: ";
-			getline(cin, newItemName);
-			vectorMenu.at(2)[0] = newItemName;
+			cout << "What changes would you like to make?\n\n";
+			cout << "1. Change a Menu Item Name\n";
+			cout << "2. Change a Menu Item Price\n\n";
 			changeColour(11);
-			cout << vectorMenu.at(2)[0] << " has been updated into the menu! Press Enter to go back to admin account page!\n";
+			cout << "Please make a selection: (1 or 2) ";
 			changeColour(7);
-			cin.ignore();
+			cin >> choice;
+
+			if (choice == 1) {
+				cin.ignore();
+				cout << "\nPlease Enter new item Name: ";
+				getline(cin, newItemName);
+				vectorMenu.at(2)[0] = newItemName;
+				changeColour(11);
+				cout << vectorMenu.at(2)[0] << " has been updated into the menu! Press Enter to go back to admin account page!\n";
+				changeColour(7);
+				cout << "\n\n\n";
+				changeColour(11);
+				system("pause");
+				changeColour(7);
+			}
+			else if (choice == 2) {
+				cin.ignore();
+				cout << "\nPlease Enter new item Price: ";
+				cin >> newItemPrice;
+				vectorMenu.at(2)[1] = newItemPrice;
+				changeColour(11);
+				cout << vectorMenu.at(2)[1] << " has been updated into the menu! Press Enter to go back to admin account page!\n";
+				changeColour(7);
+				cin.ignore();
+				a = -1; //This is for the price to be entered from newItemPrice instead of the vector
+			}
 		}
 		// checks if the user selected item matches with the item in cell 4
 		else if (itemNameChoice == vectorMenu.at(3)[0]) {
 			cout << "\nYou would like to change " << vectorMenu.at(3)[0]; //if it matches, it will then ask the user what they want to change it too
-			cout << "\nPlease Enter new item Name: ";
-			getline(cin, newItemName);
-			vectorMenu.at(3)[0] = newItemName;
+			cout << "What changes would you like to make?\n\n";
+			cout << "1. Change a Menu Item Name\n";
+			cout << "2. Change a Menu Item Price\n\n";
 			changeColour(11);
-			cout << vectorMenu.at(3)[0] << " has been updated into the menu! Press Enter to go back to admin account page!\n";
+			cout << "Please make a selection: (1 or 2) ";
 			changeColour(7);
-			cin.ignore();
+			cin >> choice;
+
+			if (choice == 1) {
+				cin.ignore();
+				cout << "\nPlease Enter new item Name: ";
+				getline(cin, newItemName);
+				vectorMenu.at(3)[0] = newItemName;
+				changeColour(11);
+				cout << vectorMenu.at(3)[0] << " has been updated into the menu! Press Enter to go back to admin account page!\n";
+				changeColour(7);
+				cout << "\n\n\n";
+				changeColour(11);
+				system("pause");
+				changeColour(7);
+			}
+			else if (choice == 2) {
+				cin.ignore();
+				cout << "\nPlease Enter new item Price: ";
+				cin >> newItemPrice;
+				vectorMenu.at(3)[1] = newItemPrice;
+				changeColour(11);
+				cout << vectorMenu.at(3)[1] << " has been updated into the menu! Press Enter to go back to admin account page!\n";
+				changeColour(7);
+				cin.ignore();
+				a = -1; //This is for the price to be entered from newItemPrice instead of the vector
+			}
 		}
 		// checks if the user selected item matches with the item in cell 5
 		else if (itemNameChoice == vectorMenu.at(4)[0]) {
 			cout << "\nYou would like to change " << vectorMenu.at(4)[0]; //if it matches, it will then ask the user what they want to change it too
-			cout << "\nPlease Enter new item Name: ";
-			getline(cin, newItemName);
-			vectorMenu.at(4)[0] = newItemName;
+			cout << "What changes would you like to make?\n\n";
+			cout << "1. Change a Menu Item Name\n";
+			cout << "2. Change a Menu Item Price\n\n";
 			changeColour(11);
-			cout << vectorMenu.at(4)[0] << " has been updated into the menu! Press Enter to go back to admin account page!\n";
+			cout << "Please make a selection: (1 or 2) ";
 			changeColour(7);
-			cin.ignore();
+			cin >> choice;
+
+			if (choice == 1) {
+				cin.ignore();
+				cout << "\nPlease Enter new item Name: ";
+				getline(cin, newItemName);
+				vectorMenu.at(4)[0] = newItemName;
+				changeColour(11);
+				cout << vectorMenu.at(4)[0] << " has been updated into the menu! Press Enter to go back to admin account page!\n";
+				changeColour(7);
+				cout << "\n\n\n";
+				changeColour(11);
+				system("pause");
+				changeColour(7);
+			}
+			else if (choice == 2) {
+				cin.ignore();
+				cout << "\nPlease Enter new item Price: ";
+				cin >> newItemPrice;
+				vectorMenu.at(4)[1] = newItemPrice;
+				changeColour(11);
+				cout << vectorMenu.at(4)[1] << " has been updated into the menu! Press Enter to go back to admin account page!\n";
+				changeColour(7);
+				cin.ignore();
+				a = -1; //This is for the price to be entered from newItemPrice instead of the vector
+			}
 		}
 		// checks if the user selected item matches with the item in cell 6
 		else if (itemNameChoice == vectorMenu.at(5)[0]) {
 			cout << "\nYou would like to change " << vectorMenu.at(5)[0]; //if it matches, it will then ask the user what they want to change it too
-			cout << "\nPlease Enter new item Name: ";
-			getline(cin, newItemName);
-			vectorMenu.at(5)[0] = newItemName;
+			cout << "What changes would you like to make?\n\n";
+			cout << "1. Change a Menu Item Name\n";
+			cout << "2. Change a Menu Item Price\n\n";
 			changeColour(11);
-			cout << vectorMenu.at(5)[0] << " has been updated into the menu! Press Enter to go back to admin account page!\n";
+			cout << "Please make a selection: (1 or 2) ";
 			changeColour(7);
-			cin.ignore();
+			cin >> choice;
+
+			if (choice == 1) {
+				cin.ignore();
+				cout << "\nPlease Enter new item Name: ";
+				getline(cin, newItemName);
+				vectorMenu.at(5)[0] = newItemName;
+				changeColour(11);
+				cout << vectorMenu.at(5)[0] << " has been updated into the menu! Press Enter to go back to admin account page!\n";
+				changeColour(7);
+				cout << "\n\n\n";
+				changeColour(11);
+				system("pause");
+				changeColour(7);
+			}
+			else if (choice == 2) {
+				cin.ignore();
+				cout << "\nPlease Enter new item Price: ";
+				cin >> newItemPrice;
+				vectorMenu.at(5)[1] = newItemPrice;
+				changeColour(11);
+				cout << vectorMenu.at(5)[1] << " has been updated into the menu! Press Enter to go back to admin account page!\n";
+				changeColour(7);
+				cin.ignore();
+				a = -1; //This is for the price to be entered from newItemPrice instead of the vector
+			}
 		}
 		// checks if the user selected item matches with the item in cell 7
 		else if (itemNameChoice == vectorMenu.at(6)[0]) {
 			cout << "\nYou would like to change " << vectorMenu.at(6)[0]; //if it matches, it will then ask the user what they want to change it too
-			cout << "\nPlease Enter new item Name: ";
-			getline(cin, newItemName);
-			vectorMenu.at(6)[0] = newItemName;
+			cout << "What changes would you like to make?\n\n";
+			cout << "1. Change a Menu Item Name\n";
+			cout << "2. Change a Menu Item Price\n\n";
 			changeColour(11);
-			cout << vectorMenu.at(6)[0] << " has been updated into the menu! Press Enter to go back to admin account page!\n";
+			cout << "Please make a selection: (1 or 2) ";
 			changeColour(7);
-			cin.ignore();
+			cin >> choice;
+
+			if (choice == 1) {
+				cin.ignore();
+				cout << "\nPlease Enter new item Name: ";
+				getline(cin, newItemName);
+				vectorMenu.at(6)[0] = newItemName;
+				changeColour(11);
+				cout << vectorMenu.at(6)[0] << " has been updated into the menu! Press Enter to go back to admin account page!\n";
+				changeColour(7);
+				cout << "\n\n\n";
+				changeColour(11);
+				system("pause");
+				changeColour(7);
+			}
+			else if (choice == 2) {
+				cin.ignore();
+				cout << "\nPlease Enter new item Price: ";
+				cin >> newItemPrice;
+				vectorMenu.at(6)[1] = newItemPrice;
+				changeColour(11);
+				cout << vectorMenu.at(6)[1] << " has been updated into the menu! Press Enter to go back to admin account page!\n";
+				changeColour(7);
+				cin.ignore();
+				a = -1; //This is for the price to be entered from newItemPrice instead of the vector
+			}
 		}
 		// checks if the user selected item matches with the item in cell 8
 		else if (itemNameChoice == vectorMenu.at(7)[0]) {
 			cout << "\nYou would like to change " << vectorMenu.at(7)[0]; //if it matches, it will then ask the user what they want to change it too
-			cout << "\nPlease Enter new item Name: ";
-			getline(cin, newItemName);
-			vectorMenu.at(7)[0] = newItemName;
+			cout << "What changes would you like to make?\n\n";
+			cout << "1. Change a Menu Item Name\n";
+			cout << "2. Change a Menu Item Price\n\n";
 			changeColour(11);
-			cout << vectorMenu.at(7)[0] << " has been updated into the menu! Press Enter to go back to admin account page!\n";
+			cout << "Please make a selection: (1 or 2) ";
 			changeColour(7);
-			cin.ignore();
+			cin >> choice;
+
+			if (choice == 1) {
+				cin.ignore();
+				cout << "\nPlease Enter new item Name: ";
+				getline(cin, newItemName);
+				vectorMenu.at(7)[0] = newItemName;
+				changeColour(11);
+				cout << vectorMenu.at(7)[0] << " has been updated into the menu! Press Enter to go back to admin account page!\n";
+				changeColour(7);
+				cout << "\n\n\n";
+				changeColour(11);
+				system("pause");
+				changeColour(7);
+			}
+			else if (choice == 2) {
+				cin.ignore();
+				cout << "\nPlease Enter new item Price: ";
+				cin >> newItemPrice;
+				vectorMenu.at(7)[1] = newItemPrice;
+				changeColour(11);
+				cout << vectorMenu.at(7)[1] << " has been updated into the menu! Press Enter to go back to admin account page!\n";
+				changeColour(7);
+				cin.ignore();
+				a = -1; //This is for the price to be entered from newItemPrice instead of the vector
+			}
 		}
 		// checks if the user selected item matches with the item in cell 9
 		else if (itemNameChoice == vectorMenu.at(8)[0]) {
 			cout << "\nYou would like to change " << vectorMenu.at(8)[0]; //if it matches, it will then ask the user what they want to change it too
-			cout << "\nPlease Enter new item Name: ";
-			getline(cin, newItemName);
-			vectorMenu.at(8)[0] = newItemName;
+			cout << "What changes would you like to make?\n\n";
+			cout << "1. Change a Menu Item Name\n";
+			cout << "2. Change a Menu Item Price\n\n";
 			changeColour(11);
-			cout << vectorMenu.at(8)[0] << " has been updated into the menu! Press Enter to go back to admin account page!\n";
+			cout << "Please make a selection: (1 or 2) ";
 			changeColour(7);
-			cin.ignore();
+			cin >> choice;
+
+			if (choice == 1) {
+				cin.ignore();
+				cout << "\nPlease Enter new item Name: ";
+				getline(cin, newItemName);
+				vectorMenu.at(8)[0] = newItemName;
+				changeColour(11);
+				cout << vectorMenu.at(8)[0] << " has been updated into the menu! Press Enter to go back to admin account page!\n";
+				changeColour(7);
+				cout << "\n\n\n";
+				changeColour(11);
+				system("pause");
+				changeColour(7);
+			}
+			else if (choice == 2) {
+				cin.ignore();
+				cout << "\nPlease Enter new item Price: ";
+				cin >> newItemPrice;
+				vectorMenu.at(8)[1] = newItemPrice;
+				changeColour(11);
+				cout << vectorMenu.at(8)[1] << " has been updated into the menu! Press Enter to go back to admin account page!\n";
+				changeColour(7);
+				cin.ignore();
+				a = -1; //This is for the price to be entered from newItemPrice instead of the vector
+			}
 		}
 
-		updateCSVWithNewData << vectorMenu.at(i)[0] << "," << vectorMenu.at(i)[1] << "," << vectorMenu.at(i)[2] << "," << vectorMenu.at(i)[3] << "," << endl;
+		break;
 	}
+
+	// updating the csv file with the user input
+	ofstream updateCSVWithNewData("menuItems.csv", ios::out);
+
+	a = -1;
+	for (int i = 0; i < vectorMenu.size(); i++) {
+		if (a == i) {
+			updateCSVWithNewData << vectorMenu.at(i)[0] << "," << newItemPrice << "," << vectorMenu.at(i)[2] << "," << vectorMenu.at(i)[3] << "," << endl;
+		}
+		else {
+			updateCSVWithNewData << vectorMenu.at(i)[0] << "," << vectorMenu.at(i)[1] << "," << vectorMenu.at(i)[2] << "," << vectorMenu.at(i)[3] << "," << endl;
+		}
+	}
+
 	updateCSVWithNewData.close();
 }
 
-//View weekly sales
+//View weekly number of orders and total recieved for the week
 void weeklySalesFunc() {
+	system("cls");
+	vector<array<string, 7>> weeklyorder;
+	float total = 0;
+	int order = 0;
+
+	fstream infile; // reading the file
+	infile.open("parentOrder.csv", ios::in);
+
+	string line, row;
+	while (getline(infile, line)) { // this loop gets the data from the csv and push_backs into a vector
+		stringstream ss(line);
+		int i = 0;
+		array<string, 7> m;
+		while (getline(ss, row, ',')) {//while inside that row.
+			m[i] = row;
+			i++;
+		}
+		weeklyorder.push_back(m);
+	}
+
+	infile.close();
+
+	for (int i = 0; i < weeklyorder.size(); i++) {
+		total = total + stof(weeklyorder.at(i)[3]);
+		order++;
+	}
+
+	cout << "\n\n\t\tWeekly Sales Report";
+	cout << "\n---------------------------------------------------\n\n";
+	cout << "\nNumber of orders:                            " << order;
+	cout << "\n\nTotal recieved for the week:                 $" << total;
+
+	cout << "\n\n\n";
+	changeColour(11);
+	system("pause");
+	changeColour(7);
 }
 
+//View complaints made by parents
+void ViewComplaints() {
+	system("cls");
+	vector<array<string, 5> > complaint;
+	string line, row;
+	int option;
+
+	fstream infile; // reading the file
+	infile.open("parentComplaint.csv", ios::in);
+
+	while (getline(infile, line)) { // this loop gets the data from the csv and push_backs into a vector
+		stringstream ss(line);
+		int i = 0;
+		array<string, 5> m;
+		while (getline(ss, row, ',')) {//while inside that row.
+			m[i] = row;
+			i++;
+		}
+		complaint.push_back(m);
+	}
+
+	infile.close(); //Closing the file
+
+	cout << "\n\n\t\t\t\t\t\tParent Complaints";
+	cout << "\n\t\t\t\t---------------------------------------------------\n\n";
+
+	for (int i = 0; i < complaint.size(); i++) {
+		if (complaint.at(i)[4] == "n") {
+			cout << "\n\t" << (i + 1) << ".  Complaint Number: " << complaint.at(i)[0] << "\tDate: " << complaint.at(i)[1] << "\tItem: " << complaint.at(i)[2] << "\n\t\tComplaint Description: " << complaint.at(i)[3] << endl;
+		}
+	}
+
+	changeColour(11);
+	cout << "\n\n\tWhich complaint would you like to resolve? (Select from numbers shown above, enter -1 if no complaints showing) ";
+	changeColour(7);
+	cin >> option;
+
+	for (int i = 0; i < complaint.size(); i++) { //Finding the complaint the user would like to resolve
+		if ((option - 1) == i) {
+			complaint.at(i)[4] = "y";
+			break;
+		}
+		else if (option == -2) {
+			break;
+		}
+	}
+
+	ofstream outfile;
+	outfile.open("parentComplaint.csv", ios::out);
+
+	for (int i = 0; i < complaint.size(); i++) { //Updating the file with a yes in the 5th column standing for resolved
+		outfile << complaint.at(i)[0] << "," << complaint.at(i)[1] << "," << complaint.at(i)[2] << "," << complaint.at(i)[3] << "," << complaint.at(i)[4] << endl;
+	}
+
+	outfile.close();
+
+	if (option > 0) { //Doesnt print out if user enters -1
+		cout << "\n\n\tComplaint has been resolved successfully!";
+	}
+
+	cout << "\n\n\n\t\t";
+	changeColour(11);
+	system("pause");
+	changeColour(7);
+}
+
+//Function to show the quantity ordered for different items daily
 void DailyOrderReport() {
 	system("cls");
 	vector<array<int, 2> > readingDaily;
 	vector<array<string, 4> > menuDaily;
+	vector<int> characters;
 
 	ifstream infile;
 	infile.open("dailyorder.csv", ios::in);
 
 	string line, row, item, line2, row2;
 
-	while (getline(infile, line)) {
+	while (getline(infile, line)) { //Reading out of the daily order file for the quantity ordered
 		stringstream ss(line);
 		int i = 0;
 		array<int, 2> b;
@@ -1030,7 +1371,7 @@ void DailyOrderReport() {
 	infile.close();
 
 	fstream infile2;
-	infile2.open("menuItems.csv", ios::in);
+	infile2.open("menuItems.csv", ios::in); //Reading out of menu file for the menu items
 
 	while (getline(infile2, line2)) {
 		stringstream ss(line2);
@@ -1048,10 +1389,22 @@ void DailyOrderReport() {
 	cout << "\n\t\t\tDaily Order Report\n";
 	underLine(72);
 
-	cout << "\n\n\tItems:\t\t\t\t\t\tQuantity Ordered:\n";
+	cout << "\n\n\tItems:\t\t\t\t\tQuantity Ordered:\n";
 
 	for (int i = 0; i < menuDaily.size(); i++) {
-		cout << "\n\t\t" << (i + 1) << ". " << menuDaily.at(i)[0] << "\t" << readingDaily.at(i)[1];
+		int a = countingChar(&menuDaily.at(i)[0]); //Counting the characters in a string using a function to make the output look nicer
+		characters.push_back(a);
+	}
+
+	for (int i = 0; i < menuDaily.size(); i++) {
+
+		cout << "\n\t" << (i + 1) << ". " << menuDaily.at(i)[0];
+		for (int j = 0; j < (50 - characters[i]); j++) { //Using the character asmounts we stored to evenly space out the quantity
+			cout << " ";
+		
+		}
+		cout << readingDaily.at(i)[1];
+
 	}
 
 	cout << "\n\n\n\t\t";
@@ -1059,8 +1412,6 @@ void DailyOrderReport() {
 	system("pause");
 	changeColour(7);
 }
-
-//check complaints functions
 
 // ===== ^^ KEITH CODE SECTION ^^ =====
 
@@ -1075,8 +1426,9 @@ int main()
 	struct ParentAcc* ptrParent;
 
 	ptrParent = &Parent;
+
 	writeMenuPreview();
-MenuSelect:
+MenuSelect: //Label to return to main menu
 	system("cls");
 	// --- added intro screen below V --- //
 	cout << "\n\t\t\tSchool Lunch Order System\t\t\t" << endl;
@@ -1097,14 +1449,14 @@ MenuSelect:
 	cin >> index;
 	switch (index) {
 	case 1:
-		system("cls");
+		system("cls"); // clears screen 
 		menuPreview();
 		changeColour(11);
 		cout << "\n\n\n Enter 1 to return back to Main Menu: ";
 		changeColour(7);
 		cin >> flag;
 
-		if (flag != 1) {   //find a way to make this loop if condition is not met (IN PROGRESS)
+		if (flag != 1) {  
 			changeColour(4);
 			cout << "invalid input! Try again: ";
 			changeColour(7);
@@ -1153,15 +1505,15 @@ MenuSelect:
 		}
 		break;
 	case 4:
-		b = parentLogin();
+		b = parentLogin(); //Returns b from the function with the corresponding log in
 		if (b == -1) {
-			a = 0;
+			a = 0; //Too many attempts to log in
 		}
 		else if (b == -5) {
-			a = 2;
+			a = 2; //Admin log in
 		}
 		else {
-			a = 1;
+			a = 1; //Parent log in
 		}
 		break;
 	case 5:
@@ -1175,7 +1527,7 @@ MenuSelect:
 	}
 
 	if (a == 0) {
-		//Too many attempts to log in
+		//Too many attempts to log in, exits program
 	}
 	else if (a == 1) {
 		string line, row;
@@ -1194,7 +1546,9 @@ MenuSelect:
 		}
 
 		infile.close();
-	MenuParentSelect:
+
+	MenuParentSelect: //The parent screen
+
 		system("cls");
 		cout << "\n\t\t\tParent School Lunch System " << matrix.at(b)[1] << endl;
 		underLine(80);
@@ -1309,7 +1663,7 @@ MenuSelect:
 	//admin Log In
 	else if (a == 2) {
 		int option;
-	AdminSelect:
+	AdminSelect: //Admin screen
 		system("cls");
 		cout << "\n\t\t\tAdmin School Lunch System " << endl;
 		underLine(80);
@@ -1330,11 +1684,16 @@ MenuSelect:
 
 		switch (option) {
 		case 1:
+			ViewComplaints();
+			goto AdminSelect;
 			break;
 		case 2:
 			DailyOrderReport();
+			goto AdminSelect;
 			break;
 		case 3:
+			weeklySalesFunc();
+			goto AdminSelect;
 			break;
 		case 4:
 			adminUpdateMenu();
