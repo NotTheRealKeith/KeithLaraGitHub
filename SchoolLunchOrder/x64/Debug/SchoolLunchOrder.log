@@ -23,10 +23,10 @@ C:\Users\keith\OneDrive\Desktop\cppFolder\keithlaraclone\KeithLaraGitHub\SchoolL
 C:\Users\keith\OneDrive\Desktop\cppFolder\keithlaraclone\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(790,8): warning C4102: 'redoID': unreferenced label
 C:\Users\keith\OneDrive\Desktop\cppFolder\keithlaraclone\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(830,6): warning C4101: 'i': unreferenced local variable
 C:\Users\keith\OneDrive\Desktop\cppFolder\keithlaraclone\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(858,6): warning C4101: 'i': unreferenced local variable
-C:\Users\keith\OneDrive\Desktop\cppFolder\keithlaraclone\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(1155,17): warning C4244: '=': conversion from 'float' to '_Ty', possible loss of data
+C:\Users\keith\OneDrive\Desktop\cppFolder\keithlaraclone\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(1356,17): warning C4244: '=': conversion from 'float' to '_Ty', possible loss of data
           with
           [
               _Ty=int
           ]
-C:\Users\keith\OneDrive\Desktop\cppFolder\keithlaraclone\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(1321,7): warning C4101: 'c': unreferenced local variable
+C:\Users\keith\OneDrive\Desktop\cppFolder\keithlaraclone\KeithLaraGitHub\SchoolLunchOrder\SchoolLunchOrder.cpp(1522,7): warning C4101: 'c': unreferenced local variable
   SchoolLunchOrder.vcxproj -> C:\Users\keith\OneDrive\Desktop\cppFolder\keithlaraclone\KeithLaraGitHub\SchoolLunchOrder\x64\Debug\SchoolLunchOrder.exe
