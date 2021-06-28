@@ -858,12 +858,6 @@ void adminUpdateMenu() {
 		vectorMenu.push_back(m);
 	}
 
-	////Asking admin if they would like to make changes
-	//cout << "What changes would you like to make?\n\n";
-	//cout << "1. Change a Menu Item Name\n";
-	//cout << "2. Change a Menu Item Price\n\n";
-	//cout << "Please make a selection: (1 or 2) ";
-	//cin >> choice;
 	int choice;
 	string itemNameChoice;
 	string newItemName;
@@ -890,25 +884,26 @@ void adminUpdateMenu() {
 			cin >> choice;
 
 			if (choice == 1) {
+				cin.ignore();
 				cout << "\nPlease Enter new item Name: ";
 				getline(cin, newItemName);
 				vectorMenu.at(0)[0] = newItemName;
 				changeColour(11);
 				cout << vectorMenu.at(0)[0] << " has been updated into the menu! Press Enter to go back to admin account page!\n";
 				changeColour(7);
-				cin.ignore();
-				// INCOMPLETE SECTION | SKIPS REALLY FAST FOR SOME REASON
+				cin.ignore();// INCOMPLETE SECTION | SKIPS REALLY FAST FOR SOME REASON
 			}
-			//else if (choice == 2) {
-			//	cout << "\nPlease Enter new item Price: ";
-			//	cin >> newItemPrice;
-			//	vectorMenu.at(0)[1] = newItemPrice;
-			//	changeColour(11);
-			//	cout << vectorMenu.at(0)[1] << " has been updated into the menu! Press Enter to go back to admin account page!\n";
-			//	changeColour(7);
-			//	cin.ignore();
-			//	break; // INCOMPLETE SECTION | SKIPS REALLY FAST FOR SOME REASON
-			//}
+			else if (choice == 2) {
+				cin.ignore();
+				cout << "\nPlease Enter new item Price: ";
+				cin >> newItemPrice;
+				vectorMenu.at(0)[1] = newItemPrice;
+				changeColour(11);
+				cout << vectorMenu.at(0)[1] << " has been updated into the menu! Press Enter to go back to admin account page!\n";
+				changeColour(7);
+				cin.ignore();
+				
+			}
 		}
 		// checks if the user selected item matches with the item in cell 2
 		else if (itemNameChoice == vectorMenu.at(1)[0]) {
